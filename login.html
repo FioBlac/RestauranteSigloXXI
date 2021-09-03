@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="css/css_login.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <div class="contenedor_todo">
+            <div class="caja_trasera">
+                <div class="caja_trasera-login">
+                    <h3>¿Ya estas registrado?</h3>
+
+                    <p>Inicia sesión aquí</p>
+
+                    <button id="btn_iniciar-sesion">Inicia sesión aquí</button>
+
+                </div>
+                <div class="caja_trasera-registro">
+                    <h3>¿Aún no estas registrado?</h3>
+                    <p>Registrate aquí</p>
+                    <button id="btn_registro">Registrate aquí</button>
+                </div>
+            </div>
+    
+            <!--Formulario login y registro-->
+            <div class="contenedor_login-registro">
+                <!--Login-->
+                <form action="" class="form_login">
+                    <h2>Inicar sesión</h2>
+
+                    <input type="email" id="txtLoginEmail" placeholder="correo electrónico">
+
+                    <input type="password" id="txtLoginPassword" placeholder="contraseña">
+
+                    <button id="btn_loginUser" onclick="getData()">Iniciar Sesión</button>
+                    
+                </form>
+    
+                <!--Registro-->
+                <form action="" class="form_registro">
+                    <h2>Registrarse</h2>
+                    <input type="text" placeholder="Nombre y Apellidos">
+                    <input type="email" placeholder="Correo electrónico">
+                    <input type="text" placeholder="Usuario">
+                    <input type="password" placeholder="Contraseña">
+                    <button id="btn_registrarUser">Registrarse</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="js/script_css_login.js"></script>
+</body>
+</html>
