@@ -2,7 +2,6 @@
 
 body{
     font-family: 'Nunito Sans', sans-serif;
-    overflow: hidden;
 }
 
 /*
@@ -31,15 +30,31 @@ body{
 }
 
 /*
-===========================================Carrusel de imagenes===========================================
+===========================================Inicio===========================================
 */
 #tituloInicio{
     font-family: 'Lobster', cursive;
 }
 
+/*
+===========================================Media Queries===========================================
+*/
+
 @media (max-width: 768px) {
     #sectionInicio{
         width: 90% !important;
+    }
+
+    .sectionInicioIMG{
+        width: 100% !important;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .icono-wrap{
+        flex-wrap: wrap;
+        justify-content: center !important;
     }
 }
 
