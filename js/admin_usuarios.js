@@ -41,7 +41,20 @@ btnAgregarUsuario.addEventListener('click', () => {
     mostrar()
 })
 
+//Procedimiento agregar
+btnAgregar.addEventListener('click', () => {
+    usuariosEjemplo.push(
+        new usuarioEjemplo(correo.value, nombre.value, numero.value, contra.value, tipoUsuario.value)
+    )
+    console.log(usuariosEjemplo)
+    mostrar()
+})
+
 //Procedimiento mostrar
+btnActualizar.addEventListener('click', () => {
+    mostrar()
+})
+
 const mostrar = () =>{
     var elmtTable = document.getElementById('tablaUsuarios');
     var tableRows = elmtTable.getElementsByTagName('tr');
@@ -82,10 +95,11 @@ on(document, 'click', '.btnEliminar', e =>{
     let index = 0
 
     usuariosEjemplo.forEach( usuariosEjemplo =>{
-        if(id == '<td>'+usuariosEjemplo.uno+'</td>'){
+        if(id == usuariosEjemplo.uno){
             usuariosEjemplo.splice(index,1)
             console.log(usuariosEjemplo.uno)
         }
         index = index + 1
     })
 })
+
