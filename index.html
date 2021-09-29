@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!--CSS -->
+    <link rel="stylesheet" href="css/css_index.css">
+
+    <!--FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">    
+    <title>Restaurante Siglo XXI</title>
+</head>
+
+<body>
+    <header class="container-fluid bg-primary 
+    d-flex justify-content-center">
+        <p class="text-light mb-0 p-2 fs-7">
+            Av. España 233, Viña del Mar o llamanos al +569 57469792
+        </p>
+    </header>
+
+<!--NAVBAR-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-2" id="menu">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <span class="" id="tituloNavbar">
+                    Restaurante Siglo XXI
+                </span> 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link " aria-current="page" href="index.html">Inicio</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link " href="#misionVision">Misión y Visión</a>
+                    </li>
+
+                    <li class="nav-item">
+                    <a class="nav-link " href="#">Contactanos</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Menú
+                    </a>
+
+                    <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="#">Platos de entrada</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="#">Platos de fondo</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="#">Postres</a>
+                        </li>
+                    </ul>
+                </ul>
+            
+            <form class="d-flex">
+                <a class="btn btn-outline-secondary me-md-3" type="button" type="submit" href="login.html">
+                    Iniciar Sesion
+                </a>
+
+                <a class="btn btn-primary btn-primary-outline-success" type="submit" href="registro.html">
+                    Registrate
+                </a>
+            </form>
+            
+            </div>
+        </div>
+    </nav>
+
+<!--SLIDER-->
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="3000">
+                <img src="./img/Slider1.jpg" class="d-block w-100" alt="Plato entrada">
+            </div>
+
+            <div class="carousel-item" data-bs-interval="3000">
+                <img src="./img/Slider2.jpg" class="d-block w-100" alt="Plato de fondo">
+            </div>
+
+            <div class="carousel-item">
+                <img src="./img/Slider3.jpg" class="d-block w-100" alt="Postre">
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+<!--INTRO-->
+    <section class="w-50 mx-auto text-center pt-5" id="sectionInicio">
+        <h1 class="p-3 border-top border-2" id="tituloInicio">50 años dando el mejor servico a tu paladar</h1>
+        <span class="fs-5">
+            En restaurant Siglo XXI nos encargamos de brindar el mejor servicio gastronómico a los residentes y turistas que
+            nos visiten durante su estadia en la zona.
+        </span>
+    </section>
+
+    <section class="container-fluid">
+        <div class="row w-75 mx-auto my-5 sectionInicioIMG">  
+            <div class="col-lg-6 col-md12 col-sm-12 d-flex justify-content-start my-5  icono-wrap">
+                <img src="img/rest1.jpg" alt="" width="350" height="260">
+            </div>
+
+            <div class="col-lg-6 col-md12 col-sm-12 d-flex justify-content-start my-5  icono-wrap">
+                <img src="img/rest3.jpg" alt="" width="350" height="260">
+            </div>
+        </div>
+    </section>
+    
+
+    <!--MISION Y VISION-->
+    <section class="w-50 mx-auto text-center pt-5" id="sectionMyV" id="misionVision">
+        <h1 class="p-3 border-top border-2" id="tituloInicio">Mision y Visión</h1>
+        <span class="fs-5">
+            Inserte mision y vision equisde
+        </span>
+    </section>
+
+    <!--CAMBIAR IMAGENES DE PAGINA WEB-->
+    <section class="container-fluid">
+        <div class="row w-75 mx-auto my-5 sectionInicioIMG">
+            <div class="col-lg-6 col-md12 col-sm-12 d-flex justify-content-start my-5 icono-wrap">
+                <img src="img/rest1.jpg" alt="" width="350" height="260">
+            </div>
+
+            <div class="col-lg-6 col-md12 col-sm-12 d-flex justify-content-start my-5 icono-wrap">
+                <img src="img/rest3.jpg" alt="" width="350" height="260">
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</body>
+</html>

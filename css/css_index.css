@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+
+body{
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+/*
+===========================================NAVBAR===========================================
+*/
+#menu li > a{
+    font-size: 18px;
+    color: 3f3f3f;
+}
+
+#tituloNavbar{
+    font-family: 'Lobster', cursive;
+    color: #212529;
+}
+
+#menu form > button{
+    font: 18px;
+}
+
+/*
+===========================================Carrusel de imagenes===========================================
+*/
+.carousel-inner{
+    max-height: 39rem;
+    content: center;
+}
+
+/*
+===========================================Inicio===========================================
+*/
+#tituloInicio{
+    font-family: 'Lobster', cursive;
+}
+
+/*
+===========================================Media Queries===========================================
+*/
+
+@media (max-width: 768px) {
+    #sectionInicio{
+        width: 90% !important;
+    }
+
+    .sectionInicioIMG{
+        width: 100% !important;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .icono-wrap{
+        flex-wrap: wrap;
+        justify-content: center !important;
+    }
+}
+
+
