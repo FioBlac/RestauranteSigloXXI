@@ -4,7 +4,7 @@ function loginCli(){
     var passwd = "cliente";
 
     if(document.getElementById("txtLoginEmail").value == user && document.getElementById("txtLoginPassword").value == passwd){
-        window.location = "indexLogin.html";
+        window.location = "cliente_index.html";
     }else{
         alert("Datos incorrectos, por favor intentelo nuevamente")
     }
