@@ -128,7 +128,7 @@
                 <td>2 Personas</td>
                 <td>Mesa al lado de la ventana.</td>
                 <td class="text-center">
-                    <button class="btn btn-danger" type="button">Cancelar</button>
+                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#ventanaCancelar">Cancelar</button>
                 </td>
             </tr>
             <tr>
@@ -138,7 +138,7 @@
                 <td>3 Personas</td>
                 <td>Sin Comentarios.</td>
                 <td class="text-center">
-                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Cancelar</button>
+                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#ventanaCancelar">Cancelar</button>
                 </td>
             </tr>
             <tr>
@@ -148,7 +148,7 @@
                 <td>4 Personas</td>
                 <td>Mesa lejos del baño.</td>
                 <td class="text-center">
-                    <button class="btn btn-danger" type="button">Cancelar</button>
+                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#ventanaCancelar">Cancelar</button>
                 </td>
             </tr>
             </tbody>
@@ -156,26 +156,52 @@
     </div>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+
+
+    <!--VENTANA CANCELAR-->
+    <div class="modal fade" id="ventanaCancelar" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Cancelar Reservación</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            ...
+            ¿Seguro desea cancelar la reservación?
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Understood</button>
+            <button class="btn btn-secondary" data-bs-dismiss="modal">Atrás</button>
+            <button class="btn btn-danger" type="button" data-bs-target="#confirmarCancelar" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
             </div>
         </div>
         </div>
     </div>
 
+    <!--VENTANA DESPUÉS DE CANCELAR-->
+    <div class="modal fade" id="confirmarCancelar" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalToggleLabel2">Reservación Cancelada</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              La Reservación se ha cancelado correctamente.
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" data-bs-dismiss="modal" onClick="closeAll()">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="js/script_cliente_reserva.js"></script>
+    <script>
+        var ventanaCancelar = new bootstrap.Modal(document.getElementById('ventanaCancelar'))
+        function closeAll() {
+            ventanaCancelar.hide();
+            }
+    </script>
 </body>
 </html>
