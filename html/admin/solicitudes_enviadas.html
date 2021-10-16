@@ -35,7 +35,7 @@
     <!--NAVBAR-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-2" id="menu">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index_admin.html">
+            <a class="navbar-brand" href="../admin/index_admin.html">
                 <span class="" id="tituloNavbar">
                     Restaurante Siglo XXI
                 </span> 
@@ -131,7 +131,7 @@
                                 <td class="text-center" scope="row">Aceptada</td>
                                 <td class="text-center" scope="row">$50.000</td>
                                 <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="">
+                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#ventanaEditar" href="">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </td>
@@ -144,7 +144,7 @@
                                 <td class="text-center" scope="row">Rechazada</td>
                                 <td class="text-center" scope="row">$0</td>
                                 <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="">
+                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#ventanaEditar" href="">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </td>
@@ -157,7 +157,7 @@
                                 <td class="text-center" scope="row">Pendiente</td>
                                 <td class="text-center" scope="row">$0</td>
                                 <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="">
+                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#ventanaEditar" href="">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </td>
@@ -181,6 +181,57 @@
             </div>            
         </div>
     </section>
+
+    <!--Ventana Emergente-->
+    <div class="modal fade" id="ventanaEditar" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Editar estado de solicitud</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
+                <div class="modal-body row">
+                    <form class="row">
+                        <div class="col">
+                            <label for="inputEstado" class="visually-hidden">Estado:</label>
+                            <input type="text" readonly class="form-control-plaintext" id="inputEstado" value="Estado:">
+                        </div>
+                        <div class="col dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                Seleccione estado
+                            </a>
+                            
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Aceptada</a></li>
+                                <li><a class="dropdown-item" href="#">Pendiente</a></li>
+                                <li><a class="dropdown-item" href="#">Rechazada</a></li>
+                            </ul>
+                        </div>
+                    </form>
+
+                    <div class="row g-3 align-middle">
+                        <div class="col-auto">
+                            <label for="inputDineroPagar" class="col-form-label">Monto a pagar a proveedores:</label>
+                        </div>
+                        <div class="col input-group mb-3">
+                            <span class="input-group-text">$</span>
+                            <input type="text" class="form-control" aria-label="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" modal-footer">
+                    <div class="col text-center">
+                        <input type="button" class="btn btn-outline-success" onclick="" data-bs-dismiss="modal" value="Aceptar"></>
+                    </div>
+                    <div class="col text-center">
+                        <button class="btn btn-outline-danger" type="button" data-bs-target="#confirmarCancelar" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- JavaScript -->
 

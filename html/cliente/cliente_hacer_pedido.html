@@ -113,13 +113,13 @@
     <!--TEMPLATE PRODUCTOS-->
     <template id="template-card">
         <div class="col-6 col-sm-3">
-          <div class="card">
-            <div class="card-body">
-              <h5>Titulo</h5>
-              <p>precio</p>
-              <button class="btn btn-dark">Comprar</button>
+            <div class="card">
+                <div class="card-body">
+                    <h5>Titulo</h5>
+                    <p>precio</p>
+                    <button class="btn btn-dark">Comprar</button>
+                </div>
             </div>
-          </div>
         </div>
     </template>
 
@@ -134,27 +134,26 @@
 
     <!--CARRITO COMPRA-->
     <div class="container">
-
         <h4>Carrito de compras</h4>
         <table class="table">
-          <thead>
+            <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Item</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col">Acción</th>
-              <th scope="col">Total</th>
+                <th scope="col">#</th>
+                <th scope="col">Item</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Acción</th>
+                <th scope="col">Total</th>
             </tr>
-          </thead>
-          <tbody id="items"></tbody>
-          <tfoot>
-            <tr id="footer">
-              <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>
-            </tr>
-          </tfoot>
+            </thead>
+        <tbody id="items"></tbody>
+            <tfoot>
+                <tr id="footer">
+                <th scope="row" colspan="5">Carrito vacío - comience a comprar!</th>
+                </tr>
+            </tfoot>
         </table>
-      </div>
-  
+    </div>
+
     <script src="/js/script_cliente_hacer_pedido.js"></script>
 </body>
 </html>
