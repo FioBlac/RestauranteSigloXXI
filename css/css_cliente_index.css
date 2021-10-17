@@ -1,24 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
 
 body{
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Nunito Sans', sans-serif !important;
 }
 
 /*
 ===========================================NAVBAR===========================================
 */
 #menu li > a{
-    font-size: 18px;
-    color: 3f3f3f;
+    font-size: 18px !important;; 
+    color: 3f3f3f !important;;
 }
 
 #tituloNavbar{
-    font-family: 'Lobster', cursive;
+    font-family: 'Lobster', cursive !important;;
     color: #212529;
 }
 
 #menu form > button{
-    font: 18px;
+    font: 18px !important;;
 }
 
 /*
@@ -26,5 +26,5 @@ body{
 */
 
 #tituloInicio{
-    font-family: 'Lobster', cursive;
+    font-family: 'Lobster', cursive !important;;
 }
