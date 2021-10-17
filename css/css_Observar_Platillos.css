@@ -1,0 +1,103 @@
+/*==Barra del navbar==*/
+    /*==Textodelnavbar==*/
+    #Nombre{
+        font-family: 'Lobster', cursive;
+    }
+
+/*==Texto Descriptivo==*/
+#NumPag{
+    margin: 20px;
+}
+#MenuComida{
+    margin: 25px;
+}
+
+/*==PerfilUsuario==*/
+#PerfilUsuario{
+    margin: 10px;
+}
+body
+{
+    font-family: 'Open Sans', sans-serif;
+    }
+    .fb-profile img.fb-image-lg{
+        z-index: 0;
+        width: 100%;  
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .fb-image-profile
+    {
+        margin: -90px 10px 0px 50px;
+        z-index: 9;
+        width: 20%; 
+    }
+    @media (max-width:768px)
+    {
+    .fb-profile-text>h1{
+        font-weight: 700;
+        font-size:16px;
+    }
+    .fb-image-profile
+    {
+        margin: -45px 10px 0px 25px;
+        z-index: 9;
+        width: 20%; 
+    }
+}
+/*==Barra de informacion de platos==*/
+#bebestibles{
+    text-align: left;
+    width: fit-content;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    height: 1px;
+    margin: 50px;
+}
+#Jugos{
+    text-align: center;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+} 
+
+/*==Barra del footer==*/  
+    /*==TextoDeLaEmpresa==*/
+    #Nombre_bajo{
+        font-family: 'Lobster', cursive;
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+    }
+    #Nombre{
+        color: rgb(0, 0, 0);
+    }
+    /*==Textodelfooter==*/
+    #Ubicacion{
+        color: whitesmoke;
+    }
+    /*==Textodelfooter==*/
+    #AtencionAlCliente{
+        color: whitesmoke;
+    }
+    /*==Textodelfooter==*/
+    #MenuContactanos{
+        color: whitesmoke;
+    }
+    #RedesSociales{
+        color: whitesmoke;
+    }
+    /*==Texto Descriptivo==*/
+    #Decoration1{
+        text-decoration: none;
+    }
+    #RedesFacebook{
+        background-color: seashell;
+    }
+    #RedesTwitter{
+        background-color: seashell;
+    }
+    #RedesPinterest{
+        background-color: seashell;
+    }
+    #RedesYoutube{
+        background-color: seashell;
+    }
+@media screen and (max-width: 500px){ 
+}
