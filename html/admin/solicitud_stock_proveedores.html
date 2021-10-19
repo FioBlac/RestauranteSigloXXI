@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <!--CSS -->
-    
+    <link rel="stylesheet" href="../../css/css_index_admin.css">
 
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,7 +58,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Mesas</a>
+                        <a class="nav-link " href="../admin/gestionMesas.html">Mesas</a>
                     </li>
 
                     <li class="nav-item">
@@ -66,7 +66,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Reportes</a>
+                        <a class="nav-link " href="../admin/admin_reportes.html">Reportes</a>
                     </li>
                 </ul>
             
@@ -80,45 +80,114 @@
         </div>
     </nav>
 
-    <div class="col-md-3 ps-3 pt-3">
-        <label for="Proveedor" class="form-label ">Proveedor</label>
-        <input type="text" class="form-control" id="Proveedor">
-    </div>
-    <form class="row g-3">
-    <div class="col-md-8 pt-3 ps-3">
-        <label for="Listado" class="form-label-lg">Listado de items a solicitar</label>
-    </div>
-    <div class="col-md-8 ps-3">
-        <label for="Descripcion" class="form-label">Descripcion</label>
-    <input type="text" class="form-control" id="Descripcion">
-    </div>
-    <div class="col-md-3">
-        <label for="Cantidad" class="form-label">Cantidad</label>
-        <input type="text" class="form-control" id="Cantidad">
-    </div>
-    <div class="col-md-8 ps-3">
-        <input type="text" class="form-control" id="Descripcion">
-    </div>
-    <div class="col-md-3">
-        <input type="text" class="form-control" id="Cantidad">
-    </div>
-    <div class="col-md-8 ps-3">
-        <input type="text" class="form-control" id="Descripcion">
-    </div>
-    <div class="col-md-3">
-        <input type="text" class="form-control " id="Cantidad">
-    </div>
-    <div class="col-md-8 ps-3">
-        <input type="text" class="form-control" id="Descripcion">
-    </div>
-    <div class="col-md-3">
-        <input type="text" class="form-control" id="Cantidad">
-    </div>
-    <div class="d-grid gap-1 d-md-flex justify-content-md-end pe-3">
-        <button class="btn btn-primary me-md-2 pe-3" type="button">Agregar Producto</button>
-        <button class="btn btn-primary pe-3" type="button">Generar Solicitud</button>
-    </div>
-    </form>
+    <!--IMAGEN CABECERA-->
+    <section class="text-center">
+        <img class="img-fluid" src="/img/imagenSuperiorUsuarios.jpg" alt="">
+    </section>
+
+    <!--Titulo-->
+    <section class="w-50 mx-auto text-center pt-5" id="sectionInicio">
+        <h1 class="p-3 border-top border-2" id="tituloInicio">Solicitud a proveedores</h1>
+    </section>
+
+    <section class="container">
+        <div>
+            <form class="row g-3 pt-3">
+                <div class="col-auto">
+                    <label for="staticEmail2" class="visually-hidden">Buscar proveedor</label>
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Buscar proveedor">
+                </div>
+                <div class="col-auto">
+                    <label for="inputBuscarProducto" class="visually-hidden">Ingrese proveedor a buscar</label>
+                    <input type="password" class="form-control" id="inputBuscarProducto" placeholder="Ingrese proveedor">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+                </div>
+            </form>
+
+            <div class="row mx-auto border justify-content-center">    
+                <div class="w-100">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <!--Columna-->
+                            <thead>
+                                <tr>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col" colspan="2">Cantidad</th>
+                                </tr>
+                                
+                            </thead>
+    
+                            <!--Filas-->
+                            <tbody>
+                                <tr>
+                                    <td class="text-center" scope="row"><input class="w-100" type="text"></td>
+                                    <td class="" scope="row">
+                                        <input class="w-75" type="number">
+                                    </td>
+
+                                    <td>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>Kg o Lt</option>
+                                            <option value="1">Kg</option>
+                                            <option value="2">Lt</option>
+                                        </select>
+                                    </td>
+                                </tr>
+    
+                                <tr>
+                                    <td class="text-center" scope="row"><input class="w-100" type="text"></td>
+                                    <td class="" scope="row">
+                                        <input class="w-75" type="number">
+                                    </td>
+
+                                    <td>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>Kg o Lt</option>
+                                            <option value="1">Kg</option>
+                                            <option value="2">Lt</option>
+                                        </select>    
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-center" scope="row"><input class="w-100" type="text"></td>
+                                    <td class="" scope="row">
+                                        <input class="w-75" type="number">
+                                    </td>
+
+                                    <td>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>Kg o Lt</option>
+                                            <option value="1">Kg</option>
+                                            <option value="2">Lt</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="text-center" scope="row"><input class="w-100" type="text"></td>
+                                    <td class="" scope="row">
+                                        <input class="w-75" type="number">
+                                    </td>
+
+                                    <td>
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>Kg o Lt</option>
+                                            <option value="1">Kg</option>
+                                            <option value="2">Lt</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </section>
+        
 
     <!-- JavaScript -->
 

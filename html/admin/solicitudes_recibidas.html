@@ -58,7 +58,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Mesas</a>
+                        <a class="nav-link " href="../admin/gestionMesas.html">Mesas</a>
                     </li>
 
                     <li class="nav-item">
@@ -66,7 +66,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Reportes</a>
+                        <a class="nav-link " href="../admin/admin_reportes.html">Reportes</a>
                     </li>
                 </ul>
             
@@ -195,16 +195,16 @@
                             <label for="inputEstado" class="visually-hidden">Estado:</label>
                             <input type="text" readonly class="form-control-plaintext" id="inputEstado" value="Estado:">
                         </div>
-                        <div class="col dropdown">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                                Seleccione estado
-                            </a>
-                            
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Aceptada</a></li>
-                                <li><a class="dropdown-item" href="#">Pendiente</a></li>
-                                <li><a class="dropdown-item" href="#">Rechazada</a></li>
-                            </ul>
+                        
+                        <div class="col text-center">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Seleccione estado</option>
+                                    <option value="1">Aceptada</option>
+                                    <option value="2">Rechazada</option>
+                                    <option value="3">Pendiente</option>
+                                </select>
+                            </div>
                         </div>
                     </form>
 

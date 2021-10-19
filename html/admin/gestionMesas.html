@@ -19,27 +19,29 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">    
-    <title>Gestion de usuarios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">  
+    
+    <!-- Titulo de la pestaña-->
+    <title>Restaurante Siglo XXI</title>
 </head>
+
 <body>
-    <header class="container-fluid bg-primary 
-    d-flex justify-content-center">
+    <header class="container-fluid bg-primary d-flex justify-content-center">
         <p class="text-light mb-0 p-2 fs-7">
             Av. España 233, Viña del Mar o llamanos al +569 57469792
         </p>
     </header>
 
-<!--NAVBAR-->
+    <!--NAVBAR-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-2" id="menu">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../admin/index_admin.html">
+            <a class="navbar-brand" href="index_admin.html">
                 <span class="" id="tituloNavbar">
                     Restaurante Siglo XXI
                 </span> 
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -73,30 +75,29 @@
                         Cerrar sesión
                     </a>
                 </form>
-            
             </div>
         </div>
     </nav>
 
     <!--IMAGEN CABECERA-->
     <section class="text-center">
-        <img class="img-fluid" src="/img/imagenAdminUsuario.png" alt="imagen de usuarios">
+        <img class="img-fluid" src="/img/imagenSuperiorUsuarios.jpg" alt="">
     </section>
 
     <section class="w-50 mx-auto text-center pt-5" id="sectionInicio">
-        <h1 class="p-3 border-top border-2" id="tituloInicio">Gestión de usuarios</h1>
+        <h1 class="p-3 border-top border-2" id="tituloInicio">Gestión de mesas</h1>
     </section>
 
     <section class="container">
         <div class="row mx-auto border justify-content-center">
             <form class="row g-3">
                 <div class="col-auto">
-                    <label for="staticEmail2" class="visually-hidden">Buscar usuario</label>
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Buscar usuario">
+                    <label for="staticEmail2" class="visually-hidden">Buscar producto</label>
+                    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Buscar producto">
                 </div>
                 <div class="col-auto">
-                    <label for="inputBuscarUsuario" class="visually-hidden">Ingrese usuario</label>
-                    <input type="password" class="form-control" id="inputBuscarUsuario" placeholder="">
+                    <label for="inputBuscarProducto" class="visually-hidden">Ingrese número de mesa</label>
+                    <input type="password" class="form-control" id="inputBuscarProducto" placeholder="Ingrese número de mesa">
                 </div>
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary mb-3">Buscar</button>
@@ -104,19 +105,14 @@
             </form>
 
             
-            <div class="w-100">
+            <div class="w-50">
                 <div class="table-responsive">
                     <table class="table table-hover align-middle text-center">
                         <!--Columna-->
                         <thead>
                             <tr>
-                                <th scope="col">Rut</th>
-                                <th scope="col">usuario</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Contraseña</th>
-                                <th scope="col">Correo electrónico</th>
-                                <th scope="col">Número de teléfono</th>
-                                <th scope="col">Tipo de usuario</th>
+                                <th scope="col">Número de mesa</th>
+                                <th scope="col">Disponibilidad</th>
                                 <th scope="col" colspan="2">Opciones</th>
                             </tr>
                             
@@ -125,40 +121,45 @@
                         <!--Filas-->
                         <tbody>
                             <tr>
-                                <td class="text-center" scope="row">19.844.348-6</td>
-                                <td class="text-center" scope="row">jos.lazcano</td>
-                                <td class="text-center" scope="row">José Lazcano</td>
-                                <td class="text-center" scope="row">asdsad123</td>
-                                <td class="text-center" scope="row">jos.lazcano@duocuc.cl</td>
-                                <td class="text-center" scope="row">962507551</td>
-                                <td class="text-center" scope="row">Administrador</td>
+                                <td class="text-center" scope="row">01</td>
+                                <td class="text-center" scope="row">Disponibilidad</td>
                                 <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="../admin/modificar_usuario.html">
+                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#ventanaEditar" href="">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </td>
                                 <td class="text-danger fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-danger border-0 fs-4 text-center" href="" data-bs-toggle="modal" data-bs-target="#modalEliminar">
+                                    <a class="btn btn-outline-danger border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#modalEliminar" href="">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </td>
                             </tr>
 
                             <tr>
-                                <td class="text-center" scope="row">14.566.956-8</td>
-                                <td class="text-center" scope="row">car.sepulveda</td>
-                                <td class="text-center" scope="row">Carlos Sepulveda</td>
-                                <td class="text-center" scope="row">dsadsa321</td>
-                                <td class="text-center" scope="row">car.sepulveda@restaurant.cl</td>
-                                <td class="text-center" scope="row">945678245</td>
-                                <td class="text-center" scope="row">Cocinero</td>
+                                <td class="text-center" scope="row">02</td>
+                                <td class="text-center" scope="row">Ocupada</td>
                                 <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="../admin/modificar_usuario.html">
+                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#ventanaEditar" href="">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </td>
                                 <td class="text-danger fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-danger border-0 fs-4 text-center" href="" data-bs-toggle="modal" data-bs-target="#modalEliminar">
+                                    <a class="btn btn-outline-danger border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#modalEliminar" href="">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center" scope="row">03</td>
+                                <td class="text-center" scope="row">Inhabilitada</td>
+                                <td class="text-warning fs-4 text-center" scope="row">
+                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#ventanaEditar" href="">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                </td>
+                                <td class="text-danger fs-4 text-center" scope="row">
+                                    <a class="btn btn-outline-danger border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#modalEliminar" href="">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </td>
@@ -169,17 +170,76 @@
             </div>
         </div>
 
+        <div class="row w-75 mx-auto justify-content-center">
+            <div class="text-center col-lg pt-3 ">
+                <a class="btn btn-outline-secondary btn-lg w-50" href="../admin/index_admin.html">
+                    Volver
+                </a>
+            </div>
+
+            <div class="text-center col-lg p-3 ">
+                <a class="btn btn-success btn-primary-outline-success btn-lg w-50" href="../bodega/registro_bodega.html">
+                    Agregar Mesa
+                </a>
+            </div>            
+        </div>
+    </section>
+
+    <!--Ventana Emergente-->
+    <div class="modal fade" id="ventanaEditar" tabindex="-1"  aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!--Header Modal-->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Editar mesa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!--Body Modal-->
+                <div class="modal-body row">
+                    <form class="row text-center">
+                        <div class="col text-center">
+                            <label for="inputEstado" class="visually-hidden">Estado:</label>
+                            <input type="text" readonly class="form-control-plaintext" id="inputEstado" value="Estado:">
+                        </div>
+
+                        <div class="col text-center">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Seleccione estado</option>
+                                    <option value="1">Disponible</option>
+                                    <option value="2">Ocupada</option>
+                                    <option value="3">Pendiente</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--Footer Modal-->
+                <div class=" modal-footer">
+                    <div class="col text-center">
+                        <input type="button" class="btn btn-outline-success" onclick="" data-bs-dismiss="modal" value="Aceptar"></>
+                    </div>
+
+                    <div class="col text-center">
+                        <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!--Modal eliminar-->
         <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Eliminar usuario</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Eliminar mesa</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
-                    ¿Desea eliminar este usuario?
+                    ¿Desea eliminar esta mesa?
                 </div>
 
                 <div class="modal-footer">
@@ -194,23 +254,11 @@
             </div>
             </div>
         </div>
+    </div>
 
-        <div class="row w-75 mx-auto justify-content-center">
-            <div class="text-center col-lg pt-3 ">
-                <a class="btn btn-primary btn-primary-outline-success btn-lg w-50" href="../admin/index_admin.html">
-                    Volver
-                </a>
-            </div>
+    <!-- JavaScript -->
 
-            <div class="text-center col-lg p-3 ">
-                <a class="btn btn-success btn-primary-outline-success btn-lg w-50" href="../admin/agregar_usuario.html">
-                    Agregar usuario
-                </a>
-            </div>            
-        </div>
-    </section>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

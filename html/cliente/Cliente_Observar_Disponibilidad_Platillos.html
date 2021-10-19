@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <!--CSS -->
     <link rel="stylesheet" href="../../css/css_Observar_Platillos.css">
@@ -17,8 +19,15 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">    
-    
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>    
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <title>Restaurante Siglo XXI</title>
   </head>
    
@@ -31,35 +40,7 @@
     </header>
 
     <!--NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" id="Nombre"href="">Restaurante Siglo XXI</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Menu Principal</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Reservaciones</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Ordenar Comida</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Agendar Comida</a>
-            </li>
-          </ul>
-          <form class="d-flex">
-            <a class="nav-link">"NombrePersona"</a>
-            <button class="btn btn-outline-success" type="submit">Cerrar Sesion</button>
-          </form>
-        </div>
-      </div>
-    </nav>
-
+   
     <!--SLIDER-->
     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -84,8 +65,8 @@
     </div>
 
     <!--Vista disponibilidad de Platos-->
-    <H2 id="bebestibles" style="text-align: center; margin:20px; font-family:Verdana, Geneva, Tahoma, sans-serif,cursive;" >BEBESTIBLES</H2>
-    <H4 id="Jugos" style="text-align: center; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Jugos</H4>
+    <H2 id="bebestibles" style="text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif, cursive; margin: 25px;" >BEBESTIBLES</H2>
+    <H4 id="Jugos" style="text-align: center; font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 2px;">Jugos</H4>
 
     <!--Primer trio de tarjetas-->
     <div id="MenuComida" class="row row-cols-1 row-cols-md-3 g-4">
@@ -94,7 +75,7 @@
           <!--Tarjeta del producto-->
           <img src="./imagenes/Juguitonaranja.jpg" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title" class="text-light" >Jugo de Naranja</h5>
+            <h5 class="card-title">Jugo de Naranja</h5>
             <p class="card-text">Precio: $650</p>
           </div>
           <!--Disponiblilidad del producto-->
@@ -211,103 +192,80 @@
         </div>
       </div>
     </div>
-    <!--cuarto Trio-->
-    
-    <!--Vista Cambio de pagina-->
-    <nav id="NumPag" aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="../cliente/Cliente_Observar_Disponibilidad_Platillos.html">Previous</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="../cliente/Cliente_Observar_Disponibilidad_Platillos.html">1</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="../cliente/Cliente_Observar_Disponibilidad_Platillos2.html">2</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">4</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">5</a>  
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">6</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-    </nav>    
 
+    <!--Barra Baja-->
     <footer class="bg-primary text-white text-center text-lg-start">
-  <!-- Grid container -->
-  <div class="container p-4">
-    <!--Grid row-->
-    <div class="row">
-      <!--Grid column-->
-      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-        <h5 class="text-uppercase">Ubicacion</h5>
-        <p>
-          Av. España 233, Viña del Mar
-        </p>
+      <!-- Grid container -->
+      <div class="container p-4">
+        <!--Grid row-->
+        <div class="row">
+          <!--Grid column-->
+          <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Footer Content</h5>
+    
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+              molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+              voluptatem veniam, est atque cumque eum delectus sint!
+            </p>
+          </div>
+          <!--Grid column-->
+    
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase">Links</h5>
+    
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="#!" class="text-white">Link 1</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 2</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 3</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 4</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+    
+          <!--Grid column-->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase mb-0">Links</h5>
+    
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!" class="text-white">Link 1</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 2</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 3</a>
+              </li>
+              <li>
+                <a href="#!" class="text-white">Link 4</a>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
       </div>
-      <!--Grid column-->
-
-      <!--Grid column-->
-      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-        <h5 class="text-uppercase">Atencion al cliente</h5>
-        <ul class="list-unstyled mb-0">
-          <li>
-            <a class="text-white" style="text-decoration: none;">Telefono: +56957469792</a>
-          </li>
-          <li>
-            <a class="text-white" style="text-decoration: none;">Correo: RestaS21@gmail.com</a>
-          </li>
-          <li>
-            <a href="#!" class="text-white">Link 3</a>
-          </li>
-          <li>
-            <a href="#!" class="text-white">Link 4</a>
-          </li>
-        </ul>
-      </div>
-      <!--Grid column-->
-
-      <!--Grid column-->
-      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-        <h5 class="text-uppercase mb-0">Links</h5>
-
-        <ul class="list-unstyled">
-          <li>
-            <a href="#!" class="text-white">Link 1</a>
-          </li>
-          <li>
-            <a href="#!" class="text-white">Link 2</a>
-          </li>
-          <li>
-            <a href="#!" class="text-white">Link 3</a>
-          </li>
-          <li>
-            <a href="#!" class="text-white">Link 4</a>
-          </li>
-        </ul>
-      </div>
-      <!--Grid column-->
-    </div>
-    <!--Grid row-->
-  </div>
-  <!-- Grid container -->
+      <!-- Grid container -->
+    
       <!-- Copyright -->
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-          © 2021 Copyright:
-        <a class="text-white" style="text-decoration: none; font-family: Lobster,cursive;">Restaurante Siglo XXI</a>
+        © 2021 Copyright:
+        <a class="text-white" >Restaurante Siglo XXI</a>
       </div>
       <!-- Copyright -->
     </footer>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
