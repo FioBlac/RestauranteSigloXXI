@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
     <!--CSS -->
-    <link rel="stylesheet" href="../../css/css_cliente_reserva.css">
+    <link rel="stylesheet" href="../../css/css_Observar_Platillos.css">
 
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,6 +53,7 @@
             </li>
           </ul>
           <form class="d-flex">
+            <a class="nav-link">"NombrePersona"</a>
             <button class="btn btn-outline-success" type="submit">Cerrar Sesion</button>
           </form>
         </div>
@@ -82,21 +83,9 @@
       </button>
     </div>
 
-    <!--Perfil de Usuario-->
-    <div id="PerfilUsuario" class="container">
-      <div class="fb-profile">
-          <img align="left" class="fb-image-lg" src="http://lorempixel.com/850/280/nightlife/5/" alt="Profile image example"/>
-          <img align="left" class="fb-image-profile thumbnail" src="../../img/Persona.jpg" alt="Profile image example"/>
-          <div class="fb-profile-text">
-            <h3>Jose Antonio</h3>
-            <h3>Lazcano Pereira</h3>
-          </div>
-      </div>
-    </div>
-
     <!--Vista disponibilidad de Platos-->
-    <H2 id="bebestibles">BEBESTIBLES</H2>
-    <H4 id="Jugos">Jugos</H4>
+    <H2 id="bebestibles" style="text-align: center; margin:20px; font-family:Verdana, Geneva, Tahoma, sans-serif,cursive;" >BEBESTIBLES</H2>
+    <H4 id="Jugos" style="text-align: center; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Jugos</H4>
 
     <!--Primer trio de tarjetas-->
     <div id="MenuComida" class="row row-cols-1 row-cols-md-3 g-4">
@@ -105,7 +94,7 @@
           <!--Tarjeta del producto-->
           <img src="./imagenes/Juguitonaranja.jpg" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Jugo de Naranja</h5>
+            <h5 class="card-title" class="text-light" >Jugo de Naranja</h5>
             <p class="card-text">Precio: $650</p>
           </div>
           <!--Disponiblilidad del producto-->
@@ -254,72 +243,71 @@
       </ul>
     </nav>    
 
-    <!--Barra Baja-->
-    <footer id="barra" class="bg-primary text-White">
-      <div class="Container">
-        <nav class="row justify-content-center">
-          <!--Logo-->
-          <a  id="Nombre_bajo" href="" class="col-12 col-md-3 text-reset text-uppercase d-flex align-items-center justify-content-center mb-3 mb-md-0">
-            <h3 id="Nombre">Restaurante Siglo XXI</h3>
-          </a>
-          <!--MenuUbicacion-->
-          <ul id="Ubicacion" class="col-5 col-md-3 list-unstyled">
-            <li class="font-weight-bol text-uppercase">
-              Ubicacion:
-            </li>
-            <li>
-              <a id="Decoration1" class="text-reset">Av. España 233, Viña del Mar</a>
-            </li>
-          </ul>
-          <!--MenuAtencion al cliente-->
-          <ul id="AtencionAlCliente" class="col-5 col-md-3 list-unstyled">
-            <li class="font-weight-bol text-uppercase">
-              Atencion al cliente:
-            </li>
-            <li>
-              <a id="Decoration1" class="text-reset">+56957469792</a>
-            </li>
-          </ul>
-          <!--MenuContactanos-->
-          <ul id="MenuContactanos" class="col-5 col-md-3 list-unstyled">
-            <li class="font-weight-bol text-uppercase">
-              Otros medios: 
-            </li>
-            <li>
-              <a id="Decoration1" class="text-reset">RestaS21@gmail.com</a>
-            </li>
-            <li>
-              <a id="Decoration1" class="text-reset">956985107</a>
-            </li>
-            <li>
-              <a id="Decoration1" class="text-reset">Siguenos en nuestras redes</a>
-            </li>
-          </ul>
-          <!--social networks-->
-          <ul class="col-10 col-md-3 list-unstyled">
-            <li id="RedesSociales" class="font-weight-bol text-uppercase">
-              Redes Sociales: 
-              <li class="d-flex justify-content-between">
-                <a id="RedesFacebook" class="text-reset" href="https://es-la.facebook.com/">
-                  <i class="fab fa-facebook-square"></i>
-                </a>  
-                <a id="RedesTwitter" class="text-reset" href="https://twitter.com/?lang=es">
-                  <i class="fab fa-twitter-square"></i>
-                </a>
-                <a id="RedesPinterest" class="text-reset" href="https://pixabay.com/es/photos/barba-rostro-hombre-modelo-bigote-1845166/">
-                  <i class="fab fa-pinterest"></i>
-                </a>
-                <a id="RedesYoutube" class="text-reset" href="https://www.youtube.com/">
-                  <i class="fab fa-youtube"></i>
-                </a>
-              </li>
-            </li>  
-          </ul>
-        </nav>
+    <footer class="bg-primary text-white text-center text-lg-start">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!--Grid row-->
+    <div class="row">
+      <!--Grid column-->
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Ubicacion</h5>
+        <p>
+          Av. España 233, Viña del Mar
+        </p>
       </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Atencion al cliente</h5>
+        <ul class="list-unstyled mb-0">
+          <li>
+            <a class="text-white" style="text-decoration: none;">Telefono: +56957469792</a>
+          </li>
+          <li>
+            <a class="text-white" style="text-decoration: none;">Correo: RestaS21@gmail.com</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">Link 3</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">Link 4</a>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase mb-0">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!" class="text-white">Link 1</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">Link 2</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">Link 3</a>
+          </li>
+          <li>
+            <a href="#!" class="text-white">Link 4</a>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
+    </div>
+    <!--Grid row-->
+  </div>
+  <!-- Grid container -->
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+          © 2021 Copyright:
+        <a class="text-white" style="text-decoration: none; font-family: Lobster,cursive;">Restaurante Siglo XXI</a>
+      </div>
+      <!-- Copyright -->
     </footer>
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
