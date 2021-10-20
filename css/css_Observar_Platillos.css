@@ -1,56 +1,37 @@
-/*==Barra del navbar==*/
-    /*==Textodelnavbar==*/
-    #Nombre{
-        font-family: 'Lobster', cursive;
-    }
+/* CSS Document */
 
-/*==Texto Descriptivo==*/
-#NumPag{
-    margin: 20px;
+body{margin-top: 50px; margin-bottom: 100px;}
+
+/* equal card height */
+.row-equal > div[class*='col-'] {
+    display: flex;
+    flex: 1 0 auto;
 }
-#MenuComida{
-    margin: 25px;
+
+.row-equal .card {
+   width: 100%;
 }
-/*==Barra del footer==*/  
-    /*==TextoDeLaEmpresa==*/
-    #Nombre_bajo{
-        font-family: 'Lobster', cursive;
-        color: rgb(0, 0, 0);
-        text-decoration: none;
-    }
-    #Nombre{
-        color: rgb(0, 0, 0);
-    }
-    /*==Textodelfooter==*/
-    #Ubicacion{
-        color: whitesmoke;
-    }
-    /*==Textodelfooter==*/
-    #AtencionAlCliente{
-        color: whitesmoke;
-    }
-    /*==Textodelfooter==*/
-    #MenuContactanos{
-        color: whitesmoke;
-    }
-    #RedesSociales{
-        color: whitesmoke;
-    }
-    /*==Texto Descriptivo==*/
-    #Decoration1{
-        text-decoration: none;
-    }
-    #RedesFacebook{
-        background-color: seashell;
-    }
-    #RedesTwitter{
-        background-color: seashell;
-    }
-    #RedesPinterest{
-        background-color: seashell;
-    }
-    #RedesYoutube{
-        background-color: seashell;
-    }
-@media screen and (max-width: 500px){ 
+
+/* ensure equal card height inside carousel */
+.carousel-inner>.row-equal.active, 
+.carousel-inner>.row-equal.next, 
+.carousel-inner>.row-equal.prev {
+    display: flex;
 }
+
+/* prevent flicker during transition */
+.carousel-inner>.row-equal.active.left, 
+.carousel-inner>.row-equal.active.right {
+    opacity: 0.5;
+    display: flex;
+}
+
+
+/* control image height */
+.card-img-top-250 {
+    max-height: 250px;
+    overflow:hidden;
+}
+
+
+.card-header{color:dodgerblue}
