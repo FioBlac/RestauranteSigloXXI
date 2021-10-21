@@ -91,7 +91,7 @@
     </section>
 
     <section class="container">
-        <div>
+        <div class="row mx-auto border justify-content-center">
             <form class="row g-3 pt-3">
                 <div class="col-auto">
                     <label for="staticEmail2" class="visually-hidden">Buscar proveedor</label>
@@ -105,89 +105,88 @@
                     <button type="submit" class="btn btn-primary mb-3">Buscar</button>
                 </div>
             </form>
+ 
+            <div class="w-100">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <!--Columna-->
+                        <thead>
+                            <tr>
+                                <th scope="col">Descripción</th>
+                                <th scope="col" colspan="2">Cantidad</th>
+                            </tr>
+                            
+                        </thead>
 
-            <div class="row mx-auto border justify-content-center">    
-                <div class="w-100">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <!--Columna-->
-                            <thead>
-                                <tr>
-                                    <th scope="col">Descripción</th>
-                                    <th scope="col" colspan="2">Cantidad</th>
-                                </tr>
-                                
-                            </thead>
-    
-                            <!--Filas-->
-                            <tbody>
-                                <tr>
-                                    <td class="text-center" scope="row"><input class="w-100" type="text"></td>
-                                    <td class="" scope="row">
-                                        <input class="w-75" type="number">
-                                    </td>
+                        <!--Filas-->
+                        <tbody>
+                            <tr>
+                                <td class="text-center" scope="row"><input class="w-100" type="text"></td>
+                                <td class="" scope="row">
+                                    <input class="w-75" type="number">
+                                </td>
 
-                                    <td>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Kg o Lt</option>
-                                            <option value="1">Kg</option>
-                                            <option value="2">Lt</option>
-                                        </select>
-                                    </td>
-                                </tr>
-    
-                                <tr>
-                                    <td class="text-center" scope="row"><input class="w-100" type="text"></td>
-                                    <td class="" scope="row">
-                                        <input class="w-75" type="number">
-                                    </td>
+                                <td>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Kg o Lt</option>
+                                        <option value="1">Kg</option>
+                                        <option value="2">Lt</option>
+                                    </select>
+                                </td>
+                            </tr>
 
-                                    <td>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Kg o Lt</option>
-                                            <option value="1">Kg</option>
-                                            <option value="2">Lt</option>
-                                        </select>    
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="text-center" scope="row"><input class="w-100" type="text"></td>
+                                <td class="" scope="row">
+                                    <input class="w-75" type="number">
+                                </td>
 
-                                <tr>
-                                    <td class="text-center" scope="row"><input class="w-100" type="text"></td>
-                                    <td class="" scope="row">
-                                        <input class="w-75" type="number">
-                                    </td>
+                                <td>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Kg o Lt</option>
+                                        <option value="1">Kg</option>
+                                        <option value="2">Lt</option>
+                                    </select>    
+                                </td>
+                            </tr>
 
-                                    <td>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Kg o Lt</option>
-                                            <option value="1">Kg</option>
-                                            <option value="2">Lt</option>
-                                        </select>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="text-center" scope="row"><input class="w-100" type="text"></td>
+                                <td class="" scope="row">
+                                    <input class="w-75" type="number">
+                                </td>
 
-                                <tr>
-                                    <td class="text-center" scope="row"><input class="w-100" type="text"></td>
-                                    <td class="" scope="row">
-                                        <input class="w-75" type="number">
-                                    </td>
+                                <td>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Kg o Lt</option>
+                                        <option value="1">Kg</option>
+                                        <option value="2">Lt</option>
+                                    </select>
+                                </td>
+                            </tr>
 
-                                    <td>
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Kg o Lt</option>
-                                            <option value="1">Kg</option>
-                                            <option value="2">Lt</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                            <tr>
+                                <td class="text-center" scope="row"><input class="w-100" type="text"></td>
+                                <td class="" scope="row">
+                                    <input class="w-75" type="number">
+                                </td>
+
+                                <td>
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Kg o Lt</option>
+                                        <option value="1">Kg</option>
+                                        <option value="2">Lt</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-lg-end">
-                    <a href="#" class="btn btn-primary">Agregar Producto</a>
-                    <a href="#" class="btn btn-primary">Generar Solicitud</a>
-                  </div>
+            </div>
+            
+            <div class="text-center col-lg p-3">
+                <a href="#" class="btn btn-primary">Agregar Producto</a>
+                <a href="#" class="btn btn-primary">Generar Solicitud</a>
             </div>    
         </div>
     </section>
