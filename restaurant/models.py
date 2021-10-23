@@ -103,23 +103,6 @@ class Bodega(models.Model):
         db_table = 'bodega'
 
 
-class Boleta(models.Model):
-    id_boleta = models.CharField(primary_key=True, max_length=20)
-    detalle_boleta = models.CharField(max_length=500)
-    fecha_entrega = models.DateField()
-    detalle_pedido = models.CharField(max_length=200)
-    precio_total = models.BigIntegerField()
-    descuento = models.BigIntegerField()
-    propina = models.BigIntegerField()
-    hora_boleta = models.DateTimeField()
-    cliente_rut_cliente = models.ForeignKey('Cliente', models.DO_NOTHING, db_column='cliente_rut_cliente', blank=True, null=True,related_name='+')
-    admin_rut_admin = models.ForeignKey(Admin, models.DO_NOTHING, db_column='admin_rut_admin', blank=True, null=True,related_name='+')
-
-    class Meta:
-        managed = False
-        db_table = 'boleta'
-
-
 class Cliente(models.Model):
     rut_cliente = models.CharField(primary_key=True, max_length=20)
     nombre_cliente = models.CharField(max_length=40)
@@ -128,29 +111,9 @@ class Cliente(models.Model):
     password_cliente = models.CharField(max_length=40)
     telefono_cliente = models.CharField(max_length=15)
 
-    def _str_(self):
-	    return self.nombre_cliente
-
     class Meta:
         managed = False
         db_table = 'cliente'
-    
-    
-
-
-class Colab(models.Model):
-    rut_colab = models.CharField(primary_key=True, max_length=20)
-    nombre_colab = models.CharField(max_length=40)
-    apellido_colab = models.CharField(max_length=40)
-    email_colab = models.CharField(max_length=40)
-    password_colab = models.CharField(max_length=40)
-    telefono_colab = models.CharField(max_length=15)
-    tipo_colab = models.CharField(max_length=40)
-    fecha_contra_colab = models.DateField()
-
-    class Meta:
-        managed = False
-        db_table = 'colab'
 
 
 class DjangoAdminLog(models.Model):
@@ -198,6 +161,47 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
+class Entrega(models.Model):
+    id_entrega = models.BigIntegerField(primary_key=True)
+    hora_entrada = models.DateTimeField()
+    hora_salida = models.DateTimeField()
+    estado = models.CharField(max_length=50)
+    trabajador_rut_trab = models.ForeignKey('Trabajador', models.DO_NOTHING, db_column='trabajador_rut_trab', blank=True, null=True,related_name='+')
+    pedido_id_pedido = models.ForeignKey('Pedido', models.DO_NOTHING, db_column='pedido_id_pedido', blank=True, null=True,related_name='+')
+
+    class Meta:
+        managed = False
+        db_table = 'entrega'
+
+
+class Factura(models.Model):
+    id_boleta = models.CharField(primary_key=True, max_length=20)
+    fecha_emision = models.DateTimeField()
+    subtotal = models.BigIntegerField()
+    cliente_rut_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_rut_cliente', blank=True, null=True)
+    modo_pago_id_modo_pago = models.ForeignKey('ModoPago', models.DO_NOTHING, db_column='modo_pago_id_modo_pago', blank=True, null=True,related_name='+')
+    restaurant_rut_rest = models.ForeignKey('Restaurant', models.DO_NOTHING, db_column='restaurant_rut_rest', blank=True, null=True,related_name='+')
+    finanza_rut_finan = models.ForeignKey('Finanza', models.DO_NOTHING, db_column='finanza_rut_finan', blank=True, null=True,related_name='+')
+
+    class Meta:
+        managed = False
+        db_table = 'factura'
+
+
+class Finanza(models.Model):
+    rut_finan = models.CharField(primary_key=True, max_length=20)
+    nombre_finan = models.CharField(max_length=40)
+    apellido_finan = models.CharField(max_length=40)
+    email_finan = models.CharField(max_length=40)
+    password_finan = models.CharField(max_length=40)
+    telefono_finan = models.CharField(max_length=15)
+    fecha_contra_finan = models.DateField()
+
+    class Meta:
+        managed = False
+        db_table = 'finanza'
+
+
 class Mesa(models.Model):
     id_mesa = models.CharField(primary_key=True, max_length=20)
     numero_mesa = models.BigIntegerField()
@@ -208,21 +212,25 @@ class Mesa(models.Model):
         db_table = 'mesa'
 
 
+class ModoPago(models.Model):
+    id_modo_pago = models.BigIntegerField(primary_key=True)
+    denominacion = models.CharField(max_length=60)
+
+    class Meta:
+        managed = False
+        db_table = 'modo_pago'
+
+
 class Pedido(models.Model):
     id_pedido = models.CharField(primary_key=True, max_length=20)
-    rut_cliente = models.CharField(max_length=20)
-    nombre_cliente = models.CharField(max_length=40)
-    apellido_cliente = models.CharField(max_length=50)
-    numero_mesa = models.BigIntegerField()
-    nombre_plato = models.CharField(max_length=40)
     cantidad = models.BigIntegerField()
-    precio = models.BigIntegerField()
-    estado = models.CharField(max_length=20)
+    precio_ampliado = models.BigIntegerField()
     total = models.BigIntegerField()
+    mesa_id_mesa = models.ForeignKey(Mesa, models.DO_NOTHING, db_column='mesa_id_mesa', blank=True, null=True)
     reserva_id_reserva = models.ForeignKey('Reserva', models.DO_NOTHING, db_column='reserva_id_reserva', blank=True, null=True,related_name='+')
-    colab_rut_colab = models.ForeignKey(Colab, models.DO_NOTHING, db_column='colab_rut_colab', blank=True, null=True,related_name='+')
-    boleta_id_boleta = models.ForeignKey(Boleta, models.DO_NOTHING, db_column='boleta_id_boleta', blank=True, null=True,related_name='+')
-    mesa_id_mesa = models.ForeignKey(Mesa, models.DO_NOTHING, db_column='mesa_id_mesa', blank=True, null=True,related_name='+')
+    factura_id_boleta = models.ForeignKey(Factura, models.DO_NOTHING, db_column='factura_id_boleta', blank=True, null=True,related_name='+')
+    plato_id_plato = models.ForeignKey('Plato', models.DO_NOTHING, db_column='plato_id_plato', blank=True, null=True,related_name='+')
+    entrega_id_entrega = models.ForeignKey(Entrega, models.DO_NOTHING, db_column='entrega_id_entrega', blank=True, null=True,related_name='+')
 
     class Meta:
         managed = False
@@ -233,9 +241,8 @@ class Plato(models.Model):
     id_plato = models.CharField(primary_key=True, max_length=20)
     nombre_plato = models.CharField(max_length=40)
     precio = models.FloatField()
-    disponibiliddad = models.CharField(max_length=1)
     tipo_plato = models.CharField(max_length=50)
-    pedido_id_pedido = models.ForeignKey(Pedido, models.DO_NOTHING, db_column='pedido_id_pedido', blank=True, null=True,related_name='+')
+    tiempo_prepar = models.DateField()
 
     class Meta:
         managed = False
@@ -250,7 +257,7 @@ class Producto(models.Model):
     fecha_caducidad = models.DateField()
     zona_conservacion = models.CharField(max_length=40)
     tipo_alimento = models.CharField(max_length=40)
-    proveedor_rut_proveedor = models.ForeignKey('Proveedor', models.DO_NOTHING, db_column='proveedor_rut_proveedor', blank=True, null=True,related_name='+')
+    proveedor_rut_proveedor = models.ForeignKey('Proveedor', models.DO_NOTHING, db_column='proveedor_rut_proveedor', blank=True, null=True,related_name='+')       
     bodega_id_bodega = models.ForeignKey(Bodega, models.DO_NOTHING, db_column='bodega_id_bodega', blank=True, null=True,related_name='+')
     plato_id_plato = models.ForeignKey(Plato, models.DO_NOTHING, db_column='plato_id_plato', blank=True, null=True,related_name='+')
     solic_ped_id_soli_prod = models.ForeignKey('SolicPed', models.DO_NOTHING, db_column='solic_ped_id_soli_prod', blank=True, null=True,related_name='+')
@@ -278,13 +285,25 @@ class Proveedor(models.Model):
 class Reserva(models.Model):
     id_reserva = models.CharField(primary_key=True, max_length=20)
     cantidad_personas = models.BigIntegerField()
+    fecha_reserva = models.DateTimeField()
     comentario = models.CharField(max_length=200, blank=True, null=True)
-    hora_reserva = models.DateField()
-    fecha_reserva = models.DateField()
+    fecha_vence = models.DateTimeField()
 
     class Meta:
         managed = False
         db_table = 'reserva'
+
+
+class Restaurant(models.Model):
+    rut_rest = models.BigIntegerField(primary_key=True)
+    nombre_rest = models.CharField(max_length=100)
+    direccion_rest = models.CharField(max_length=40)
+    telefono = models.CharField(max_length=15)
+    factura_id_boleta = models.ForeignKey(Factura, models.DO_NOTHING, db_column='factura_id_boleta', blank=True, null=True,related_name='+')
+
+    class Meta:
+        managed = False
+        db_table = 'restaurant'
 
 
 class SolicPed(models.Model):
@@ -299,3 +318,29 @@ class SolicPed(models.Model):
     class Meta:
         managed = False
         db_table = 'solic_ped'
+
+
+class TipoTrab(models.Model):
+    id_tipo_trab = models.BigIntegerField()
+    descripcion = models.CharField(max_length=50)
+    trabajador_rut_trab = models.ForeignKey('Trabajador', models.DO_NOTHING, db_column='trabajador_rut_trab', blank=True, null=True,related_name='+')
+    tipo_trab_id = models.FloatField(primary_key=True)
+
+    class Meta:
+        managed = False
+        db_table = 'tipo_trab'
+
+
+class Trabajador(models.Model):
+    rut_trab = models.CharField(primary_key=True, max_length=20)
+    nombre_trab = models.CharField(max_length=40)
+    apellido_trab = models.CharField(max_length=40)
+    email_trab = models.CharField(max_length=40)
+    password_trab = models.CharField(max_length=40)
+    telefono_trab = models.CharField(max_length=15)
+    fecha_contra_trab = models.DateField()
+    tipo_trab_tipo_trab = models.ForeignKey(TipoTrab, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'trabajador'
