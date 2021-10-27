@@ -4,7 +4,7 @@ function loginAsoci(){
     var passwd = "admin";
 
     if(document.getElementById("userAsoci").value == user && document.getElementById("passAsoci").value == passwd){
-        window.location = "/html/admin/index_admin.html";
+        window.location = "{% url 'index_admin' %}";
     }else{
         alert("Datos incorrectos, por favor intentelo nuevamente")
     }

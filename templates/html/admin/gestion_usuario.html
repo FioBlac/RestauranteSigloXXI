@@ -66,7 +66,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="{% static 'admin_reportes' %}">Reportes</a>
+                        <a class="nav-link " href="{% url 'admin_reportes' %}">Reportes</a>
                     </li>
                 </ul>
         
@@ -134,7 +134,7 @@
                                 <td class="text-center" scope="row">962507551</td>
                                 <td class="text-center" scope="row">Administrador</td>
                                 <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="../admin/modificar_usuario.html">
+                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="{% url 'modificar_usuario' %}">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </td>
@@ -154,7 +154,7 @@
                                 <td class="text-center" scope="row">945678245</td>
                                 <td class="text-center" scope="row">Cocinero</td>
                                 <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="../admin/modificar_usuario.html">
+                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="{% url 'modificar_usuario' %}">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </td>
@@ -198,13 +198,13 @@
 
         <div class="row w-75 mx-auto justify-content-center">
             <div class="text-center col-lg pt-3 ">
-                <a class="btn btn-primary btn-primary-outline-success btn-lg w-50" href="../admin/index_admin.html">
+                <a class="btn btn-primary btn-primary-outline-success btn-lg w-50" href="{% url 'index_admin' %}">
                     Volver
                 </a>
             </div>
 
             <div class="text-center col-lg p-3 ">
-                <a class="btn btn-success btn-primary-outline-success btn-lg w-50" href="../admin/agregar_usuario.html">
+                <a class="btn btn-success btn-primary-outline-success btn-lg w-50" href="{% url 'agregar_usuario' %}">
                     Agregar usuario
                 </a>
             </div>            
