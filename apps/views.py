@@ -51,6 +51,9 @@ def solicitudes_enviadas(request):
 def solicitudes_recibidas(request):
     return render (request, 'html/admin/solicitudes_recibidas.html')
 
+def ver_reservas(request):
+    return render (request, 'html/admin/ver_reservas.html')
+
 
 #HTML BODEGA
 def gestion_bodega(request):

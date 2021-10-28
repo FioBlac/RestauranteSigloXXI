@@ -21,6 +21,7 @@ urlpatterns =[
     path('solicitud_stock_proveedores', views.solicitud_stock_proveedores, name='solicitud_stock_proveedores'),
     path('solicitudes_enviadas', views.solicitudes_enviadas, name='solicitudes_enviadas'),
     path('solicitudes_recibidas', views.solicitudes_recibidas, name='solicitudes_recibidas'),
+    path('ver_reservas', views.ver_reservas, name='ver_reservas'),
 
     #HTML BODEGA
     path('gestion_bodega', views.gestion_bodega, name='gestion_bodega'),

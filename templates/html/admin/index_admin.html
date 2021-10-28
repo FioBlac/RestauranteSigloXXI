@@ -123,20 +123,20 @@
 
         <!--SEGUNDA FILA-->
         <div class="row w-75 mx-auto" id="servicios-fila-1">       
-            <a class="btn btn-outline-secondary col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center my-5 icono-wrap" href="{% url 'gestionMesas' %}" role="button">
+            <a class="btn btn-outline-secondary col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center my-5 icono-wrap" href="{% url 'ver_reservas' %}" role="button">
                 <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="180" height="160" fill="currentColor" class="bi bi-align-top" viewBox="0 0 16 16">
-                        <rect width="4" height="12" rx="1" transform="matrix(1 0 0 -1 6 15)"/>
-                        <path d="M1.5 2a.5.5 0 0 1 0-1v1zm13-1a.5.5 0 0 1 0 1V1zm-13 0h13v1h-13V1z"/>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="180" height="160" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                        <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
                     </svg>
         
                     <div>
-                        <h3 class="fs-5 mt-4 px-4 pb-1">Gestión de mesas</h3>
-                        <p class="px-4">Seleccione esta opción para modificar la disponibilidad de las mesas.</p>
+                        <h3 class="fs-5 mt-4 px-4 pb-1">Visualizar reservas</h3>
+                        <p class="px-4">Seleccione esta opción para visualizar las reservas actuales.</p>
                     </div>
                 </div>
             </a>
-    
+
             <a class="btn btn-outline-secondary col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center my-5 icono-wrap" href="{% url 'gestion_solicitudes' %}" role="button">
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="180" height="160" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
@@ -162,6 +162,20 @@
                     <div>
                         <h3 class="fs-5 mt-4 px-4 pb-1 icono-wrap">Reportes</h3>
                         <p class="px-4">Seleccione esta opción para ver los reportes generados por los asociados.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a class="btn btn-outline-secondary col-lg-6 col-md-6 col-sm-12 d-flex justify-content-center my-5 icono-wrap" href="{% url 'gestionMesas' %}" role="button">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="180" height="160" fill="currentColor" class="bi bi-align-top" viewBox="0 0 16 16">
+                        <rect width="4" height="12" rx="1" transform="matrix(1 0 0 -1 6 15)"/>
+                        <path d="M1.5 2a.5.5 0 0 1 0-1v1zm13-1a.5.5 0 0 1 0 1V1zm-13 0h13v1h-13V1z"/>
+                    </svg>
+        
+                    <div>
+                        <h3 class="fs-5 mt-4 px-4 pb-1">Gestión de mesas</h3>
+                        <p class="px-4">Seleccione esta opción para modificar la disponibilidad de las mesas.</p>
                     </div>
                 </div>
             </a>
