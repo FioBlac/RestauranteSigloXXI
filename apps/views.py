@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import ReservaForm
 
 # Create your views here.
 
@@ -68,7 +69,14 @@ def cliente_hacer_pedido(request):
     return render (request, 'html/cliente/cliente_hacer_pedido.html')
 
 def cliente_hacer_reserva(request):
-    return render (request, 'html/cliente/cliente_hacer_reserva.html')
+    if request.method == 'POST':
+        reserva_form = ReservaForm(request.POST)
+        if reserva_form.is_valid():
+            reserva_form.save()
+
+    else:
+        reserva_form = ReservaForm()
+    return render (request, 'html/cliente/cliente_hacer_reserva.html', {'reserva_form':reserva_form})
 
 def cliente_index(request):
     return render (request, 'html/cliente/cliente_index.html')
@@ -78,3 +86,9 @@ def Cliente_Observar_Disponibilidad(request):
 
 def cliente_ver_reserva(request):
     return render (request, 'html/cliente/cliente_ver_reserva.html')
+
+
+#Formularios
+#Formulario de Hacer Reserva
+#def crearReserva(request):
+    
