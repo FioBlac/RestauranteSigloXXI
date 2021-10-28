@@ -68,7 +68,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="{% static 'admin_reportes' %}">Reportes</a>
+                        <a class="nav-link " href="{% url 'admin_reportes' %}">Reportes</a>
                     </li>
                 </ul>
         
@@ -83,7 +83,7 @@
 
     <!--IMAGEN CABECERA-->
     <section class="text-center">
-        <img class="img-fluid" src="{% static 'img/imagenSuperiorUsuarios.png' %}" alt="">
+        <img class="img-fluid" src="{% static 'img/imagenSuperiorUsuarios.jpg' %}" alt="">
     </section>
 
     <section class="w-50 mx-auto text-center pt-5" id="sectionInicio">
@@ -174,7 +174,7 @@
         </div>
         <div class="row w-75 mx-auto justify-content-center">
             <div class="text-center col-lg pt-3 ">
-                <a class="btn btn-outline-secondary w-25" href="../admin/gestion_solicitudes.html">
+                <a class="btn btn-outline-secondary w-25" href="{% url 'gestion_solicitudes' %}">
                     Volver
                 </a>
             </div>
