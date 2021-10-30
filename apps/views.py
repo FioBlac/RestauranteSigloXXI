@@ -74,7 +74,7 @@ def agregar_mesa(request):
             id_mesav2 = int(str(ult_id)) + 1
             agg_mesa = Mesa(id_mesav2, numMesaAgg, dispMesaAgg)
             agg_mesa.save()
-        else:
+    else:
             aggMesaForm = MesaForm()
     return render (request, 'html/admin/agregar_mesa.html')
 
