@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .forms import ReservaForm
+from .forms import ReservaForm, DatosReservaForm
 from .models import Reserva
+from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -72,13 +73,27 @@ def cliente_hacer_pedido(request):
 
 def cliente_hacer_reserva(request):
     if request.method == 'POST':
-        reserva_form = ReservaForm(request.POST)
-        if reserva_form.is_valid():
-            reserva_form.save()
 
+        datos_reserva = DatosReservaForm(request.POST)
+
+        if datos_reserva.is_valid():
+            #Limpiar los datos del POST
+            cantidad_personas = datos_reserva.cleaned_data['cantidad_personas']
+            fecha_reserva = datos_reserva.cleaned_data['fecha'].strftime("%Y-%m-%d")
+            hora_reserva = datos_reserva.cleaned_data['hora']
+            comentario = datos_reserva.cleaned_data['comentario']
+
+            #Asignando variables para guardar
+            ultimo_id = Reserva.objects.latest('id_reserva').id_reserva #Último ID registrado en reservas
+            nuevo_id = int(str(ultimo_id)) + 1 #Se le suma 1
+            fecha = str(fecha_reserva) + ' ' + str(hora_reserva)
+            fecha_vence = datetime.strptime(fecha ,"%Y-%m-%d %H:%M") + timedelta(minutes=20)
+            print(fecha_vence)
+            reserva = Reserva(nuevo_id, cantidad_personas, fecha, comentario, fecha_vence)
+            reserva.save()
     else:
         reserva_form = ReservaForm()
-    return render (request, 'html/cliente/cliente_hacer_reserva.html', {'reserva_form':reserva_form})
+    return render (request, 'html/cliente/cliente_hacer_reserva.html')
 
 def cliente_index(request):
     return render (request, 'html/cliente/cliente_index.html')
