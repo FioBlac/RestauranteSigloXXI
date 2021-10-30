@@ -84,6 +84,7 @@ def cliente_hacer_reserva(request):
             comentario = datos_reserva.cleaned_data['comentario']
 
             #Asignando variables para guardar
+            #Tengo que hacer el que pasaria si no hay registros para el id
             ultimo_id = Reserva.objects.latest('id_reserva').id_reserva #Último ID registrado en reservas
             nuevo_id = int(str(ultimo_id)) + 1 #Se le suma 1
             fecha = str(fecha_reserva) + ' ' + str(hora_reserva)
@@ -102,7 +103,8 @@ def Cliente_Observar_Disponibilidad(request):
     return render (request, 'html/cliente/Cliente_Observar_Disponibilidad.html')
 
 def cliente_ver_reserva(request):
-    return render (request, 'html/cliente/cliente_ver_reserva.html')
+    reservas = Reserva.objects.all()
+    return render (request, 'html/cliente/cliente_ver_reserva.html', {'reservas':reservas})
 
 
 #Formularios
