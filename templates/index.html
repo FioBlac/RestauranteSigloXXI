@@ -77,16 +77,16 @@
                         </li>
                     </ul>
                 </ul>
-            
-            <form class="d-flex">
+
+            {% if user.is_authenticated %}
+                <a class="btn btn-primary btn-primary-outline-success" type="submit" href="{% url 'registro' %}">
+                    Cerrar sesion
+                </a>
+            {% else %}
                 <a class="btn btn-outline-secondary me-md-3" type="button" type="submit" href="{% url 'login' %}">
                     Iniciar Sesion
                 </a>
-
-                <a class="btn btn-primary btn-primary-outline-success" type="submit" href="{% url 'registro' %}">
-                    Registrate
-                </a>
-            </form>
+            {% endif %}
             
             </div>
         </div>

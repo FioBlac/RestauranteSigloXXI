@@ -109,65 +109,43 @@
             
             <div class="w-50">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle text-center">
-                        <!--Columna-->
-                        <thead>
-                            <tr>
-                                <th scope="col">Número de mesa</th>
-                                <th scope="col">Disponibilidad</th>
-                                <th scope="col" colspan="2">Opciones</th>
-                            </tr>
-                            
-                        </thead>
 
-                        <!--Filas-->
-                        <tbody>
-                            <tr>
-                                <td class="text-center" scope="row">01</td>
-                                <td class="text-center" scope="row">Disponibilidad</td>
-                                <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#ventanaEditar" href="">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                </td>
-                                <td class="text-danger fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-danger border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#modalEliminar" href="">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                    {% if mesas %}
+                        <table class="table table-hover align-middle text-center">
+                            <!--Columna-->
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID Mesa</th>
+                                    <th scope="col">Número de mesa</th>
+                                    <th scope="col">Disponibilidad</th>
+                                    <th scope="col" colspan="2">Opciones</th>
+                                </tr>
+                                
+                            </thead>
 
-                            <tr>
-                                <td class="text-center" scope="row">02</td>
-                                <td class="text-center" scope="row">Ocupada</td>
-                                <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#ventanaEditar" href="">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                </td>
-                                <td class="text-danger fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-danger border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#modalEliminar" href="">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            <!--Filas-->
+                            <tbody>
+                                {% for mesa in mesas %}
+                                    <tr>
+                                        <td class="text-center" scope="row">{{ mesa.id_mesa }}</td>
+                                        <td class="text-center" scope="row">{{ mesa.numero_mesa }}</td>
+                                        <td class="text-center" scope="row">{{ mesa.disponibilidad }}</td>
+                                        <td class="text-warning fs-4 text-center" scope="row">
+                                            <a class="btn btn-outline-warning border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#ventanaEditar" href="">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        </td>
+                                        <td class="text-danger fs-4 text-center" scope="row">
+                                            <a class="btn btn-outline-danger border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#modalEliminar" href="">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
 
-                            <tr>
-                                <td class="text-center" scope="row">03</td>
-                                <td class="text-center" scope="row">Inhabilitada</td>
-                                <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#ventanaEditar" href="">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                </td>
-                                <td class="text-danger fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-danger border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#modalEliminar" href="">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
@@ -180,7 +158,7 @@
             </div>
 
             <div class="text-center col-lg p-3 ">
-                <a class="btn btn-success btn-primary-outline-success btn-lg w-50" href="{% url 'registro_bodega' %}">
+                <a class="btn btn-success btn-primary-outline-success btn-lg w-50" href="{% url 'agregar_mesa' %}">
                     Agregar Mesa
                 </a>
             </div>            
