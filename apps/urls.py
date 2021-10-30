@@ -22,6 +22,7 @@ urlpatterns =[
     path('solicitudes_enviadas', views.solicitudes_enviadas, name='solicitudes_enviadas'),
     path('solicitudes_recibidas', views.solicitudes_recibidas, name='solicitudes_recibidas'),
     path('ver_reservas', views.ver_reservas, name='ver_reservas'),
+    path('agregar_mesa', views.agregar_mesa, name='agregar_mesa'),
 
     #HTML BODEGA
     path('gestion_bodega', views.gestion_bodega, name='gestion_bodega'),

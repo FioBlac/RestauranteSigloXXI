@@ -1,5 +1,6 @@
 from django import forms
-from .models import Reserva
+from django.db.models import fields
+from .models import Mesa, Reserva
 
 class ReservaForm(forms.ModelForm):
     class Meta:
@@ -11,3 +12,12 @@ class DatosReservaForm(forms.Form):
     fecha = forms.DateTimeField()
     hora = forms.CharField()
     comentario = forms.CharField()
+
+class MesaForm(forms.ModelForm):
+    class Meta:
+        model = Mesa
+        fields = ['id_mesa', 'numero_mesa','disponibilidad']
+
+class datosAgregarMesaForm(forms.Form):
+    numero_mesa = forms.CharField()
+    disponibilidad = forms.CharField()

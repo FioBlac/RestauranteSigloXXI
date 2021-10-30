@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .forms import ReservaForm, DatosReservaForm
-from .models import Reserva
+from .forms import ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm
+from .models import Reserva, Mesa
 from datetime import datetime, timedelta
 
 # Create your views here.
@@ -37,7 +37,8 @@ def gestion_usuario(request):
     return render (request, 'html/admin/gestion_usuario.html')
 
 def gestionMesas(request):
-    return render (request, 'html/admin/gestionMesas.html')
+    mesas = Mesa.objects.all()
+    return render (request, 'html/admin/gestionMesas.html', {'mesas':mesas})
 
 def index_admin(request):
     return render (request, 'html/admin/index_admin.html')
@@ -57,6 +58,25 @@ def solicitudes_recibidas(request):
 def ver_reservas(request):
     reservas = Reserva.objects.all()
     return render (request, 'html/admin/ver_reservas.html', {'reservas':reservas})
+
+def agregar_mesa(request):
+    if request.method == 'POST':
+
+        datosAgregarMesa = datosAgregarMesaForm(request.POST)
+        print(datosAgregarMesa)
+        if datosAgregarMesa.is_valid():
+            #Limpiar los datos del POST
+            numMesaAgg = datosAgregarMesa.cleaned_data['numMesaAgg']
+            dispMesaAgg = datosAgregarMesa.cleaned_data['dispMesaAgg']
+
+            #Asignando variables para guardar
+            ult_id = Mesa.objects.latest('id_mesa').id_mesa
+            id_mesav2 = int(str(ult_id)) + 1
+            agg_mesa = Mesa(id_mesav2, numMesaAgg, dispMesaAgg)
+            agg_mesa.save()
+        else:
+            aggMesaForm = MesaForm()
+    return render (request, 'html/admin/agregar_mesa.html')
 
 
 #HTML BODEGA
