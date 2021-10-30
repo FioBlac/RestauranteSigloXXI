@@ -50,7 +50,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="{% url 'cliente_reserva' %}">Reservaciones</a>
+                        <a class="nav-link " aria-current="page" href="{% url 'cliente_index' %}">Reservaciones</a>
                     </li>
 
                     <li class="nav-item dropdown">
@@ -116,43 +116,24 @@
             <tr>
                 <th scope="col">ID Reservación</th>
                 <th scope="col">Fecha de Reserva</th>
-                <th scope="col">Hora de Reserva</th>
                 <th scope="col">Personas</th>
                 <th scope="col">Comentarios</th>
                 <th scope="col">Cancelar Reserva</th>
             </tr>
             </thead>
             <tbody>
+                <!--Podría usar un post para extraer el id para saber cual boton borraría la reserva-->
+                {% for reserva in reservas %}
                 <tr>
-                    <td class="text-center" scope="row">RE0001</th>
-                    <td>18/05/2022</td>
-                    <td>12:30</td>
-                    <td>2 Personas</td>
-                    <td>Mesa al lado de la ventana.</td>
+                    <td class="text-center" scope="row">{{ reserva.id_reserva }}</th>
+                    <td>{{ reserva.fecha_reserva }}</td>
+                    <td>{{ reserva.cantidad_personas }}</td>
+                    <td>{{ reserva.comentario }}</td>
                     <td class="text-center" scope="row">
                         <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#ventanaCancelar">Cancelar</button>
                     </td>
                 </tr>
-                <tr>
-                    <td class="text-center" scope="row">RE0015</th>
-                    <td class="text-center" scope="row">18/07/2022</td>
-                    <td class="text-center" scope="row">19:00</td>
-                    <td class="text-center" scope="row">3 Personas</td>
-                    <td class="text-center" scope="row">Sin Comentarios.</td>
-                    <td class="text-center" scope="row">
-                        <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#ventanaCancelar">Cancelar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center" scope="row">RE0030</th>
-                    <td class="text-center" scope="row">15/10/2022</td>
-                    <td class="text-center" scope="row">13:00</td>
-                    <td class="text-center" scope="row">4 Personas</td>
-                    <td class="text-center" scope="row">Mesa lejos del baño.</td>
-                    <td class="text-center" scope="row">
-                        <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#ventanaCancelar">Cancelar</button>
-                    </td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
