@@ -14,7 +14,7 @@ def login(request):
     return render (request, 'html/registration/login.html')
 
 def registro(request):
-    return render (request, 'html/registration/registro.html')
+    return render (request, 'html/general/registro.html')
 
 
 def loginAsociado(request):
