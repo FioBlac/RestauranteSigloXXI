@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from .forms import ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm
-from .models import Reserva, Mesa
+from .models import Reserva, Mesa, Plato
 from datetime import datetime, timedelta
+import base64
 
 # Create your views here.
 
@@ -89,7 +90,18 @@ def registro_bodega(request):
 
 #HTML CLIENTE
 def cliente_hacer_pedido(request):
-    return render (request, 'html/cliente/cliente_hacer_pedido.html')
+    platos = Plato.objects.all()
+
+    #arreglo = []
+
+    #for i in platos:
+    #    data = {
+     #       'data':i.nombre_plato,
+      #      'foto':str(base64.b64encode(i.foto), 'utf-8')
+       # }
+        #arreglo.append(data)
+
+    return render (request, 'html/cliente/cliente_hacer_pedido.html', {'platos' :platos})#data)
 
 def cliente_hacer_reserva(request):
     if request.method == 'POST':
@@ -105,7 +117,10 @@ def cliente_hacer_reserva(request):
 
             #Asignando variables para guardar
             #Tengo que hacer el que pasaria si no hay registros para el id
-            ultimo_id = Reserva.objects.latest('id_reserva').id_reserva #Último ID registrado en reservas
+            try:
+                ultimo_id = Reserva.objects.latest('id_reserva').id_reserva #Último ID registrado en reservas
+            except:
+                ultimo_id= 0
             nuevo_id = int(str(ultimo_id)) + 1 #Se le suma 1
             fecha = str(fecha_reserva) + ' ' + str(hora_reserva)
             fecha_vence = datetime.strptime(fecha ,"%Y-%m-%d %H:%M") + timedelta(minutes=20)

@@ -1,4 +1,5 @@
 from django.db import models
+import base64
 
 # Create your models here.
 class Admin(models.Model):
@@ -236,6 +237,17 @@ class Plato(models.Model):
     precio = models.FloatField()
     tipo_plato = models.CharField(max_length=50)
     tiempo_prepar = models.DateField()
+    foto = models.TextField(
+            db_column='foto',
+            blank=True)
+
+    def set_foto(self, data):
+        self.foto = base64.encodestring(data)
+
+    def get_foto(self):
+        return base64.decodestring(self.foto)
+
+    data = property(get_foto, set_foto)
 
     class Meta:
         managed = False

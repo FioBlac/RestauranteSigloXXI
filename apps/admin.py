@@ -4,3 +4,4 @@ from .models import *
 
 
 admin.site.register(Reserva)
+admin.site.register(Plato)
