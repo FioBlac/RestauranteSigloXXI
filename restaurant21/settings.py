@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps',
     'crispy_forms',
-   
     
 ]
 
@@ -86,7 +85,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': '127.0.0.1:1521/orcl',
-        'USER': 'dml3',
+        'USER': 'rest21',
         'PASSWORD': 'oracle',
         'TEST': {
             'USER': 'default_test',

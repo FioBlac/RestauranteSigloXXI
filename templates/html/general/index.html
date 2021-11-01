@@ -25,6 +25,7 @@
 </head>
 
 <body>
+    {% load crispy_forms_tags %}
     <header class="container-fluid bg-primary 
     d-flex justify-content-center">
         <p class="text-light mb-0 p-2 fs-7">
@@ -83,13 +84,16 @@
                 </ul>
 
             {% if user.is_authenticated %}
+                
+                <a href="{% url 'cliente_index' %}">{{user.username}}</a>
+
+                &nbsp;
+
                 <a class="btn btn-primary btn-primary-outline-success" type="submit" href="{% url 'logout' %}">
                     Cerrar sesion
                 </a>
-                <li>
-                    
-                  <a href="#">{{user.username}}</a>
-                </li>
+                
+                
             {% else %}
                 <a class="btn btn-outline-secondary me-md-3" type="button" type="submit" href="{% url 'login' %}">
                     Iniciar Sesion

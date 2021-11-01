@@ -89,12 +89,20 @@
                 </ul>
 
             
-            <form class="d-flex">
-                <a class="btn btn-primary btn-primary-outline-success" type="submit" href="{% url 'login' %}">
-                    Cerrar Sesión
-                </a>
-            </form>
-            
+                {% if user.is_authenticated %}
+                    <a href="{% url 'cliente_index' %}">{{user.username}}</a>
+
+                    &nbsp;
+
+                    <a class="btn btn-primary btn-primary-outline-success" type="submit" href="{% url 'logout' %}">
+                        Cerrar sesion
+                    </a>
+
+                {% else %}
+                    <a class="btn btn-outline-secondary me-md-3" type="button" type="submit" href="{% url 'login' %}">
+                        Iniciar Sesion
+                    </a>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -124,22 +132,19 @@
             <tbody>
                 <!--Podría usar un post para extraer el id para saber cual boton borraría la reserva-->
                 {% for reserva in reservas %}
-                <tr>
-                    <td class="text-center" scope="row">{{ reserva.id_reserva }}</th>
-                    <td>{{ reserva.fecha_reserva }}</td>
-                    <td>{{ reserva.cantidad_personas }}</td>
-                    <td>{{ reserva.comentario }}</td>
-                    <td class="text-center" scope="row">
-                        <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#ventanaCancelar">Cancelar</button>
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="text-center" scope="row">{{ reserva.id_reserva }}</th>
+                        <td>{{ reserva.fecha_reserva }}</td>
+                        <td>{{ reserva.cantidad_personas }}</td>
+                        <td>{{ reserva.comentario }}</td>
+                        <td class="text-center" scope="row">
+                            <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#ventanaCancelar">Cancelar</button>
+                        </td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-
-
-
 
     <!--VENTANA CANCELAR-->
     <div class="modal fade" id="ventanaCancelar" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

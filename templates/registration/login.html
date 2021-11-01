@@ -25,7 +25,7 @@
 </head>
 
 <body>
-   {% load crispy_forms_tags %}
+{% load crispy_forms_tags %}
     <header class="container-fluid bg-primary 
     d-flex justify-content-center">
         <p class="text-light mb-0 p-2 fs-7">
@@ -139,60 +139,34 @@
             <div class="col-lg-5 d-flex flex-column align-items-end">
                 <div class="px-lg-5 pt-lg-4 pb-lg-3 p-5 w-100 align-self-center">
                     <h1 class="text-center" id="tituloInicio">Iniciar sesión</h1>
+                    
+                    <div class="d-flex justify-content-center">
+                        <!--Formulario Login-->
+                        <form action="" method="post">
+                            {%csrf_token%}
+                            {{ form | crispy }}
+                            
+                            <div class="mb-4 mt-3 form-check">
+                                <input type="checkbox" name="connected" class="form-check-input" id="">
+                                <label for="connected" class="form-check-label">Recordarme</label>
+                            </div>
+
+                            <div class="d-grid">
+                                <button class="btn btn-primary" name ="button">
+                                    Iniciar sesión 
+                                </button>
+                            </div>
+
+                            <div class="my-3 text-center">
+                                <span>
+                                    <a class="text-muted text-decoration-none" href="#">
+                                        Recuperar contraseña
+                                    </a>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
     
-                    <!--Formulario Login-->
-                    <form action="" method="post">
-
-                        {%csrf_token%}
-                        {{ form | crispy }}
-                        
-    
-                        
-                        <div class="mb-4 mt-3 form-check">
-                            <input type="checkbox" name="connected" class="form-check-input" id="">
-                            <label for="connected" class="form-check-label">Recordarme</label>
-                        </div>
-    
-                       
-                        <button name ="button">Iniciar sesión </button>
-                       
-    
-                        <div class="my-3 text-center">
-                            <span>
-                                <a class="text-muted text-decoration-none" href="#">
-                                    Recuperar contraseña
-                                </a>
-                            </span>
-                        </div>
-                    </form>
-    
-
-              
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     <!-- Login con RRSS-->
                     <div class="container w-100 my-5">
                         <div class="row text-center">
