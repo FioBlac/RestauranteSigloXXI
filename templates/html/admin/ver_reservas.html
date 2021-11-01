@@ -121,7 +121,7 @@
                                     <th scope="col">Fecha reserva</th>
                                     <th scope="col">Comentario</th>
                                     <th scope="col">Fecha Vencim.</th>
-                                    <th scope="col">Ver reserva</th>
+                                    <th scope="col">Acción</th>
                                 </tr>
                                 
                             </thead>
@@ -135,9 +135,9 @@
                                         <td class="text-center" scope="row">{{ reserva.fecha_reserva }}</td>
                                         <td class="text-center" scope="row">{{ reserva.comentario }}</td>
                                         <td class="text-center" scope="row">{{ reserva.fecha_vence }}</td>
-                                        <td class="text-warning fs-4 text-center" scope="row">
-                                            <a class="btn btn-outline-warning border-0 fs-4 text-center" href="">
-                                                <i class="bi bi-eye"></i>
+                                        <td class="text-danger fs-4 text-center" scope="row">
+                                            <a class="btn btn-outline-danger border-0 fs-4 text-center" href="{% url 'eliminar_reservaAdm' reserva.id_reserva %}">
+                                                <i class="bi bi-trash"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -157,6 +157,32 @@
             </div>
         </div>
     </section>
+
+    <!--Modal eliminar-->
+    <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Eliminar reserva</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                ¿Desea eliminar esta reserva?
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <button class="btn btn-danger" type="button" data-bs-target="#confirmarCancelar" data-bs-toggle="modal" data-bs-dismiss="modal">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+        </div>
+    </div>
 
     <!-- JavaScript -->
 

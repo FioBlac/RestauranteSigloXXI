@@ -10,7 +10,6 @@ urlpatterns =[
     path('registro', views.registro, name='registro'),
 
     path('loginAsociado', views.loginAsociado, name='loginAsociado'),
-    path('indexLogin', views.indexLogin, name='indexLogin'),
 
     #HTML ADMIN
     path('admin_reportes', views.admin_reportes, name='admin_reportes'),
@@ -25,6 +24,7 @@ urlpatterns =[
     path('solicitudes_recibidas', views.solicitudes_recibidas, name='solicitudes_recibidas'),
     path('ver_reservas', views.ver_reservas, name='ver_reservas'),
     path('agregar_mesa', views.agregar_mesa, name='agregar_mesa'),
+    path('eliminar_reservaAdm/<id>/', views.eliminar_reservaAdm, name= 'eliminar_reservaAdm'),
 
     #HTML BODEGA
     path('gestion_bodega', views.gestion_bodega, name='gestion_bodega'),
