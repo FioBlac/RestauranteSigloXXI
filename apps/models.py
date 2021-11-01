@@ -8,6 +8,7 @@
 from django.db import models
 
 
+
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150, blank=True, null=True)
 
@@ -109,6 +110,8 @@ class Caja(models.Model):
     class Meta:
         managed = False
         db_table = 'caja'
+
+
 
 
 class DjangoAdminLog(models.Model):

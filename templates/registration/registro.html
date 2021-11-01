@@ -25,6 +25,7 @@
 </head>
 
 <body>
+    {% load crispy_forms_tags %}
     <header class="container-fluid bg-primary 
     d-flex justify-content-center">
         <p class="text-light mb-0 p-2 fs-7">
@@ -137,32 +138,31 @@
                     <h1 class="text-center" id="tituloInicio">Registrate</h1>
     
                     <!--Formulario Login-->
-                    <form action="#">
-                        <div class="mb-4">
-                            <label for="text" class="form-label">Nombre y Apellidos</label>
-                            <input type="text" name="loginName" id="loginName" class="form-control" placeholder="Ej: Fernando Zarate Peña" autofocus required>
-                        </div>
+                     <!--Formulario Login-->
+                     <form action="" method="post">
 
-                        <div class="mb-4">
-                            <label for="number" class="form-label">Número de contacto</label>
-                            <input type="number" name="loginTelef" id="loginTelef" class="form-control" placeholder="Ej: 957469792" autofocus required>
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="email" class="form-label">Correo electrónico</label>
-                            <input type="email" name="loginEmail" id="loginEmail" class="form-control" placeholder="Ej: cliente@restaurant.com" autofocus required>
+                        {%csrf_token%}
+                        {{ form | crispy }}
+                        
+                    <input type="submit" value="registrarse" class="btn btn-success float-right" >
+                        
+                        <div class="mb-4 mt-3 form-check">
+                            <input type="checkbox" name="connected" class="form-check-input" id="">
+                            <label for="connected" class="form-check-label">Recordarme</label>
                         </div>
     
-                        <div class="mb-4">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" name="loginPasswd" id="loginPasswd" class="form-control" placeholder="***********" autofocus required>
-                        </div>
+                       
+                       
     
-                        <div class="d-grid">
-                            <a type="submit" class="btn btn-primary">
-                                Registrate 
-                            </a>
+                        <div class="my-3 text-center">
+                            <span>
+                                <a class="text-muted text-decoration-none" href="#">
+                                    Recuperar contraseña
+                                </a>
+                            </span>
                         </div>
+                    </form>
+    
 
                     </form>
                 </div>
