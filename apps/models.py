@@ -1,19 +1,11 @@
+# This is an auto-generated Django model module.
+# You'll have to do the following manually to clean this up:
+#   * Rearrange models' order
+#   * Make sure each model has one field with primary_key=True
+#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
+#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
-
-# Create your models here.
-class Admin(models.Model):
-    rut_admin = models.CharField(primary_key=True, max_length=20)
-    nombre_admin = models.CharField(max_length=40)
-    apellido_admin = models.CharField(max_length=40)
-    email_admin = models.CharField(max_length=40)
-    password_admin = models.CharField(max_length=40)
-    telefono_admin = models.CharField(max_length=15)
-    tipo_admin = models.CharField(max_length=40)
-    fecha_contra_admin = models.DateField()
-
-    class Meta:
-        managed = False
-        db_table = 'admin'
 
 
 class AuthGroup(models.Model):
@@ -96,17 +88,27 @@ class Bodega(models.Model):
         db_table = 'bodega'
 
 
-class Cliente(models.Model):
-    rut_cliente = models.CharField(primary_key=True, max_length=20)
-    nombre_cliente = models.CharField(max_length=40)
-    apellido_cliente = models.CharField(max_length=40)
-    email_cliente = models.CharField(max_length=40)
-    password_cliente = models.CharField(max_length=40)
-    telefono_cliente = models.CharField(max_length=15)
+class Boleta(models.Model):
+    id_boleta = models.CharField(primary_key=True, max_length=20)
+    fecha_emision = models.DateTimeField()
+    subtotal = models.BigIntegerField()
+    modo_pago_id_modo_pago = models.ForeignKey('ModoPago', models.DO_NOTHING, db_column='modo_pago_id_modo_pago', blank=True, null=True,related_name='+')
+    restaurant_rut_rest = models.ForeignKey('Restaurant', models.DO_NOTHING, db_column='restaurant_rut_rest', blank=True, null=True,related_name='+')
+    auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING, blank=True, null=True,related_name='+')
 
     class Meta:
         managed = False
-        db_table = 'cliente'
+        db_table = 'boleta'
+
+
+class Caja(models.Model):
+    id_caja = models.BigIntegerField(primary_key=True)
+    boleta_id_boleta = models.ForeignKey(Boleta, models.DO_NOTHING, db_column='boleta_id_boleta', blank=True, null=True,related_name='+')
+    pedido_id_pedido = models.ForeignKey('Pedido', models.DO_NOTHING, db_column='pedido_id_pedido',related_name='+')
+
+    class Meta:
+        managed = False
+        db_table = 'caja'
 
 
 class DjangoAdminLog(models.Model):
@@ -115,8 +117,8 @@ class DjangoAdminLog(models.Model):
     object_repr = models.CharField(max_length=200, blank=True, null=True)
     action_flag = models.IntegerField()
     change_message = models.TextField(blank=True, null=True)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True,related_name='+')
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING,related_name='+')
 
     class Meta:
         managed = False
@@ -159,40 +161,12 @@ class Entrega(models.Model):
     hora_entrada = models.DateTimeField()
     hora_salida = models.DateTimeField()
     estado = models.CharField(max_length=50)
-    trabajador_rut_trab = models.ForeignKey('Trabajador', models.DO_NOTHING, db_column='trabajador_rut_trab', blank=True, null=True,related_name='+')
     pedido_id_pedido = models.ForeignKey('Pedido', models.DO_NOTHING, db_column='pedido_id_pedido', blank=True, null=True,related_name='+')
+    auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING, blank=True, null=True,related_name='+')
 
     class Meta:
         managed = False
         db_table = 'entrega'
-
-
-class Factura(models.Model):
-    id_boleta = models.CharField(primary_key=True, max_length=20)
-    fecha_emision = models.DateTimeField()
-    subtotal = models.BigIntegerField()
-    cliente_rut_cliente = models.ForeignKey(Cliente, models.DO_NOTHING, db_column='cliente_rut_cliente', blank=True, null=True)
-    modo_pago_id_modo_pago = models.ForeignKey('ModoPago', models.DO_NOTHING, db_column='modo_pago_id_modo_pago', blank=True, null=True,related_name='+')
-    restaurant_rut_rest = models.ForeignKey('Restaurant', models.DO_NOTHING, db_column='restaurant_rut_rest', blank=True, null=True,related_name='+')
-    finanza_rut_finan = models.ForeignKey('Finanza', models.DO_NOTHING, db_column='finanza_rut_finan', blank=True, null=True,related_name='+')
-
-    class Meta:
-        managed = False
-        db_table = 'factura'
-
-
-class Finanza(models.Model):
-    rut_finan = models.CharField(primary_key=True, max_length=20)
-    nombre_finan = models.CharField(max_length=40)
-    apellido_finan = models.CharField(max_length=40)
-    email_finan = models.CharField(max_length=40)
-    password_finan = models.CharField(max_length=40)
-    telefono_finan = models.CharField(max_length=15)
-    fecha_contra_finan = models.DateField()
-
-    class Meta:
-        managed = False
-        db_table = 'finanza'
 
 
 class Mesa(models.Model):
@@ -219,9 +193,8 @@ class Pedido(models.Model):
     cantidad = models.BigIntegerField()
     precio_ampliado = models.BigIntegerField()
     total = models.BigIntegerField()
-    mesa_id_mesa = models.ForeignKey(Mesa, models.DO_NOTHING, db_column='mesa_id_mesa', blank=True, null=True)
+    mesa_id_mesa = models.ForeignKey(Mesa, models.DO_NOTHING, db_column='mesa_id_mesa', blank=True, null=True,related_name='+')
     reserva_id_reserva = models.ForeignKey('Reserva', models.DO_NOTHING, db_column='reserva_id_reserva', blank=True, null=True,related_name='+')
-    factura_id_boleta = models.ForeignKey(Factura, models.DO_NOTHING, db_column='factura_id_boleta', blank=True, null=True,related_name='+')
     plato_id_plato = models.ForeignKey('Plato', models.DO_NOTHING, db_column='plato_id_plato', blank=True, null=True,related_name='+')
     entrega_id_entrega = models.ForeignKey(Entrega, models.DO_NOTHING, db_column='entrega_id_entrega', blank=True, null=True,related_name='+')
 
@@ -250,7 +223,7 @@ class Producto(models.Model):
     fecha_caducidad = models.DateField()
     zona_conservacion = models.CharField(max_length=40)
     tipo_alimento = models.CharField(max_length=40)
-    proveedor_rut_proveedor = models.ForeignKey('Proveedor', models.DO_NOTHING, db_column='proveedor_rut_proveedor', blank=True, null=True,related_name='+')       
+    proveedor_rut_proveedor = models.ForeignKey('Proveedor', models.DO_NOTHING, db_column='proveedor_rut_proveedor', blank=True, null=True,related_name='+')
     bodega_id_bodega = models.ForeignKey(Bodega, models.DO_NOTHING, db_column='bodega_id_bodega', blank=True, null=True,related_name='+')
     plato_id_plato = models.ForeignKey(Plato, models.DO_NOTHING, db_column='plato_id_plato', blank=True, null=True,related_name='+')
     solic_ped_id_soli_prod = models.ForeignKey('SolicPed', models.DO_NOTHING, db_column='solic_ped_id_soli_prod', blank=True, null=True,related_name='+')
@@ -292,7 +265,7 @@ class Restaurant(models.Model):
     nombre_rest = models.CharField(max_length=100)
     direccion_rest = models.CharField(max_length=40)
     telefono = models.CharField(max_length=15)
-    factura_id_boleta = models.ForeignKey(Factura, models.DO_NOTHING, db_column='factura_id_boleta', blank=True, null=True,related_name='+')
+    boleta_id_boleta = models.ForeignKey(Boleta, models.DO_NOTHING, db_column='boleta_id_boleta', blank=True, null=True,related_name='+')
 
     class Meta:
         managed = False
@@ -306,34 +279,8 @@ class SolicPed(models.Model):
     fecha_entrega = models.DateField()
     hora_entrega = models.DateTimeField()
     estado_solicitud = models.CharField(max_length=100)
-    admin_rut_admin = models.ForeignKey(Admin, models.DO_NOTHING, db_column='admin_rut_admin', blank=True, null=True,related_name='+')
+    auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING, blank=True, null=True,related_name='+')
 
     class Meta:
         managed = False
         db_table = 'solic_ped'
-
-
-class TipoTrab(models.Model):
-    id_tipo_trab = models.BigIntegerField()
-    descripcion = models.CharField(max_length=50)
-    trabajador_rut_trab = models.ForeignKey('Trabajador', models.DO_NOTHING, db_column='trabajador_rut_trab', blank=True, null=True,related_name='+')
-    tipo_trab_id = models.FloatField(primary_key=True)
-
-    class Meta:
-        managed = False
-        db_table = 'tipo_trab'
-
-
-class Trabajador(models.Model):
-    rut_trab = models.CharField(primary_key=True, max_length=20)
-    nombre_trab = models.CharField(max_length=40)
-    apellido_trab = models.CharField(max_length=40)
-    email_trab = models.CharField(max_length=40)
-    password_trab = models.CharField(max_length=40)
-    telefono_trab = models.CharField(max_length=15)
-    fecha_contra_trab = models.DateField()
-    tipo_trab_tipo_trab = models.ForeignKey(TipoTrab, models.DO_NOTHING, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'trabajador'

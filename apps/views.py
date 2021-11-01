@@ -8,13 +8,14 @@ from datetime import datetime, timedelta
 
 #HTML GENERAL
 def index(request):
-    return render (request,'index.html')
+    return render (request,'html/general/index.html')
 
 def login(request):
-    return render (request, 'html/general/login.html')
+    return render (request, 'html/registration/login.html')
 
 def registro(request):
-    return render (request, 'html/general/registro.html')
+    return render (request, 'html/registration/registro.html')
+
 
 def loginAsociado(request):
     return render (request, 'html/general/loginAsociado.html')
