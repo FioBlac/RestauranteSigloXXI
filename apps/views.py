@@ -1,21 +1,39 @@
 from django.shortcuts import render
-from .forms import ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm
 from .models import Reserva, Mesa, Plato
 from datetime import datetime, timedelta
 import base64
-
+from .forms import ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom
+from django.contrib.auth import authenticate, login
+from django.contrib.messages import success
+from django.shortcuts import redirect
+from django.contrib import messages
 # Create your views here.
 
 
 #HTML GENERAL
 def index(request):
-    return render (request,'index.html')
+    return render (request,'html/general/index.html')
 
-def login(request):
-    return render (request, 'html/general/login.html')
+def login_usuario(request):
+    return render (request, 'registration/login.html')
 
 def registro(request):
-    return render (request, 'html/general/registro.html')
+    data = {
+
+        'form' : CustomUserCreationFrom()
+    }
+    if request.method == 'POST':
+        formulario = CustomUserCreationFrom(data=request.POST)
+        if  formulario.is_valid():
+            formulario.save()
+            user= authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+            login(request, user)
+            messages.success(request,'registro correctamente')
+            return redirect(to='index')
+        data["form"]= formulario
+
+    return render (request, 'registration/registro.html', data)
+
 
 def loginAsociado(request):
     return render (request, 'html/general/loginAsociado.html')

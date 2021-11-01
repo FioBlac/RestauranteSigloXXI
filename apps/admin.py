@@ -5,3 +5,5 @@ from .models import *
 
 admin.site.register(Reserva)
 admin.site.register(Plato)
+admin.site.register(Boleta)
+admin.site.register(Restaurant)

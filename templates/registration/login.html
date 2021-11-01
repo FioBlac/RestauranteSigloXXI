@@ -25,6 +25,7 @@
 </head>
 
 <body>
+{% load crispy_forms_tags %}
     <header class="container-fluid bg-primary 
     d-flex justify-content-center">
         <p class="text-light mb-0 p-2 fs-7">
@@ -57,6 +58,8 @@
                     <a class="nav-link " href="#">Contactanos</a>
                     </li>
 
+                    
+
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Menú
@@ -76,6 +79,7 @@
                         </li>
                     </ul>
                 </ul>
+                
             
             <form class="d-flex">
                 <a class="btn btn-outline-secondary me-md-3" type="button" type="submit" href="{% url 'login' %}">
@@ -135,36 +139,33 @@
             <div class="col-lg-5 d-flex flex-column align-items-end">
                 <div class="px-lg-5 pt-lg-4 pb-lg-3 p-5 w-100 align-self-center">
                     <h1 class="text-center" id="tituloInicio">Iniciar sesión</h1>
-    
-                    <!--Formulario Login-->
-                    <form method="IniciarSesionCliente">
-                        <div class="form-floating mb-4">
-                            <input type="email" name="loginEmail" id="txtLoginEmail" class="form-control" placeholder="Ingrese su correo electrónico">
-                            <label for="txtLoginEmail">Correo electrónico</label>
-                        </div>
-    
-                        <div class="form-floating mb-4">
-                            <input type="password" name="password" id="txtLoginPassword" class="form-control" placeholder="Ingrese su contraseña">
-                            <label for="txtLoginPassword">Contraseña</label>
-                        </div>
-    
-                        <div class="mb-4 mt-3 form-check">
-                            <input type="checkbox" name="connected" class="form-check-input" id="">
-                            <label for="connected" class="form-check-label">Recordarme</label>
-                        </div>
-    
-                        <div class="d-grid">
-                            <a href="{% url 'cliente_index' %}" class="btn btn-primary">Iniciar sesión</a>
-                        </div>
-    
-                        <div class="my-3 text-center">
-                            <span>
-                                <a class="text-muted text-decoration-none" href="#">
-                                    Recuperar contraseña
-                                </a>
-                            </span>
-                        </div>
-                    </form>
+                    
+                    <div class="d-flex justify-content-center">
+                        <!--Formulario Login-->
+                        <form action="" method="post">
+                            {%csrf_token%}
+                            {{ form | crispy }}
+                            
+                            <div class="mb-4 mt-3 form-check">
+                                <input type="checkbox" name="connected" class="form-check-input" id="">
+                                <label for="connected" class="form-check-label">Recordarme</label>
+                            </div>
+
+                            <div class="d-grid">
+                                <button class="btn btn-primary" name ="button">
+                                    Iniciar sesión 
+                                </button>
+                            </div>
+
+                            <div class="my-3 text-center">
+                                <span>
+                                    <a class="text-muted text-decoration-none" href="#">
+                                        Recuperar contraseña
+                                    </a>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
     
                     <!-- Login con RRSS-->
                     <div class="container w-100 my-5">

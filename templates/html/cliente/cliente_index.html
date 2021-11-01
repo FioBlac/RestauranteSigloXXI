@@ -90,13 +90,20 @@
                     </li>
                 </ul>
 
-            
-            <form class="d-flex">
-                <a class="btn btn-primary btn-primary-outline-success" type="submit" href="/html/general/login.html">
-                    Cerrar Sesión
-                </a>
-            </form>
-            
+                {% if user.is_authenticated %}
+                    <a href="{% url 'cliente_index' %}">{{user.username}}</a>
+
+                    &nbsp;
+
+                    <a class="btn btn-primary btn-primary-outline-success" type="submit" href="{% url 'logout' %}">
+                        Cerrar sesion
+                    </a>
+
+                {% else %}
+                    <a class="btn btn-outline-secondary me-md-3" type="button" type="submit" href="{% url 'login' %}">
+                        Iniciar Sesion
+                    </a>
+                {% endif %}
             </div>
         </div>
     </nav>
