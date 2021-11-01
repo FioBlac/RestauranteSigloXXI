@@ -4,7 +4,7 @@ from .models import Reserva, Mesa
 from datetime import datetime, timedelta
 from django.contrib.auth import authenticate, login
 from django.contrib.messages import success
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 # Create your views here.
 
@@ -36,10 +36,6 @@ def registro(request):
 
 def loginAsociado(request):
     return render (request, 'html/general/loginAsociado.html')
-
-def indexLogin(request):
-    return render (request, 'html/general/indexLogin.html')
-
 
 #HTML ADMIN
 def admin_reportes(request):
@@ -143,6 +139,11 @@ def Cliente_Observar_Disponibilidad(request):
 def cliente_ver_reserva(request):
     reservas = Reserva.objects.all()
     return render (request, 'html/cliente/cliente_ver_reserva.html', {'reservas':reservas})
+
+def eliminar_reservaAdm(request, id):
+    reserva = get_object_or_404(Reserva, id = id_reserva)
+    reserva.delete()
+    return redirect(to = "ver_reservas")
 
 
 #Formularios
