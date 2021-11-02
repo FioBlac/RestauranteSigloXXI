@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Reserva, Mesa, Plato
+from .models import Reserva, Mesa, Plato, AuthUser
 from datetime import datetime, timedelta
 import base64
 from .forms import ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom
@@ -49,7 +49,8 @@ def gestion_solicitudes(request):
     return render (request, 'html/admin/gestion_solicitudes.html')
 
 def gestion_usuario(request):
-    return render (request, 'html/admin/gestion_usuario.html')
+    usuarios = AuthUser.objects.all()
+    return render (request, 'html/admin/gestion_usuario.html', {'usuarios':usuarios})
 
 def gestionMesas(request):
     mesas = Mesa.objects.all()
@@ -115,7 +116,7 @@ def cliente_hacer_pedido(request):
        # }
         #arreglo.append(data)
 
-    return render (request, 'html/cliente/cliente_hacer_pedido.html', {'platos' :platos})#data)
+    return render (request, 'html/cliente/cliente_hacer_pedido.html', {'platos' :platos})#data
 
 def cliente_hacer_reserva(request):
     if request.method == 'POST':

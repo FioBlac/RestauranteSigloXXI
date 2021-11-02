@@ -111,65 +111,45 @@
             
             <div class="w-100">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle text-center">
-                        <!--Columna-->
-                        <thead>
-                            <tr>
-                                <th scope="col">Rut</th>
-                                <th scope="col">usuario</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Contraseña</th>
-                                <th scope="col">Correo electrónico</th>
-                                <th scope="col">Número de teléfono</th>
-                                <th scope="col">Tipo de usuario</th>
-                                <th scope="col" colspan="2">Opciones</th>
-                            </tr>
-                            
-                        </thead>
+                    {% if usuarios %}
+                        <table class="table table-hover align-middle text-center">
+                            <!--Columna-->
+                            <thead>
+                                <tr>
+                                    <th scope="col">usuario</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Apellido</th>
+                                    <th scope="col">Correo electrónico</th>
+                                    <th scope="col">Fecha que se unió</th>
+                                    <th scope="col" colspan="2">Opciones</th>
+                                </tr>
+                                
+                            </thead>
 
-                        <!--Filas-->
-                        <tbody>
-                            <tr>
-                                <td class="text-center" scope="row">19.844.348-6</td>
-                                <td class="text-center" scope="row">jos.lazcano</td>
-                                <td class="text-center" scope="row">José Lazcano</td>
-                                <td class="text-center" scope="row">asdsad123</td>
-                                <td class="text-center" scope="row">jos.lazcano@duocuc.cl</td>
-                                <td class="text-center" scope="row">962507551</td>
-                                <td class="text-center" scope="row">Administrador</td>
-                                <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="{% url 'modificar_usuario' %}">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                </td>
-                                <td class="text-danger fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-danger border-0 fs-4 text-center" href="" data-bs-toggle="modal" data-bs-target="#modalEliminar">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="text-center" scope="row">14.566.956-8</td>
-                                <td class="text-center" scope="row">car.sepulveda</td>
-                                <td class="text-center" scope="row">Carlos Sepulveda</td>
-                                <td class="text-center" scope="row">dsadsa321</td>
-                                <td class="text-center" scope="row">car.sepulveda@restaurant.cl</td>
-                                <td class="text-center" scope="row">945678245</td>
-                                <td class="text-center" scope="row">Cocinero</td>
-                                <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="{% url 'modificar_usuario' %}">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                </td>
-                                <td class="text-danger fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-danger border-0 fs-4 text-center" href="" data-bs-toggle="modal" data-bs-target="#modalEliminar">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            <!--Filas-->
+                            <tbody>
+                                {% for u in usuarios %}
+                                    <tr>
+                                        <td class="text-center" scope="row">{{ u.username }}</td>
+                                        <td class="text-center" scope="row">{{ u.first_name }}</td>
+                                        <td class="text-center" scope="row">{{ u.last_name }}</td>
+                                        <td class="text-center" scope="row">{{ u.email }}</td>
+                                        <td class="text-center" scope="row">{{ u.date_joined }}</td>
+                                        <td class="text-warning fs-4 text-center" scope="row">
+                                            <a class="btn btn-outline-warning border-0 fs-4 text-center" href="{% url 'modificar_usuario' %}">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        </td>
+                                        <td class="text-danger fs-4 text-center" scope="row">
+                                            <a class="btn btn-outline-danger border-0 fs-4 text-center" href="" data-bs-toggle="modal" data-bs-target="#modalEliminar">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
                 </div>
             </div>
         </div>
