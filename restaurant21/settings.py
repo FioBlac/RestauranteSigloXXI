@@ -139,6 +139,11 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
+EMAIL_HOST = 'smtp.googlemail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'restaurantsxxi@gmail.com'
+EMAIL_HOST_PASSWORD = 'restaurantsiglo21'
+EMAIL_USE_TLS = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
