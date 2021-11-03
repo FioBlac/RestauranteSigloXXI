@@ -1,12 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Reserva, Mesa, Plato, AuthUser
 from datetime import datetime, timedelta
 import base64
 from .forms import ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom
 from django.contrib.auth import authenticate, login
 from django.contrib.messages import success
-from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
+from django.db.models import Q, query, query_utils
 # Create your views here.
 
 
@@ -50,10 +50,29 @@ def gestion_solicitudes(request):
 
 def gestion_usuario(request):
     usuarios = AuthUser.objects.all()
+
+    queryset = request.GET.get("inputBuscarUsuario")
+    if queryset:
+        usuarios = AuthUser.objects.filter(
+            Q(username__icontains = queryset) |
+            Q(first_name__icontains = queryset) | 
+            Q(last_name__icontains = queryset) |
+            Q(email__icontains = queryset) 
+        ).distinct()
+    else:
+        usuarios = AuthUser.objects.all()
     return render (request, 'html/admin/gestion_usuario.html', {'usuarios':usuarios})
 
 def gestionMesas(request):
     mesas = Mesa.objects.all()
+
+    queryset = request.GET.get("inputBuscarMesa")
+    if queryset:
+        mesas = Mesa.objects.filter(
+            Q(id_mesa__icontains = queryset)
+        ).distinct()
+    else:
+        mesas = Mesa.objects.all()
     return render (request, 'html/admin/gestionMesas.html', {'mesas':mesas})
 
 def index_admin(request):
@@ -73,6 +92,15 @@ def solicitudes_recibidas(request):
 
 def ver_reservas(request):
     reservas = Reserva.objects.all()
+
+    queryset = request.GET.get("inputBuscarReserva")
+    if queryset:
+        reservas = Reserva.objects.filter(
+            Q(id_reserva__icontains = queryset) |
+            Q(comentario__icontains = queryset)
+        ).distinct()
+    else:
+        reservas = Reserva.objects.all()
     return render (request, 'html/admin/ver_reservas.html', {'reservas':reservas})
 
 def agregar_mesa(request):
@@ -86,7 +114,10 @@ def agregar_mesa(request):
             dispMesaAgg = datosAgregarMesa.cleaned_data['dispMesaAgg']
 
             #Asignando variables para guardar
-            ult_id = Mesa.objects.latest('id_mesa').id_mesa
+            try:
+                ult_id = Mesa.objects.latest('id_mesa').id_mesa #Último ID registrado en reservas
+            except:
+                ult_id= 0
             id_mesav2 = int(str(ult_id)) + 1
             agg_mesa = Mesa(id_mesav2, numMesaAgg, dispMesaAgg)
             agg_mesa.save()
@@ -156,11 +187,14 @@ def cliente_ver_reserva(request):
     reservas = Reserva.objects.all()
     return render (request, 'html/cliente/cliente_ver_reserva.html', {'reservas':reservas})
 
-def eliminar_reservaAdm(request, id):
+def eliminar_reservaAdm(request, id_reserva):
     reserva = get_object_or_404(Reserva, id = id_reserva)
     reserva.delete()
     return redirect(to = "ver_reservas")
 
+#ENVIAR CORREO
+def sendemail(email):
+    pass
 
 #Formularios
 #Formulario de Hacer Reserva

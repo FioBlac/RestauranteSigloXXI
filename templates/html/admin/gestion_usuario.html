@@ -94,21 +94,17 @@
 
     <section class="container">
         <div class="row mx-auto border justify-content-center">
-            <form class="row g-3">
-                <div class="col-auto">
-                    <label for="staticEmail2" class="visually-hidden">Buscar usuario</label>
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Buscar usuario">
-                </div>
-                <div class="col-auto">
-                    <label for="inputBuscarUsuario" class="visually-hidden">Ingrese usuario</label>
-                    <input type="password" class="form-control" id="inputBuscarUsuario" placeholder="">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+            <form class="row g-3" method="GET">
+                <div class="input-group col-auto">
+                    <input type="text" class="form-control" placeholder="Buscar usuario" aria-label="Recipient's username" aria-describedby="button-addon2" name="inputBuscarUsuario">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                    &nbsp;
+                    <button type="submit" class="btn btn-primary">Buscar</button>
                 </div>
             </form>
 
-            
             <div class="w-100">
                 <div class="table-responsive">
                     {% if usuarios %}
@@ -116,7 +112,7 @@
                             <!--Columna-->
                             <thead>
                                 <tr>
-                                    <th scope="col">usuario</th>
+                                    <th scope="col">Usuario</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Apellido</th>
                                     <th scope="col">Correo electrónico</th>

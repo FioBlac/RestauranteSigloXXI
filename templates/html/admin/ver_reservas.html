@@ -97,21 +97,17 @@
 
     <section class="container mb-4">
         <div class="row mx-auto border justify-content-center">
-            <form class="row g-3">
-                <div class="col-auto">
-                    <label for="staticEmail2" class="visually-hidden">Buscar reserva</label>
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Buscar reserva">
-                </div>
-                <div class="col-auto">
-                    <label for="inputBuscarReserva" class="visually-hidden"></label>
-                    <input type="password" class="form-control" id="inputBuscarReserva" placeholder="">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+            <form class="row g-3" method="GET">
+                <div class="input-group col-auto">
+                    <input type="text" class="form-control" placeholder="Buscar reserva" aria-label="Recipient's username" aria-describedby="button-addon2" name="inputBuscarReserva">
+                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                    &nbsp;
+                    <button type="submit" class="btn btn-primary">Buscar</button>
                 </div>
             </form>
 
-            
             <div class="w-100">
                 <div class="table-responsive">
 
