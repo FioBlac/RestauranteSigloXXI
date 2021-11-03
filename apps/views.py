@@ -106,16 +106,19 @@ def registro_bodega(request):
 def cliente_hacer_pedido(request):
     platos = Plato.objects.all()
 
-    #arreglo = []
+    arreglo = []
 
-    #for i in platos:
-    #    data = {
-     #       'data':i.nombre_plato,
-      #      'foto':str(base64.b64encode(i.foto), 'utf-8')
-       # }
-        #arreglo.append(data)
+    for i in platos:
+        data = {
+            'id_plato': i.id_plato,
+            'nombre_plato': i.nombre_plato,
+            'precio': i.precio,
+            'tipo_plato': i.tipo_plato,
+            'foto_plato': str(base64.b64encode(i.foto_plato.read()),'utf-8')
+        }
+        arreglo.append(data)
 
-    return render (request, 'html/cliente/cliente_hacer_pedido.html', {'platos' :platos})#data)
+    return render (request, 'html/cliente/cliente_hacer_pedido.html', {'arreglo' :arreglo})#data)
 
 def cliente_hacer_reserva(request):
     if request.method == 'POST':

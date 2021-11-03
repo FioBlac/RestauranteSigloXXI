@@ -2,6 +2,8 @@ const cardsEntradas1 = document.getElementById('cardsEntradas1')
 const cardsEntradas2 = document.getElementById('cardsEntradas2')
 const cardsEntradas3 = document.getElementById('cardsEntradas3')
 const cardsEntradas4 = document.getElementById('cardsEntradas4')
+const cardsEntradas5 = document.getElementById('cardsEntradas5')
+const cardsEntradas6 = document.getElementById('cardsEntradas6')
 const items = document.getElementById('items')
 const footer = document.getElementById('footer')
 const templateCard = document.getElementById('template-card').content
@@ -20,6 +22,8 @@ cardsEntradas1.addEventListener('click', e => { addCarrito(e) });
 cardsEntradas2.addEventListener('click', e => { addCarrito(e) });
 cardsEntradas3.addEventListener('click', e => { addCarrito(e) });
 cardsEntradas4.addEventListener('click', e => { addCarrito(e) });
+cardsEntradas5.addEventListener('click', e => { addCarrito(e) });
+cardsEntradas6.addEventListener('click', e => { addCarrito(e) });
 items.addEventListener('click', e => { btnAumentarDisminuir(e) })
 
 // Objeto producto
@@ -29,25 +33,7 @@ function Entrada(nombre, precio, id) {
     this.id = id;
 }
 
-//Productos de ejemplo
-var Entradas = [
-    new Entrada('Ensalada Cesar', 2000, 1),
-    new Entrada('Ensalada Juan', 3000, 2),
-    new Entrada('Esalada Verdejo', 1500, 3),
-    new Entrada('Ensaladita Cuatro', 2500, 4),
-    new Entrada('Ensaladita Cinco', 2500, 5),
-    new Entrada('Ensaladita Seis', 2500, 6),
-    new Entrada('Ensaladita Siete', 2500, 7),
-    new Entrada('Ensaladita Ocho', 2500, 8),
-    new Entrada('Ensaladita Nueve', 2500, 9),
-    new Entrada('Ensaladita Diez', 2500, 10),
-    new Entrada('Ensaladita Once', 2500, 11),
-    new Entrada('Ensaladita Doce', 2500, 12),
-    new Entrada('Ensaladita Trece', 2500, 13),
-    new Entrada('Ensaladita Catorce', 2500, 14),
-    new Entrada('Ensaladita Quince', 2500, 15),
-    new Entrada('Ensaladita Diesiséis', 2500, 16)
-]
+
 /*
 // Traer productos
 const fetchData = async () => {
@@ -121,13 +107,13 @@ const setCarrito = item => {
         id: item.querySelector('button').id,
         cantidad: 1
     }
-    // console.log(producto)
+    // 
     if (carrito.hasOwnProperty(producto.id)) {
         producto.cantidad = carrito[producto.id].cantidad + 1
     }
 
     carrito[producto.id] = { ...producto }
-    
+    //console.log(producto)
     pintarCarrito()
 }
 

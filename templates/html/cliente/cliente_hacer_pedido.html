@@ -139,24 +139,20 @@
         <h4>Platos de Entrada</h4>
     </section>
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-interval="false">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        </div>
+    <div id="carouselExampleIndicators" class="carousel slide">
         <div class="carousel-inner">
-          <div class="carousel-item active">
+          <div class="carousel-item active" data-bs-interval="900000">
             <div class="container">
                 <div class="row" id="cardsEntradas1">
-                    {% for p in platos %}
-                        {% if p.tipo_plato == 'Entrada' %}
+                    {% for p in arreglo %}
+                        {% if p.tipo_plato == 'Entrada' and forloop.counter < 5 %}
                         <div class="col-6 col-sm-3 my-1">
-                            <div class="card">
-                            <div class="card-body text text-center">
-                                <img class="img-fluid" src="data:image/png;base64, {{ p.foto }}" width="100" height="100" alt="">
+                            <div class="card carta" style="min-height: 400px;">
+                            <div class="card-body text text-center mb-auto">
+                                <img class="img-fluid" src="data:foto/png;base64, {{ p.foto_plato }} " alt="">
                                 <h5 class="text-center">{{ p.nombre_plato }}</h5>
                                 <p class="text-center precioUnit">{{ p.precio }}</p>    
-                                <button id="{{ p.id_plato }}" class="btn btn-dark text-center">Agregar</button>
+                                <button id="{{ p.id_plato }}" class="btn btn-dark text-center align-self-end">Agregar</button>
                             </div>
                             </div>
                         </div>
@@ -165,44 +161,65 @@
                 </div>
             </div>
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" data-bs-interval="900000">
             <div class="container">
                 <div class="row" id="cardsEntradas2">
-
+                {% for p in arreglo %}
+                    {% if p.tipo_plato == 'Entrada' and forloop.counter > 4  %}
+                        <div class="col-6 col-sm-3 my-1">
+                            <div class="card carta" style="min-height: 400px;">
+                            <div class="card-body text text-center mb-auto">
+                                <img class="img-fluid" src="data:foto/png;base64, {{ p.foto_plato }} " alt="">
+                                <h5 class="text-center">{{ p.nombre_plato }}</h5>
+                                <p class="text-center precioUnit">{{ p.precio }}</p>    
+                                <button id="{{ p.id_plato }}" class="btn btn-dark text-center align-self-end">Agregar</button>
+                            </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
                 </div>
             </div>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+        <div class="carousel-indicators" style="position:unset">
+            <button type="button" style="background-color: #5fc5d9;" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" style="background-color: #5fc5d9;" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          </div>
+        <div class="row justify-content-between mx-5">
+            <div class="col-4">
+                <button class="btn btn-primary" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+            </div>
+             
+            <div class="col-1 float-right">
+                <button class="btn btn-primary" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>                 
+        </div>
+        
+    </div>
 
     <!--PLATOS PRINCIPALES-->
-    <section class=" text-left pt-2 mx-5">
+    <section class=" text-left pt-2 mx-5 mt-5">
         <h4>Platos Principales</h4>
     </section>
 
-    <div id="carouselExampleIndicators2" class="carousel slide py-5" data-interval="false">
-        <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        </div>
+    <div id="carouselExampleIndicators2" class="carousel slide" data-interval="false">
         <div class="carousel-inner">
-        <div class="carousel-item active">
+        <div class="carousel-item active" data-bs-interval="900000">
             <div class="container">
                 <div class="row" id="cardsEntradas3">
-                    {% for p in platos %}
+                    {% for p in arreglo %}
                         {% if p.tipo_plato == 'Principal' %}
                         <div class="col-6 col-sm-3 my-1">
-                            <div class="card">
+                            <div class="card" style="min-height: 400px;">
                             <div class="card-body text text-center">
-                                <img class="img-fluid" src="data:image/png;base64, {{ p.foto }}" width="100" height="100" alt="">
+                                <img class="img-fluid" src="data:image/png;base64, {{ p.foto_plato }}" alt="">
                                 <h5 class="text-center">{{ p.nombre_plato }}</h5>
                                 <p class="text-center precioUnit">{{ p.precio }}</p>    
                                 <button id="{{ p.id_plato }}" class="btn btn-dark text-center">Agregar</button>
@@ -214,44 +231,51 @@
                 </div>
             </div>
         </div>
-        <div class="carousel-item">
+        <div class="carousel-item" data-bs-interval="900000">
             <div class="container">
                 <div class="row" id="cardsEntradas4">
-
+                    
                 </div>
             </div>
         </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-        </button>
+        <div class="carousel-indicators" style="position:unset">
+            <button type="button" style="background-color: #5fc5d9;" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" style="background-color: #5fc5d9;" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          </div>
+        <div class="row justify-content-between mx-5">
+            <div class="col-4">
+                <button class="btn btn-primary" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+            </div>
+             
+            <div class="col-1 float-right">
+                <button class="btn btn-primary" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>                 
+        </div>
     </div>
     
     <!--POSTRES-->
-    <section class=" text-left pt-2 mx-5">
+    <section class=" text-left pt-2 mx-5 mt-5">
         <h4>Postres</h4>
     </section>
 
-    <div id="carouselExampleIndicators3" class="carousel slide py-5" data-interval="false">
-        <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        </div>
+    <div id="carouselExampleIndicators3" class="carousel slide" data-interval="false">
         <div class="carousel-inner">
-        <div class="carousel-item active">
-            <div class="container">
-                <div class="row" id="cardsEntradas5">
-                    {% for p in platos %}
+            <div class="carousel-item active" data-bs-interval="900000">
+                <div class="container">
+                    <div class="row" id="cardsEntradas5">
+                    {% for p in arreglo %}
                         {% if p.tipo_plato == 'Postre' %}
                         <div class="col-6 col-sm-3 my-1">
-                            <div class="card">
+                            <div class="card" style="min-height: 400px;">
                             <div class="card-body text text-center">
-                                <img class="img-fluid" src="data:image/png;base64, {{ p.foto }}" width="100" height="100" alt="">
+                                <img class="img-fluid" src="data:image/png;base64, {{ p.foto_plato }}" alt="">
                                 <h5 class="text-center">{{ p.nombre_plato }}</h5>
                                 <p class="text-center precioUnit">{{ p.precio }}</p>    
                                 <button id="{{ p.id_plato }}" class="btn btn-dark text-center">Agregar</button>
@@ -260,30 +284,40 @@
                         </div>
                         {% endif %}
                     {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="900000">
+                <div class="container">
+                    <div class="row" id="cardsEntradas6">
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="carousel-item">
-            <div class="container">
-                <div class="row" id="cardsEntradas6">
-
-                </div>
+        <div class="carousel-indicators" style="position:unset">
+            <button type="button" style="background-color: #5fc5d9;" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" style="background-color: #5fc5d9;" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        </div>
+        <div class="row justify-content-between mx-5">
+            <div class="col-4">
+                <button class="btn btn-primary" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
             </div>
+             
+            <div class="col-1 float-right">
+                <button class="btn btn-primary" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>                 
         </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-        </button>
     </div>    
 
 
     <!--CARRITO COMPRA-->
-    <div class="container">
+    <div class="container mt-5">
         <h4>Carrito de compras</h4>
         <table class="table">
             <thead>
@@ -304,9 +338,38 @@
         </table>
     </div>
 
+    <!--BOTON PEDIR-->
+    <div class="container d-flex justify-content-end my-5">
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#ventanaPedir">Pedir</button>
+    </div>
 
     <!--TEMPLATES-->
-    <!--TEMPLATE CARRITO-->
+    <!--VENTANA PEDIR-->
+    <!--VENTANA CANCELAR-->
+    <div class="modal fade" id="ventanaPedir" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">¡Pedido Enviado!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                Se ha enviado el pedido correctamente.
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-dismiss="modal">
+                    <a href="{% url 'cliente_hacer_pedido' %}" style="text-decoration: none; color: white;">
+                        Aceptar
+                    </a> 
+                </button>
+
+            </div>
+        </div>
+        </div>
+    </div>
+
     <!--TEMPLATE CARRITO-->
     <template id="template-carrito">
         <tr>
@@ -341,5 +404,6 @@
     <!--SCRIPTS-->
     <script src="{% static '/js/script_cliente_hacer_pedido.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    
 </body>
 </html>
