@@ -17,8 +17,8 @@ def index(request):
 
 def login_usuario(request):
     if request.method == 'POST':
-        request.POST.get('username')
-        request.POST.get('password')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
         user = authenticate(request, username = username, password = password)
 
@@ -38,9 +38,6 @@ def registro(request):
         formulario = CustomUserCreationFrom(data=request.POST)
         if  formulario.is_valid():
             formulario.save()
-            usuario = formulario.cleaned_data.get('username')
-            messages.success(request, 'Ya existe una cuenta con el usuario ' + usuario)
-
             user= authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
             login(request, user)
             messages.success(request,'registrado correctamente')
@@ -51,8 +48,8 @@ def registro(request):
 
 def loginAsociado(request):
     if request.method == 'POST':
-        request.POST.get('username')
-        request.POST.get('password')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
         user = authenticate(request, username = username, password = password)
 
