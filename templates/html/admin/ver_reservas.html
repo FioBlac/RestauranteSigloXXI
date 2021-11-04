@@ -78,7 +78,7 @@
                 </ul>
         
                 <form class="d-flex">
-                    <a class="btn btn-primary btn-primary-outline-success" type="submit" href="{% url 'loginAsociado' %}">
+                    <a class="btn btn-primary btn-primary-outline-success" type="submit" href="{% url 'logoutUserAsoci' %}">
                         Cerrar sesión
                     </a>
                 </form>
@@ -121,7 +121,6 @@
                                     <th scope="col">Fecha reserva</th>
                                     <th scope="col">Comentario</th>
                                     <th scope="col">Fecha Vencim.</th>
-                                    <th scope="col">Acción</th>
                                 </tr>
                                 
                             </thead>
@@ -135,11 +134,6 @@
                                         <td class="text-center" scope="row">{{ reserva.fecha_reserva }}</td>
                                         <td class="text-center" scope="row">{{ reserva.comentario }}</td>
                                         <td class="text-center" scope="row">{{ reserva.fecha_vence }}</td>
-                                        <td class="text-danger fs-4 text-center" scope="row">
-                                            <a class="btn btn-outline-danger border-0 fs-4 text-center" href="{% url 'eliminar_reservaAdm' reserva.id_reserva %}">
-                                                <i class="bi bi-trash"></i>
-                                            </a>
-                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

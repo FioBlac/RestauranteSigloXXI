@@ -24,7 +24,9 @@ urlpatterns =[
     path('solicitudes_recibidas', views.solicitudes_recibidas, name='solicitudes_recibidas'),
     path('ver_reservas', views.ver_reservas, name='ver_reservas'),
     path('agregar_mesa', views.agregar_mesa, name='agregar_mesa'),
-    path('eliminar_reservaAdm/<id>/', views.eliminar_reservaAdm, name= 'eliminar_reservaAdm'),
+    path('eliminar_mesa/<id>/', views.eliminar_mesa, name= 'eliminar_mesa'),
+    path('logoutUser', views.logoutUser, name= 'logoutUser'),
+    path('logoutUserAsoci', views.logoutUserAsoci, name= 'logoutUserAsoci'),
 
     #HTML BODEGA
     path('gestion_bodega', views.gestion_bodega, name='gestion_bodega'),

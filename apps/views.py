@@ -3,11 +3,11 @@ from .models import Reserva, Mesa, Plato, AuthUser
 from datetime import datetime, timedelta
 import base64
 from .forms import ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.messages import success
 from django.contrib import messages
 from django.db.models import Q, query, query_utils
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 # Create your views here.
 from .decorators import usuarioPermitido, usuarioNoLogeado
 
@@ -16,26 +16,52 @@ def index(request):
     return render (request,'html/general/index.html')
 
 def login_usuario(request):
+    if request.method == 'POST':
+        request.POST.get('username')
+        request.POST.get('password')
+
+        user = authenticate(request, username = username, password = password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            messages.info(request, 'Usuario o contraseña incorrecto')
+
     return render (request, 'registration/login.html')
 
 def registro(request):
     data = {
-
         'form' : CustomUserCreationFrom()
     }
     if request.method == 'POST':
         formulario = CustomUserCreationFrom(data=request.POST)
         if  formulario.is_valid():
             formulario.save()
+            usuario = formulario.cleaned_data.get('username')
+            messages.success(request, 'Ya existe una cuenta con el usuario ' + usuario)
+
             user= authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
             login(request, user)
-            messages.success(request,'registro correctamente')
+            messages.success(request,'registrado correctamente')
             return redirect(to='index')
         data["form"]= formulario
 
     return render (request, 'registration/registro.html', data)
 
 def loginAsociado(request):
+    if request.method == 'POST':
+        request.POST.get('username')
+        request.POST.get('password')
+
+        user = authenticate(request, username = username, password = password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('index_admin')
+        else:
+            messages.info(request, 'Usuario o contraseña incorrecto')
+
     return render (request, 'html/general/loginAsociado.html')
 
 #HTML ADMIN
@@ -138,6 +164,14 @@ def agregar_mesa(request):
             aggMesaForm = MesaForm()
     return render (request, 'html/admin/agregar_mesa.html')
 
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
+def logoutUserAsoci(request):
+    logout(request)
+    return redirect('loginAsociado')
+
 
 #HTML BODEGA
 def gestion_bodega(request):
@@ -204,8 +238,8 @@ def cliente_ver_reserva(request):
     reservas = Reserva.objects.all()
     return render (request, 'html/cliente/cliente_ver_reserva.html', {'reservas':reservas})
 
-def eliminar_reservaAdm(request, id_reserva):
-    reserva = get_object_or_404(Reserva, id = id_reserva)
+def eliminar_mesa(request, id_reserva):
+    reserva = get_object_or_404(Mesa, id = id_mesa)
     reserva.delete()
     return redirect(to = "ver_reservas")
 
