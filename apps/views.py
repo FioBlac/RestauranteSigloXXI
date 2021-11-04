@@ -7,8 +7,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib.messages import success
 from django.contrib import messages
 from django.db.models import Q, query, query_utils
+from django.contrib.auth.decorators import login_required
 # Create your views here.
-
+from .decorators import usuarioPermitido, usuarioNoLogeado
 
 #HTML GENERAL
 def index(request):
@@ -34,20 +35,23 @@ def registro(request):
 
     return render (request, 'registration/registro.html', data)
 
-
 def loginAsociado(request):
     return render (request, 'html/general/loginAsociado.html')
 
 #HTML ADMIN
+#@login_required(login_url = 'loginAsociado')
 def admin_reportes(request):
     return render (request, 'html/admin/admin_reportes.html')
 
+#@login_required(login_url = 'loginAsociado')
 def agregar_usuario(request):
     return render (request, 'html/admin/agregar_usuario.html')
 
+#@login_required(login_url = 'loginAsociado')
 def gestion_solicitudes(request):
     return render (request, 'html/admin/gestion_solicitudes.html')
 
+#@login_required(login_url = 'loginAsociado')
 def gestion_usuario(request):
     usuarios = AuthUser.objects.all()
 
@@ -63,6 +67,7 @@ def gestion_usuario(request):
         usuarios = AuthUser.objects.all()
     return render (request, 'html/admin/gestion_usuario.html', {'usuarios':usuarios})
 
+#@login_required(login_url = 'loginAsociado')
 def gestionMesas(request):
     mesas = Mesa.objects.all()
 
@@ -75,21 +80,28 @@ def gestionMesas(request):
         mesas = Mesa.objects.all()
     return render (request, 'html/admin/gestionMesas.html', {'mesas':mesas})
 
+#@login_required(login_url = 'loginAsociado')
+#@usuarioPermitido(allowed_roles = ['admin'])
 def index_admin(request):
     return render (request, 'html/admin/index_admin.html')
 
+#@login_required(login_url = 'loginAsociado')
 def modificar_usuario(request):
     return render (request, 'html/admin/modificar_usuario.html')
 
+#@login_required(login_url = 'loginAsociado')
 def solicitud_stock_proveedores(request):
     return render (request, 'html/admin/solicitud_stock_proveedores.html')
 
+#@login_required(login_url = 'loginAsociado')
 def solicitudes_enviadas(request):
     return render (request, 'html/admin/solicitudes_enviadas.html')
 
+#@login_required(login_url = 'loginAsociado')
 def solicitudes_recibidas(request):
     return render (request, 'html/admin/solicitudes_recibidas.html')
 
+#@login_required(login_url = 'loginAsociado')
 def ver_reservas(request):
     reservas = Reserva.objects.all()
 
@@ -103,6 +115,7 @@ def ver_reservas(request):
         reservas = Reserva.objects.all()
     return render (request, 'html/admin/ver_reservas.html', {'reservas':reservas})
 
+#@login_required(login_url = 'loginAsociado')
 def agregar_mesa(request):
     if request.method == 'POST':
 
@@ -130,6 +143,7 @@ def agregar_mesa(request):
 def gestion_bodega(request):
     return render (request, 'html/bodega/gestion_bodega.html')
 
+#@login_required(login_url = 'loginAsociado')
 def registro_bodega(request):
     return render (request, 'html/bodega/registro_bodega.html')
 
