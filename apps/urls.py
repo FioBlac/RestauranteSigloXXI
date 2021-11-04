@@ -25,7 +25,6 @@ urlpatterns =[
     path('ver_reservas', views.ver_reservas, name='ver_reservas'),
     path('agregar_mesa', views.agregar_mesa, name='agregar_mesa'),
     path('eliminar_mesa/<id>/', views.eliminar_mesa, name= 'eliminar_mesa'),
-    path('logoutUser', views.logoutUser, name= 'logoutUser'),
     path('logoutUserAsoci', views.logoutUserAsoci, name= 'logoutUserAsoci'),
 
     #HTML BODEGA
@@ -38,4 +37,21 @@ urlpatterns =[
     path('cliente_index', views.cliente_index, name='cliente_index'),
     path('Cliente_Observar_Disponibilidad', views.Cliente_Observar_Disponibilidad, name='Cliente_Observar_Disponibilidad'),
     path('cliente_ver_reserva', views.cliente_ver_reserva, name='cliente_ver_reserva'),
+
+    #HTML GARZON
+    path('main_garzon', views.main_garzon, name='main_garzon'),
+    path('retiro_platos', views.retiro_platos, name='retiro_platos'),
+
+    #HTML COCINERO
+    path('index_cocina', views.index_cocina, name='index_cocina'),
+    path('gestion_receta', views.gestion_receta, name='gestion_receta'),
+
+    #HTML CAJERO
+    path('cajero_cuenta_clientes', views.cajero_cuenta_clientes, name='cajero_cuenta_clientes'),
+    path('cobro_cliente_manual', views.cobro_cliente_manual, name='cobro_cliente_manual'),
+    path('index_cajero', views.index_cajero, name='index_cajero'),
+
+    #HTML CONTADOR
+    path('index_contador', views.index_contador, name='index_contador'),
+    path('movimientos_dinero', views.movimientos_dinero, name='movimientos_dinero'),
 ]

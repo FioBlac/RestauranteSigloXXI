@@ -15,12 +15,35 @@ def usuarioPermitido(allowed_roles = []):
         def envoltFunc(request, *args, **kwargs):
 
             group = None
-            if request.user.group.exists():
-                group = request.user.group.all()[0].name
+            if request.user.groups.exists():
+                group = request.user.groups.all()[0].name
 
             if group in allowed_roles:
-                return view_func(request, *args, **kwargs)
+               return view_func(request, *args, **kwargs)
             else:
                 return HttpResponse('No cuentas con los permisos para acceder a este sitio')
         return envoltFunc
+    return decorator
+
+
+def admin_view(view_func):
+    def decorator(request, *args, **kwargs):
+        group = None
+        if request.user.groups.exists():
+            group = request.user.groups.all()[0].name
+
+        if group == 'Admin':
+            return redirect('index_admin')
+
+        #if group == 'Bodega':
+            return redirect('index_ddmin')
+        
+        if group == 'Cajero':
+            return redirect('index_cajero')
+
+        if group == 'Cocinero':
+            return redirect('index_cocina')
+
+        if group == 'Garzon':
+            return redirect('main_garzon')
     return decorator

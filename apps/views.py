@@ -8,13 +8,17 @@ from django.contrib.messages import success
 from django.contrib import messages
 from django.db.models import Q, query, query_utils
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import Group
+from django.http import HttpResponse
+
 # Create your views here.
-from .decorators import usuarioPermitido, usuarioNoLogeado
+from .decorators import usuarioPermitido, usuarioNoLogeado, admin_view
 
 #HTML GENERAL
 def index(request):
     return render (request,'html/general/index.html')
 
+@usuarioNoLogeado
 def login_usuario(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -38,7 +42,12 @@ def registro(request):
         formulario = CustomUserCreationFrom(data=request.POST)
         if  formulario.is_valid():
             formulario.save()
-            user= authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+
+            usuario = formulario.save()
+            group = Group.objects.get(name = 'Cliente')
+            usuario.groups.add(group)
+
+            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
             login(request, user)
             messages.success(request,'registrado correctamente')
             return redirect(to='index')
@@ -46,6 +55,7 @@ def registro(request):
 
     return render (request, 'registration/registro.html', data)
 
+@admin_view
 def loginAsociado(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -62,19 +72,23 @@ def loginAsociado(request):
     return render (request, 'html/general/loginAsociado.html')
 
 #HTML ADMIN
-#@login_required(login_url = 'loginAsociado')
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def admin_reportes(request):
     return render (request, 'html/admin/admin_reportes.html')
 
-#@login_required(login_url = 'loginAsociado')
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def agregar_usuario(request):
     return render (request, 'html/admin/agregar_usuario.html')
 
-#@login_required(login_url = 'loginAsociado')
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def gestion_solicitudes(request):
     return render (request, 'html/admin/gestion_solicitudes.html')
 
-#@login_required(login_url = 'loginAsociado')
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def gestion_usuario(request):
     usuarios = AuthUser.objects.all()
 
@@ -90,7 +104,8 @@ def gestion_usuario(request):
         usuarios = AuthUser.objects.all()
     return render (request, 'html/admin/gestion_usuario.html', {'usuarios':usuarios})
 
-#@login_required(login_url = 'loginAsociado')
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def gestionMesas(request):
     mesas = Mesa.objects.all()
 
@@ -103,28 +118,33 @@ def gestionMesas(request):
         mesas = Mesa.objects.all()
     return render (request, 'html/admin/gestionMesas.html', {'mesas':mesas})
 
-#@login_required(login_url = 'loginAsociado')
-#@usuarioPermitido(allowed_roles = ['admin'])
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def index_admin(request):
     return render (request, 'html/admin/index_admin.html')
 
-#@login_required(login_url = 'loginAsociado')
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def modificar_usuario(request):
     return render (request, 'html/admin/modificar_usuario.html')
 
-#@login_required(login_url = 'loginAsociado')
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def solicitud_stock_proveedores(request):
     return render (request, 'html/admin/solicitud_stock_proveedores.html')
 
-#@login_required(login_url = 'loginAsociado')
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def solicitudes_enviadas(request):
     return render (request, 'html/admin/solicitudes_enviadas.html')
 
-#@login_required(login_url = 'loginAsociado')
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def solicitudes_recibidas(request):
     return render (request, 'html/admin/solicitudes_recibidas.html')
 
-#@login_required(login_url = 'loginAsociado')
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def ver_reservas(request):
     reservas = Reserva.objects.all()
 
@@ -138,7 +158,8 @@ def ver_reservas(request):
         reservas = Reserva.objects.all()
     return render (request, 'html/admin/ver_reservas.html', {'reservas':reservas})
 
-#@login_required(login_url = 'loginAsociado')
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def agregar_mesa(request):
     if request.method == 'POST':
 
@@ -161,9 +182,6 @@ def agregar_mesa(request):
             aggMesaForm = MesaForm()
     return render (request, 'html/admin/agregar_mesa.html')
 
-def logoutUser(request):
-    logout(request)
-    return redirect('login')
 
 def logoutUserAsoci(request):
     logout(request)
@@ -171,15 +189,19 @@ def logoutUserAsoci(request):
 
 
 #HTML BODEGA
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def gestion_bodega(request):
     return render (request, 'html/bodega/gestion_bodega.html')
 
-#@login_required(login_url = 'loginAsociado')
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def registro_bodega(request):
     return render (request, 'html/bodega/registro_bodega.html')
 
 
 #HTML CLIENTE
+@login_required(login_url = 'login')
 def cliente_hacer_pedido(request):
     platos = Plato.objects.all()
 
@@ -197,6 +219,7 @@ def cliente_hacer_pedido(request):
 
     return render (request, 'html/cliente/cliente_hacer_pedido.html', {'arreglo' :arreglo})#data)
 
+@login_required(login_url = 'login')
 def cliente_hacer_reserva(request):
     if request.method == 'POST':
 
@@ -225,15 +248,65 @@ def cliente_hacer_reserva(request):
         reserva_form = ReservaForm()
     return render (request, 'html/cliente/cliente_hacer_reserva.html')
 
+@login_required(login_url = 'login')
 def cliente_index(request):
     return render (request, 'html/cliente/cliente_index.html')
 
+@login_required(login_url = 'login')
 def Cliente_Observar_Disponibilidad(request):
     return render (request, 'html/cliente/Cliente_Observar_Disponibilidad.html')
 
+@login_required(login_url = 'login')
 def cliente_ver_reserva(request):
     reservas = Reserva.objects.all()
     return render (request, 'html/cliente/cliente_ver_reserva.html', {'reservas':reservas})
+
+
+
+#HTML GARZON
+@admin_view
+def main_garzon(request):
+    return render (request, 'html/garzon/main_garzon.html')
+
+@admin_view
+def retiro_platos(request):
+    return render (request, 'html/garzon/retiro_paltos.html')
+
+
+#HTML COCINERO
+@admin_view
+def index_cocina(request):
+    return render (request, 'html/Cocinero/index_cocina.html')
+
+@admin_view
+def gestion_receta(request):
+    return render (request, 'html/Cocinero/gestion_receta.html')
+
+
+#HTML CONTADOR
+@admin_view
+def index_contador(request):
+    return render (request, 'html/Contador/index_contador.html')
+
+@admin_view
+def movimientos_dinero(request):
+    return render (request, 'html/Cocinero/movimientos_dinero.html')
+
+
+#HTML CAJERO
+@admin_view
+def index_cajero(request):
+    return render (request, 'html/Cajero/index_cajero.html')
+
+@admin_view
+def cajero_cuenta_clientes(request):
+    return render (request, 'html/Cajero/cajero_cuenta_clientes.html')
+
+@admin_view
+def cobro_cliente_manual(request):
+    return render (request, 'html/Cajero/cobro_cliente_manual.html')
+
+
 
 def eliminar_mesa(request, id_reserva):
     reserva = get_object_or_404(Mesa, id = id_mesa)
