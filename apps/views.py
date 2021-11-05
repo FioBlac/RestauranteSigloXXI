@@ -55,7 +55,7 @@ def registro(request):
 
     return render (request, 'registration/registro.html', data)
 
-@admin_view
+
 def loginAsociado(request):
     if request.method == 'POST':
         username = request.POST.get('username')
