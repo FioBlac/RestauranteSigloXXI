@@ -97,6 +97,7 @@
             <form class="row g-3" method="GET">
                 <div class="input-group col-auto">
                     <input type="text" class="form-control" placeholder="Buscar usuario" aria-label="Recipient's username" aria-describedby="button-addon2" name="inputBuscarUsuario">
+                    
                     <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
                         <i class="bi bi-x-lg"></i>
                     </button>
@@ -131,13 +132,8 @@
                                         <td class="text-center" scope="row">{{ u.last_name }}</td>
                                         <td class="text-center" scope="row">{{ u.email }}</td>
                                         <td class="text-center" scope="row">{{ u.date_joined }}</td>
-                                        <td class="text-warning fs-4 text-center" scope="row">
-                                            <a class="btn btn-outline-warning border-0 fs-4 text-center" href="{% url 'modificar_usuario' %}">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </a>
-                                        </td>
                                         <td class="text-danger fs-4 text-center" scope="row">
-                                            <a class="btn btn-outline-danger border-0 fs-4 text-center" href="" data-bs-toggle="modal" data-bs-target="#modalEliminar">
+                                            <a class="btn btn-outline-danger border-0 fs-4 text-center" href="{% url 'eliminar_usuario' u.id %}" data-bs-toggle="modal">
                                                 <i class="bi bi-trash"></i>
                                             </a>
                                         </td>

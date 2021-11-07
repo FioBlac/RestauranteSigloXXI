@@ -33,9 +33,8 @@ def admin_view(view_func):
             group = request.user.groups.all()[0].name
 
         if group == 'Admin':
-            return redirect('index_admin')
+            return view_func('index_admin')
 
-        
         if group == 'Cajero':
             return redirect('index_cajero')
 

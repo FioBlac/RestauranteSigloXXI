@@ -1,8 +1,9 @@
+import django
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Reserva, Mesa, Plato, AuthUser
 from datetime import datetime, timedelta
 import base64
-from .forms import ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom
+from .forms import ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.messages import success
 from django.contrib import messages
@@ -10,9 +11,24 @@ from django.db.models import Q, query, query_utils
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import Group
 from django.http import HttpResponse
+from django.db import connection
 
 # Create your views here.
 from .decorators import usuarioPermitido, usuarioNoLogeado, admin_view
+
+def listar_grupos():
+    django_cursor = connection.cursor()
+    cursor = django_cursor.connection.cursor()
+    out_cur =django_cursor.connection.cursor()
+
+    cursor.callproc("SP_LISTAR_GRUPOS", [out_cur])
+
+    lista = []
+
+    for fila in out_cur:
+        lista.append(fila)
+
+    return lista
 
 #HTML GENERAL
 def index(request):
@@ -43,6 +59,7 @@ def registro(request):
         if  formulario.is_valid():
             formulario.save()
 
+            #agregar usuario a un grupo automaticamente
             usuario = formulario.save()
             group = Group.objects.get(name = 'Cliente')
             usuario.groups.add(group)
@@ -55,7 +72,7 @@ def registro(request):
 
     return render (request, 'registration/registro.html', data)
 
-
+#@admin_view
 def loginAsociado(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -73,22 +90,38 @@ def loginAsociado(request):
 
 #HTML ADMIN
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def admin_reportes(request):
     return render (request, 'html/admin/admin_reportes.html')
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def agregar_usuario(request):
-    return render (request, 'html/admin/agregar_usuario.html')
+    data = {
+        'form' : CustomUserCreationFrom2(),
+        'grupo': listar_grupos()
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationFrom2(data=request.POST)
+        if  formulario.is_valid():
+            formulario.save()
+
+            #falta hacer que se agregue a un gruppo segun el combobox
+
+            messages.success(request,'Agregado correctamente')
+            return redirect(to='gestion_usuario')
+        data["form"]= formulario
+
+    return render (request, 'html/admin/agregar_usuario.html', data)
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def gestion_solicitudes(request):
     return render (request, 'html/admin/gestion_solicitudes.html')
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def gestion_usuario(request):
     usuarios = AuthUser.objects.all()
 
@@ -105,7 +138,7 @@ def gestion_usuario(request):
     return render (request, 'html/admin/gestion_usuario.html', {'usuarios':usuarios})
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def gestionMesas(request):
     mesas = Mesa.objects.all()
 
@@ -119,32 +152,32 @@ def gestionMesas(request):
     return render (request, 'html/admin/gestionMesas.html', {'mesas':mesas})
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def index_admin(request):
     return render (request, 'html/admin/index_admin.html')
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def modificar_usuario(request):
     return render (request, 'html/admin/modificar_usuario.html')
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def solicitud_stock_proveedores(request):
     return render (request, 'html/admin/solicitud_stock_proveedores.html')
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def solicitudes_enviadas(request):
     return render (request, 'html/admin/solicitudes_enviadas.html')
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def solicitudes_recibidas(request):
     return render (request, 'html/admin/solicitudes_recibidas.html')
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def ver_reservas(request):
     reservas = Reserva.objects.all()
 
@@ -159,7 +192,7 @@ def ver_reservas(request):
     return render (request, 'html/admin/ver_reservas.html', {'reservas':reservas})
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def agregar_mesa(request):
     if request.method == 'POST':
 
@@ -190,12 +223,12 @@ def logoutUserAsoci(request):
 
 #HTML BODEGA
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def gestion_bodega(request):
     return render (request, 'html/bodega/gestion_bodega.html')
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+#@admin_view
 def registro_bodega(request):
     return render (request, 'html/bodega/registro_bodega.html')
 
@@ -264,54 +297,54 @@ def cliente_ver_reserva(request):
 
 
 #HTML GARZON
-@admin_view
+#@admin_view
 def main_garzon(request):
     return render (request, 'html/garzon/main_garzon.html')
 
-@admin_view
+#@admin_view
 def retiro_platos(request):
     return render (request, 'html/garzon/retiro_paltos.html')
 
 
 #HTML COCINERO
-@admin_view
+#@admin_view
 def index_cocina(request):
     return render (request, 'html/Cocinero/index_cocina.html')
 
-@admin_view
+#@admin_view
 def gestion_receta(request):
     return render (request, 'html/Cocinero/gestion_receta.html')
 
 
 #HTML CONTADOR
-@admin_view
+#@admin_view
 def index_contador(request):
     return render (request, 'html/Contador/index_contador.html')
 
-@admin_view
+#@admin_view
 def movimientos_dinero(request):
     return render (request, 'html/Cocinero/movimientos_dinero.html')
 
 
 #HTML CAJERO
-@admin_view
+#@admin_view
 def index_cajero(request):
     return render (request, 'html/Cajero/index_cajero.html')
 
-@admin_view
+#@admin_view
 def cajero_cuenta_clientes(request):
     return render (request, 'html/Cajero/cajero_cuenta_clientes.html')
 
-@admin_view
+#@admin_view
 def cobro_cliente_manual(request):
     return render (request, 'html/Cajero/cobro_cliente_manual.html')
 
 
 
-def eliminar_mesa(request, id_reserva):
-    reserva = get_object_or_404(Mesa, id = id_mesa)
-    reserva.delete()
-    return redirect(to = "ver_reservas")
+def eliminar_usuario(request, id):
+    usuario = get_object_or_404(AuthUser, id = id)
+    usuario.delete()
+    return redirect(to = "gestion_usuario")
 
 #ENVIAR CORREO
 def sendemail(email):

@@ -24,7 +24,7 @@ urlpatterns =[
     path('solicitudes_recibidas', views.solicitudes_recibidas, name='solicitudes_recibidas'),
     path('ver_reservas', views.ver_reservas, name='ver_reservas'),
     path('agregar_mesa', views.agregar_mesa, name='agregar_mesa'),
-    path('eliminar_mesa/<id>/', views.eliminar_mesa, name= 'eliminar_mesa'),
+    path('eliminar_usuario/<id>/', views.eliminar_usuario, name= 'eliminar_usuario'),
     path('logoutUserAsoci', views.logoutUserAsoci, name= 'logoutUserAsoci'),
 
     #HTML BODEGA
