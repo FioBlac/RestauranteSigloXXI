@@ -106,8 +106,12 @@ def agregar_usuario(request):
         formulario = CustomUserCreationFrom2(data=request.POST)
         if  formulario.is_valid():
             formulario.save()
+            grupo = request.POST.get('grupo')
 
-            #falta hacer que se agregue a un gruppo segun el combobox
+            asiGrupo = Group.objects.get(id = grupo)
+            usuario = formulario.save()
+            usuario.groups.add(asiGrupo)
+            
 
             messages.success(request,'Agregado correctamente')
             return redirect(to='gestion_usuario')
@@ -152,7 +156,7 @@ def gestionMesas(request):
     return render (request, 'html/admin/gestionMesas.html', {'mesas':mesas})
 
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def index_admin(request):
     return render (request, 'html/admin/index_admin.html')
 
