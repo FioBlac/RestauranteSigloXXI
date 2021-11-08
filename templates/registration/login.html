@@ -156,7 +156,14 @@
                         <div class="d-grid">
                             <input type="submit" value="Iniciar sesión" class="btn btn-primary">
                         </div>
-                        {{form.errors}}
+
+                        {% if messages %}
+                            {% for messages in messages %}
+                                <div class="mb-4 mt-3">
+                                    <p style="color: red;">{{ messages }}</p>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
 
                         <div class="my-3 text-center">
                             <span>

@@ -139,6 +139,7 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
+
 EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'restaurantsxxi@gmail.com'

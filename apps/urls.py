@@ -54,4 +54,6 @@ urlpatterns =[
     #HTML CONTADOR
     path('index_contador', views.index_contador, name='index_contador'),
     path('movimientos_dinero', views.movimientos_dinero, name='movimientos_dinero'),
+    path('verificar', views.verificar, name='verificar'),
+    path('correo', views.correo, name='correo'),
 ]

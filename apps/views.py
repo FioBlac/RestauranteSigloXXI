@@ -1,17 +1,20 @@
 import django
+from django import template
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Reserva, Mesa, Plato, AuthUser
 from datetime import datetime, timedelta
 import base64
 from .forms import ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.messages import success
 from django.contrib import messages
 from django.db.models import Q, query, query_utils
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.http import HttpResponse
 from django.db import connection
+from django.template.loader import get_template
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
 
 # Create your views here.
 from .decorators import usuarioPermitido, usuarioNoLogeado, admin_view
@@ -46,7 +49,8 @@ def login_usuario(request):
             login(request, user)
             return redirect('index')
         else:
-            messages.info(request, 'Usuario o contraseña incorrecto')
+            messages.info(request, f'Usuario o contraseña incorrecto')
+
 
     return render (request, 'registration/login.html')
 
@@ -59,6 +63,12 @@ def registro(request):
         if  formulario.is_valid():
             formulario.save()
 
+            #email = CustomUserCreationFrom.cleaned_data['email']
+            #Enviar correo de registro
+            #sendEmailRegistro(email)
+            #print(email)
+
+
             #agregar usuario a un grupo automaticamente
             usuario = formulario.save()
             group = Group.objects.get(name = 'Cliente')
@@ -66,8 +76,10 @@ def registro(request):
 
             user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
             login(request, user)
-            messages.success(request,'registrado correctamente')
+
             return redirect(to='index')
+        else:
+            formulario = CustomUserCreationFrom()
         data["form"]= formulario
 
     return render (request, 'registration/registro.html', data)
@@ -84,18 +96,18 @@ def loginAsociado(request):
             login(request, user)
             return redirect('index_admin')
         else:
-            messages.info(request, 'Usuario o contraseña incorrecto')
+            messages.info(request, f'Usuario o contraseña incorrecto')
 
     return render (request, 'html/general/loginAsociado.html')
 
 #HTML ADMIN
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def admin_reportes(request):
     return render (request, 'html/admin/admin_reportes.html')
 
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def agregar_usuario(request):
     data = {
         'form' : CustomUserCreationFrom2(),
@@ -120,14 +132,16 @@ def agregar_usuario(request):
     return render (request, 'html/admin/agregar_usuario.html', data)
 
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def gestion_solicitudes(request):
     return render (request, 'html/admin/gestion_solicitudes.html')
 
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def gestion_usuario(request):
     usuarios = AuthUser.objects.all()
+    #grupoUser = AuthUser.objects.get()
+    #grupo = Group.objects.get(name = )
 
     queryset = request.GET.get("inputBuscarUsuario")
     if queryset:
@@ -142,7 +156,7 @@ def gestion_usuario(request):
     return render (request, 'html/admin/gestion_usuario.html', {'usuarios':usuarios})
 
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def gestionMesas(request):
     mesas = Mesa.objects.all()
 
@@ -161,27 +175,27 @@ def index_admin(request):
     return render (request, 'html/admin/index_admin.html')
 
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def modificar_usuario(request):
     return render (request, 'html/admin/modificar_usuario.html')
 
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def solicitud_stock_proveedores(request):
     return render (request, 'html/admin/solicitud_stock_proveedores.html')
 
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def solicitudes_enviadas(request):
     return render (request, 'html/admin/solicitudes_enviadas.html')
 
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def solicitudes_recibidas(request):
     return render (request, 'html/admin/solicitudes_recibidas.html')
 
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def ver_reservas(request):
     reservas = Reserva.objects.all()
 
@@ -196,7 +210,7 @@ def ver_reservas(request):
     return render (request, 'html/admin/ver_reservas.html', {'reservas':reservas})
 
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def agregar_mesa(request):
     if request.method == 'POST':
 
@@ -227,12 +241,12 @@ def logoutUserAsoci(request):
 
 #HTML BODEGA
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def gestion_bodega(request):
     return render (request, 'html/bodega/gestion_bodega.html')
 
 @login_required(login_url = 'loginAsociado')
-#@admin_view
+@admin_view
 def registro_bodega(request):
     return render (request, 'html/bodega/registro_bodega.html')
 
@@ -257,6 +271,7 @@ def cliente_hacer_pedido(request):
     return render (request, 'html/cliente/cliente_hacer_pedido.html', {'arreglo' :arreglo})#data)
 
 @login_required(login_url = 'login')
+@usuarioPermitido(allowed_roles = ['Cliente'])
 def cliente_hacer_reserva(request):
     if request.method == 'POST':
 
@@ -286,14 +301,17 @@ def cliente_hacer_reserva(request):
     return render (request, 'html/cliente/cliente_hacer_reserva.html')
 
 @login_required(login_url = 'login')
+@usuarioPermitido(allowed_roles = ['Cliente'])
 def cliente_index(request):
     return render (request, 'html/cliente/cliente_index.html')
 
 @login_required(login_url = 'login')
+@usuarioPermitido(allowed_roles = ['Cliente'])
 def Cliente_Observar_Disponibilidad(request):
     return render (request, 'html/cliente/Cliente_Observar_Disponibilidad.html')
 
 @login_required(login_url = 'login')
+@usuarioPermitido(allowed_roles = ['Cliente'])
 def cliente_ver_reserva(request):
     reservas = Reserva.objects.all()
     return render (request, 'html/cliente/cliente_ver_reserva.html', {'reservas':reservas})
@@ -301,45 +319,38 @@ def cliente_ver_reserva(request):
 
 
 #HTML GARZON
+#@login_required(login_url = 'loginAsociado')
 #@admin_view
 def main_garzon(request):
     return render (request, 'html/garzon/main_garzon.html')
 
-#@admin_view
 def retiro_platos(request):
     return render (request, 'html/garzon/retiro_paltos.html')
 
 
 #HTML COCINERO
-#@admin_view
 def index_cocina(request):
     return render (request, 'html/Cocinero/index_cocina.html')
 
-#@admin_view
 def gestion_receta(request):
     return render (request, 'html/Cocinero/gestion_receta.html')
 
 
 #HTML CONTADOR
-#@admin_view
 def index_contador(request):
     return render (request, 'html/Contador/index_contador.html')
 
-#@admin_view
 def movimientos_dinero(request):
     return render (request, 'html/Cocinero/movimientos_dinero.html')
 
 
 #HTML CAJERO
-#@admin_view
 def index_cajero(request):
     return render (request, 'html/Cajero/index_cajero.html')
 
-#@admin_view
 def cajero_cuenta_clientes(request):
     return render (request, 'html/Cajero/cajero_cuenta_clientes.html')
 
-#@admin_view
 def cobro_cliente_manual(request):
     return render (request, 'html/Cajero/cobro_cliente_manual.html')
 
@@ -350,9 +361,61 @@ def eliminar_usuario(request, id):
     usuario.delete()
     return redirect(to = "gestion_usuario")
 
-#ENVIAR CORREO
-def sendemail(email):
-    pass
+#ENVIAR CORREO (este es de prueba)
+
+def verificar(request):
+    if request.method == 'POST':
+        mail = request.POST.get('mail')
+
+        sendEmailReserva(mail)
+        print('envio correo')
+    return render (request, 'html/general/verificar.html', {})
+
+
+def sendEmailReserva(username):
+    context = {
+        'username':username
+    }
+
+    template = get_template('html/general/correo.html')
+    content = template.render(context)
+
+    correo = EmailMultiAlternatives(
+        'Reserva lista!',
+        'Su reserva se ha registrado correctamente.',
+        settings.EMAIL_HOST_USER,
+
+        #aca va el correo del usuario
+        [username]
+    )
+
+    correo.attach_alternative(content, 'text/html')
+    correo.send()
+
+def sendEmailRegistro(email):
+    context = {
+        'email':email
+    }
+
+    template = get_template('html/general/correo_registro.html')
+    content = template.render(context)
+
+    correo = EmailMultiAlternatives(
+        'Registro con exito',
+        'Usted se ha registrado correctamente en nuestro sitio web.',
+        settings.EMAIL_HOST_USER,
+
+        #aca va el correo del usuario
+        [email]
+    )
+
+    correo.attach_alternative(content, 'text/html')
+    correo.send()
+
+
+
+def correo(request):
+    return render (request, 'html/general/correo.html')
 
 #Formularios
 #Formulario de Hacer Reserva

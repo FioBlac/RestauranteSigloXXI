@@ -200,6 +200,14 @@
                             <input type="submit" value="Regístrate" class="btn btn-primary" >
                         </div>
                         
+                        {% if messages %}
+                            {% for messages in messages %}
+                                <div class="mb-4 mt-3">
+                                    <p style="color: red;">{{ messages }}</p>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        
                         <div class="mb-4 mt-3 form-check">
                             <input type="checkbox" name="connected" class="form-check-input" id="">
                             <label for="connected" class="form-check-label">Recordarme</label>
