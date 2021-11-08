@@ -231,6 +231,9 @@ def cliente_hacer_reserva(request):
             fecha_reserva = datos_reserva.cleaned_data['fecha'].strftime("%Y-%m-%d")
             hora_reserva = datos_reserva.cleaned_data['hora']
             comentario = datos_reserva.cleaned_data['comentario']
+            
+            
+            print(comentario)
 
             #Asignando variables para guardar
             #Tengo que hacer el que pasaria si no hay registros para el id
@@ -241,12 +244,53 @@ def cliente_hacer_reserva(request):
             nuevo_id = int(str(ultimo_id)) + 1 #Se le suma 1
             fecha = str(fecha_reserva) + ' ' + str(hora_reserva)
             fecha_vence = datetime.strptime(fecha ,"%Y-%m-%d %H:%M") + timedelta(minutes=20)
-            print(fecha_vence)
-            reserva = Reserva(nuevo_id, cantidad_personas, fecha, comentario, fecha_vence)
-            reserva.save()
+
+            #Asignar mesa que no esté ocupada esa hora.
+            todas_reservas = Reserva.objects.all() #Traer todas las reservas
+            mesas = Mesa.objects.all() #Traer todas las mesas
+            disponibilidad = True
+            fecha_busqueda = fecha[:11]  + str(int(fecha[11:13])+3) + fecha[13:] #se le suman 3 horas para solucionar error temporal.
+            num_mesa = Mesa.objects.first()
+            
+            for mesa in mesas:
+                for i in todas_reservas:
+                    i_reserva = str(i.fecha_reserva)[:16]
+                    if  i_reserva == fecha_busqueda : #el i.fecha_reserva es el problema
+                        print('Encontró la fecha')
+                        
+                        while i.id_mesa.id_mesa == mesa.id_mesa:
+                            suma_mesa = str(int(mesa.id_mesa)+1) #Se le suma 1 digito a la mesa
+                            print(suma_mesa) 
+                            try:
+                                num_mesa = Mesa.objects.get(id_mesa = suma_mesa)
+                                disponibilidad = True
+                                print('Asignó la mesa')
+                            except:
+                                disponibilidad = False
+                                print('No hay mesas disponibles') 
+                            break
+                    else:
+                        disponibilidad = True
+            
+            #Obtener el id del usuario que hace la reserva
+            if request.user.is_authenticated:
+                id_usuario = AuthUser.objects.get(id = request.user.id) 
+
+            reserva = Reserva(
+                id_reserva = nuevo_id, 
+                cantidad_personas = cantidad_personas, 
+                fecha_reserva = fecha, 
+                comentario = comentario, 
+                fecha_vence = fecha_vence,
+                id_mesa = num_mesa,
+                id_usuario = id_usuario
+                )
+                      
+            if disponibilidad == True:
+               reserva.save()         
     else:
         reserva_form = ReservaForm()
-    return render (request, 'html/cliente/cliente_hacer_reserva.html')
+    return render (request, 'html/cliente/cliente_hacer_reserva.html', {'disponibilidad':disponibilidad})
 
 @login_required(login_url = 'login')
 def cliente_index(request):

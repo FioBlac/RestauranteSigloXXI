@@ -272,6 +272,8 @@ class Reserva(models.Model):
     fecha_reserva = models.DateTimeField()
     comentario = models.CharField(max_length=200, blank=True, null=True)
     fecha_vence = models.DateTimeField()
+    id_mesa = models.ForeignKey(Mesa, models.DO_NOTHING, db_column='MESA_id_mesa', blank=True, null=True,related_name='+')
+    id_usuario = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='AUTH_USER_ID', blank=True, null=True,related_name='+')
 
     class Meta:
         managed = False

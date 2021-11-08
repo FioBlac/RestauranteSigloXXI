@@ -1,6 +1,7 @@
-//Guardar reserva
-const btnReservar = document.querySelector('#btnReservar')
+//Guardar reserva 
+//const btnReservar = document.querySelector('#btnReservar')
 
+/*
 btnReservar.addEventListener('click', () => {
     //Obtener Fecha
     var fechaReserva = document.querySelector('#fechaReserva').value
@@ -32,3 +33,4 @@ btnReservar.addEventListener('click', () => {
     
     
 })
+*/
