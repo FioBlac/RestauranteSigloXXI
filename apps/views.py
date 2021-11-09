@@ -339,9 +339,9 @@ def cliente_hacer_reserva(request):
                 id_mesa = num_mesa,
                 id_usuario = id_usuario
                 )
-                      
+
             if disponibilidad == True:
-               reserva.save()         
+                reserva.save()         
     else:
         disponibilidad = False
         reserva_form = ReservaForm()
