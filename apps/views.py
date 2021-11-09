@@ -273,9 +273,11 @@ def cliente_hacer_pedido(request):
 @login_required(login_url = 'login')
 @usuarioPermitido(allowed_roles = ['Cliente'])
 def cliente_hacer_reserva(request):
+    disponibilidad = True
     if request.method == 'POST':
 
         datos_reserva = DatosReservaForm(request.POST)
+        
 
         if datos_reserva.is_valid():
             #Limpiar los datos del POST
@@ -341,6 +343,7 @@ def cliente_hacer_reserva(request):
             if disponibilidad == True:
                reserva.save()         
     else:
+        disponibilidad = False
         reserva_form = ReservaForm()
     return render (request, 'html/cliente/cliente_hacer_reserva.html', {'disponibilidad':disponibilidad})
 
