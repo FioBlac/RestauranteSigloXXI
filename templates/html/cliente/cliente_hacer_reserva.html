@@ -120,7 +120,7 @@
 
     <!--MENÚ DE RESERVA-->
     <section class="container-fluid row  w-75 mx-auto border border-2">
-        <form method="POST">    
+        <form method="POST" target="frame">    
             {% csrf_token %}
             <!--Primera Fila-->
             <div class="row align-items-start">
@@ -303,9 +303,7 @@
                 </button>
                 {% else %}
                 <button class="btn btn-primary" data-bs-dismiss="modal">
-                    <a href="{% url 'cliente_hacer_pedido' %}" style="text-decoration: none; color: white;">
-                        Aceptar
-                    </a> 
+                    Aceptar
                 </button>
                 {% endif %}
 
@@ -314,6 +312,7 @@
         </div>
     </div>
 
+    <iframe name="frame" style="display: none;"></iframe>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <!--<script src="{% static 'js/script_cliente_reserva.js' %}"></script>-->
 </body>
