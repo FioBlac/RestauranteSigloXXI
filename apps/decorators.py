@@ -34,6 +34,9 @@ def admin_view(view_func):
 
         if group == 'Admin':
             return view_func(request, *args, **kwargs)
+            
+        if group == 'Bodega':
+            return redirect('index_cajero')
 
         if group == 'Cajero':
             return redirect('index_cajero')

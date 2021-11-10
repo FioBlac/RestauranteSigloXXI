@@ -376,17 +376,21 @@ def retiro_platos(request):
 
 
 #HTML COCINERO
+@admin_view
 def index_cocina(request):
     return render (request, 'html/Cocinero/index_cocina.html')
 
+@admin_view
 def gestion_receta(request):
     return render (request, 'html/Cocinero/gestion_receta.html')
 
 
 #HTML CONTADOR
+#@admin_view
 def index_contador(request):
     return render (request, 'html/Contador/index_contador.html')
 
+#@admin_view
 def movimientos_dinero(request):
     return render (request, 'html/Cocinero/movimientos_dinero.html')
 
