@@ -34,6 +34,7 @@ def listar_grupos():
     return lista
 
 #HTML GENERAL
+
 def index(request):
     return render (request,'html/general/index.html')
 
@@ -253,6 +254,7 @@ def registro_bodega(request):
 
 #HTML CLIENTE
 @login_required(login_url = 'login')
+@usuarioPermitido(allowed_roles = ['Cliente'])
 def cliente_hacer_pedido(request):
     platos = Plato.objects.all()
 
@@ -268,7 +270,7 @@ def cliente_hacer_pedido(request):
         }
         arreglo.append(data)
 
-    return render (request, 'html/cliente/cliente_hacer_pedido.html', {'arreglo' :arreglo})#data)
+    return render (request, 'html/cliente/cliente_hacer_pedido.html', {'arreglo' :arreglo})#data
 
 @login_required(login_url = 'login')
 @usuarioPermitido(allowed_roles = ['Cliente'])
@@ -366,42 +368,54 @@ def cliente_ver_reserva(request):
 
 
 #HTML GARZON
-#@login_required(login_url = 'loginAsociado')
-#@admin_view
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Garzon'])
 def main_garzon(request):
     return render (request, 'html/garzon/main_garzon.html')
 
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Garzon'])
 def retiro_platos(request):
     return render (request, 'html/garzon/retiro_paltos.html')
 
 
 #HTML COCINERO
-@admin_view
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cocinero'])
 def index_cocina(request):
     return render (request, 'html/Cocinero/index_cocina.html')
 
-@admin_view
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cocinero'])
 def gestion_receta(request):
     return render (request, 'html/Cocinero/gestion_receta.html')
 
 
 #HTML CONTADOR
-#@admin_view
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Contador'])
 def index_contador(request):
     return render (request, 'html/Contador/index_contador.html')
 
-#@admin_view
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Contador'])
 def movimientos_dinero(request):
     return render (request, 'html/Cocinero/movimientos_dinero.html')
 
 
 #HTML CAJERO
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cajero'])
 def index_cajero(request):
     return render (request, 'html/Cajero/index_cajero.html')
 
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cajero'])
 def cajero_cuenta_clientes(request):
     return render (request, 'html/Cajero/cajero_cuenta_clientes.html')
 
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cajero'])
 def cobro_cliente_manual(request):
     return render (request, 'html/Cajero/cobro_cliente_manual.html')
 
