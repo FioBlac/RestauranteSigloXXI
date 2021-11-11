@@ -383,6 +383,11 @@ def main_garzon(request):
 def retiro_platos(request):
     return render (request, 'html/garzon/retiro_paltos.html')
 
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Garzon'])
+def ver_reservas(request):
+    return render (request, 'html/garzon/ver_reservas.html')
+
 
 #HTML COCINERO
 @login_required(login_url = 'loginAsociado')
