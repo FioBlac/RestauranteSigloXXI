@@ -30,6 +30,7 @@ urlpatterns =[
     #HTML BODEGA
     path('gestion_bodega', views.gestion_bodega, name='gestion_bodega'),
     path('registro_bodega', views.registro_bodega, name='registro_bodega'),
+    path('index_bodeguero', views.index_bodeguero, name='index_bodeguero'),
 
     #HTML CLIENTE
     path('cliente_hacer_pedido', views.cliente_hacer_pedido, name='cliente_hacer_pedido'),
@@ -41,6 +42,7 @@ urlpatterns =[
     #HTML GARZON
     path('main_garzon', views.main_garzon, name='main_garzon'),
     path('retiro_platos', views.retiro_platos, name='retiro_platos'),
+    path('ver_reservas', views.ver_reservas, name='ver_reservas'),
 
     #HTML COCINERO
     path('index_cocina', views.index_cocina, name='index_cocina'),

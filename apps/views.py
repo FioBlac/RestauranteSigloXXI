@@ -242,12 +242,17 @@ def logoutUserAsoci(request):
 
 #HTML BODEGA
 @login_required(login_url = 'loginAsociado')
-@admin_view
+@usuarioPermitido(allowed_roles = ['Bodega'])
+def index_bodeguero(request):
+    return render (request, 'html/bodega/index_bodeguero.html')
+
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Bodega'])
 def gestion_bodega(request):
     return render (request, 'html/bodega/gestion_bodega.html')
 
 @login_required(login_url = 'loginAsociado')
-@admin_view
+@usuarioPermitido(allowed_roles = ['Bodega'])
 def registro_bodega(request):
     return render (request, 'html/bodega/registro_bodega.html')
 
@@ -377,6 +382,11 @@ def main_garzon(request):
 @usuarioPermitido(allowed_roles = ['Garzon'])
 def retiro_platos(request):
     return render (request, 'html/garzon/retiro_paltos.html')
+
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Garzon'])
+def ver_reservas(request):
+    return render (request, 'html/garzon/ver_reservas.html')
 
 
 #HTML COCINERO
