@@ -61,7 +61,17 @@
                         {% if user.is_authenticated %}
 
                         <a class="nav-link" href="{% url 'index_cocina' %}">{{user.username}}</a>
-                        <button class="btn btn-outline-dark" type="submit">Cerrar Sesion</button>
+
+                        &nbsp;
+
+                        <button class="btn btn-outline-dark" type="submit" href="{% url 'logoutUserAsoci' %}">Cerrar Sesion</button>
+                        
+                        {% else %}
+                        <a class="btn btn-outline-secondary me-md-3" type="button" type="submit" href="{% url 'loginAsociado' %}">
+                            Iniciar Sesion
+                        </a>
+                        {% endif %}
+                    
                     </form>
                 </div>
             </div>
@@ -316,8 +326,8 @@
         <!--Botones-->
         <div class="container">
             <div class="d-grid gap-2 d-md-block">
-                <button style="margin-left:239px;" class="btn btn-primary" type="button">Volver</button>
-                <button style="margin-left:710px;" class="btn btn-primary" type="button">Enviar pedido</button>
+                <button style="margin-left:239px;" class="btn btn-primary" type="button" href="{% url 'index_cocina' %}">Volver</button>
+                <button style="margin-left:710px;" class="btn btn-primary" type="button" href="{% url '#' %}">Enviar pedido</button>
             </div>
         </div>
 
