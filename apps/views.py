@@ -554,6 +554,13 @@ def sendEmailRegistro(email):
 def correo(request):
     return render (request, 'html/general/correo.html')
 
+
+#HTML PAGAR
+def metodo_pago(request):
+    return render (request, 'html/pago/metodo_pago.html')
+
+def pagar(request):
+    return render (request, 'html/pago/pagar.html')
 #Formularios
 #Formulario de Hacer Reserva
 #def crearReserva(request):

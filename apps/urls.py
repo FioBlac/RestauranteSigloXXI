@@ -60,4 +60,9 @@ urlpatterns =[
     path('movimientos_dinero', views.movimientos_dinero, name='movimientos_dinero'),
     path('verificar', views.verificar, name='verificar'),
     path('correo', views.correo, name='correo'),
+
+    #HTML DE PAGO
+    path('metodo_pago',views.metodo_pago , name= 'metodo_pago'),
+    path('pagar',views.pagar , name= 'pagar')
+
 ]
