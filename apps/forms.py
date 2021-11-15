@@ -15,6 +15,18 @@ class DatosReservaForm(forms.Form):
     hora = forms.CharField()
     comentario = forms.CharField()
 
+class AgregarProductoForm(forms.Form):
+    id_bodega = forms.CharField()
+    nombre_alimento = forms.CharField()
+    t_conservacion = forms.CharField()
+    cantidad_alimento = forms.CharField()
+    fecha_caducidad = forms.DateTimeField()
+    zona_refrigeracion = forms.CharField()
+    tipo_alimento = forms.CharField()
+
+class EliminarProductoForm(forms.Form):
+    id_producto_borrar = forms.CharField()
+
 class MesaForm(forms.ModelForm):
     class Meta:
         model = Mesa

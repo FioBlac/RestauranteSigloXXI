@@ -122,46 +122,29 @@
                         </thead>
 
                         <!--Filas-->
-                        <tbody>
-                            <tr>
-                                <td class="text-center" scope="row">12054450</td>
-                                <td class="text-center" scope="row">Cebolla</td>
-                                <td class="text-center" scope="row">20</td>
-                                <td class="text-center" scope="row">5</td>
-                                <td class="text-center" scope="row">07-10-2021</td>
-                                <td class="text-center" scope="row">Ambiente</td>
-                                <td class="text-center" scope="row">Solido</td>
-                                <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                </td>
-                                <td class="text-danger fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-danger border-0 fs-4 text-center" href="" data-bs-toggle="modal" data-bs-target="#modalEliminar">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                        <tbody class="fila">
+                            {% for p in productos %}
+                                <tr>
+                                    <td class="text-center" scope="row">{{ p.id_producto }}</td>
+                                    <td class="text-center" scope="row">{{ p.nombre }}</td>
+                                    <td class="text-center" scope="row">{{ p.cantidad }}</td>
+                                    <td class="text-center" scope="row">{{ p.temperatura_conservacion }}</td>
+                                    <td class="text-center" scope="row">{{ p.fecha_caducidad }} </td>
+                                    <td class="text-center" scope="row">{{ p.zona_conservacion }}</td>
+                                    <td class="text-center" scope="row">{{ p.tipo_alimento }}</td>
+                                    <td class="text-warning fs-4 text-center" scope="row">
+                                        <a class="btn btn-outline-warning border-0 fs-4 text-center" href="">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    </td>
+                                    <td class="text-danger fs-4 text-center" scope="row">
+                                        <a class="btn btn-outline-danger border-0 fs-4 text-center" id="{{ p.id_producto }}" href="" data-bs-toggle="modal" data-bs-target="#modalEliminar">
+                                            <i class="bi bi-trash" id="{{ p.id_producto }}"></i>
+                                        </a>
+                                    </td> 
+                                </tr>
+                            {% endfor %}
 
-                            <tr>
-                                <td class="text-center" scope="row">12054451</td>
-                                <td class="text-center" scope="row">Pollo</td>
-                                <td class="text-center" scope="row">12</td>
-                                <td class="text-center" scope="row">-10</td>
-                                <td class="text-center" scope="row">07-11-2021</td>
-                                <td class="text-center" scope="row">Refrigeración</td>
-                                <td class="text-center" scope="row">Solido</td>
-                                <td class="text-warning fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-warning border-0 fs-4 text-center" href="">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                </td>
-                                <td class="text-danger fs-4 text-center" scope="row">
-                                    <a class="btn btn-outline-danger border-0 fs-4 text-center" href="" data-bs-toggle="modal" data-bs-target="#modalEliminar">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -185,10 +168,14 @@
                     <button class="btn btn-secondary" data-bs-dismiss="modal">
                         No eliminar
                     </button>
-
-                    <button class="btn btn-danger" type="button" data-bs-target="#confirmarCancelar" data-bs-toggle="modal" data-bs-dismiss="modal">
-                        Si, estoy seguro/a
-                    </button>
+                    
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="text" name="id_producto_borrar" id="id_producto_borrar" style=display:none;>
+                        <button class="btn btn-danger" type="submit" data-bs-dismiss="modal">
+                            Si, estoy seguro/a
+                        </button>
+                    </form>
                 </div>
             </div>
             </div>
@@ -209,6 +196,21 @@
         </div>
     </section>
 
+    <script>
+        const tabla = document.querySelector(".table-responsive")
+        const eliminar = document.querySelector('#id_producto_borrar')
+
+        //Leerá las características de cualquier elemento del html que esté dentro de la tabla
+        tabla.addEventListener('click', (e) =>{
+            id_producto = e.target.id
+            console.log(id_producto)
+            console.log(eliminar)
+            eliminar.value = id_producto
+        })
+
+
+
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>

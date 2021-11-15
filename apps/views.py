@@ -1,10 +1,10 @@
 import django
 from django import template
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Reserva, Mesa, Plato, AuthUser
+from .models import Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
 import base64
-from .forms import ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2
+from .forms import AgregarProductoForm, EliminarProductoForm, ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db.models import Q, query, query_utils
@@ -243,18 +243,76 @@ def logoutUserAsoci(request):
 #HTML BODEGA
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Bodega'])
-def index_bodeguero(request):
+def index_bodeguero(request):      
     return render (request, 'html/bodega/index_bodeguero.html')
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Bodega'])
-def gestion_bodega(request):
-    return render (request, 'html/bodega/gestion_bodega.html')
+def gestion_bodega(request):   
+    productos = Producto.objects.all()
+    if request.method == 'POST':
+        producto_borrar = EliminarProductoForm(request.POST)
+        
+        if producto_borrar.is_valid():
+            id_borrar = producto_borrar.cleaned_data['id_producto_borrar']
+
+            producto = Producto.objects.get(id_producto = id_borrar)
+            producto.delete() 
+            
+    return render (request, 'html/bodega/gestion_bodega.html', {'productos':productos})
+    
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Bodega'])
 def registro_bodega(request):
-    return render (request, 'html/bodega/registro_bodega.html')
+    bodegas = Bodega.objects.all()
+
+    if request.method == 'POST':
+        datos_item = AgregarProductoForm(request.POST)
+
+        if datos_item.is_valid():
+
+            id_bodega = datos_item.cleaned_data['id_bodega']
+            nombre_alimento = datos_item.cleaned_data['nombre_alimento']
+            t_conservacion = datos_item.cleaned_data['t_conservacion']
+            cantidad_alimento = datos_item.cleaned_data['cantidad_alimento']
+            fecha_caducidad = datos_item.cleaned_data['fecha_caducidad']
+            zona_refrigeracion = datos_item.cleaned_data['zona_refrigeracion']
+            tipo_alimento = datos_item.cleaned_data['tipo_alimento']
+
+            print(id_bodega)
+            print(nombre_alimento)
+            print(t_conservacion)
+            print(cantidad_alimento)
+            print(fecha_caducidad)
+            print(zona_refrigeracion)
+            print(tipo_alimento)
+
+            #Asignando variables para guardar
+            #Tengo que hacer el que pasaria si no hay registros para el id
+            try:
+                ultimo_id_alimento = Producto.objects.latest('id_producto').id_producto #Último ID registrado en reservas
+            except:
+                ultimo_id_alimento= 0
+
+            nuevo_id = int(str(ultimo_id_alimento)) + 1 #Se le suma 1
+
+            #Asignar el Id de bodega
+            bodega = Bodega.objects.get(id_bodega = id_bodega)
+
+            #bodega_id_bodega
+            producto = Producto(
+                id_producto  = nuevo_id, 
+                bodega_id_bodega = bodega, 
+                nombre = nombre_alimento, 
+                temperatura_conservacion = t_conservacion, 
+                cantidad = cantidad_alimento,
+                fecha_caducidad = fecha_caducidad,
+                zona_conservacion = zona_refrigeracion,
+                tipo_alimento =  tipo_alimento
+                )
+            producto.save()
+    return render (request, 'html/bodega/registro_bodega.html', {'bodegas':bodegas})
 
 
 #HTML CLIENTE
