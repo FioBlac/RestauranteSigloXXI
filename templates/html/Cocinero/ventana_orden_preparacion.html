@@ -1,4 +1,4 @@
-<!--añadir archivos static, terminar vistar y agregar funcionalidades-->
+<!-- agregar funcionalidades-->
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -48,8 +48,20 @@
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <a class="nav-link">"NomAplell cocinera" (Cocinera)</a>
-                        <button class="btn btn-outline-dark" type="submit">Cerrar Sesion</button>
+                        
+                        {% if user.is_authenticated %}
+                        <a class="nav-link"  href="{% url 'index_cocina' %}">{{user.username}}</a>
+
+                        &nbsp;
+                        
+                        <button class="btn btn-outline-dark" type="submit" href="{% url 'logoutUserAsoci' %}">Cerrar Sesion</button>
+                    
+                        {% else %}
+                        <a class="btn btn-outline-secondary me-md-3" type="button" type="submit" href="{% url 'loginAsociado' %}">
+                            Iniciar Sesion
+                        </a>
+                        {% endif %}
+                    
                     </form>
                 </div>
             </div>
@@ -57,7 +69,7 @@
 
         <!--Barra del menu de opciones del Garzon-->
         <section class="text-center">
-            <img class="img-fluid" src="/static/img/imagenSuperiorUsuarios.jpg" alt="">
+            <img class="img-fluid" src="{% static 'img/imagenSuperiorUsuarios.jpg' %}" alt="">
         </section>
 
         <!--texto-->
@@ -145,7 +157,7 @@
         <div style="margin: 20px;"></div>
 
         <!--Boton volver-->
-        <button style="margin-left:45px;" type="button" class="btn btn-primary btn-lg">Volver</button>
+        <button style="margin-left:45px;" type="button" class="btn btn-primary btn-lg" href="{% url 'index_cocina' %}">Volver</button>
         
         <!--Seperacion-->
         <div style="margin: 20px;"></div>

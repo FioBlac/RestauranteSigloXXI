@@ -443,8 +443,8 @@ def retiro_platos(request):
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])
-def ver_reservas(request):
-    return render (request, 'html/garzon/ver_reservas.html')
+def ver_reservaciones(request):
+    return render (request, 'html/garzon/ver_reservaciones.html')
 
 
 #HTML COCINERO
@@ -527,7 +527,7 @@ def sendEmailReserva(username):
 
 def sendEmailRegistro(email):
     context = {
-        'email':email
+        'email': email
     }
 
     template = get_template('html/general/correo_registro.html')

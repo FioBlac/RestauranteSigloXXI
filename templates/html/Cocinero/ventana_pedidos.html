@@ -1,4 +1,5 @@
-<!--añadir archivos static, corregir responsividad de los ultimos botones y agragar funcionalidades-->
+<!--corregir responsividad de los ultimos botones y agragar funcionalidades-->
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -37,27 +38,39 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Inicio</a>
+                            <a class="nav-link" href="{% url 'index_cocina' %}">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Inventario</a>
+                            <a class="nav-link" href="añadir">Inventario</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Usuarios</a>
+                            <a class="nav-link" href="{% url 'gestion_usuario' %}">Usuarios</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Mesas</a>
+                            <a class="nav-link" href="{% url 'gestionMesas' %}">Mesas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Solicitudes</a>
+                            <a class="nav-link" href="{% url 'gestion_solicitudes' %}">Solicitudes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Reportes</a>
+                            <a class="nav-link" href="{% url 'admin_reportes' %}">Reportes</a>
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <a class="nav-link">"NomAplell cocinera" (Cocinera)</a>
-                        <button class="btn btn-outline-dark" type="submit">Cerrar Sesion</button>
+
+                        {% if user.is_authenticated %}
+                        <a class="nav-link">{{user.username}}</a>
+                        
+                        &nbsp;
+
+                        <button class="btn btn-outline-dark" type="submit" href="{% url 'logoutUserAsoci' %}">Cerrar Sesion</button>
+                        
+                        {% else %}
+                        <a class="btn btn-outline-secondary me-md-3" type="button" type="submit" href="{% url 'loginAsociado' %}">
+                            Iniciar Sesion
+                        </a>
+                        {% endif %}
+                    
                     </form>
                 </div>
             </div>
@@ -91,7 +104,7 @@
                             </td>
                             <td>
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                    <button type="button" class="btn btn-info btn-lg">
+                                    <button type="button" class="btn btn-info btn-lg" href="{% url 'pedido_cliente_sin_entrega' %}">
                                         <h6 style="font-family:'Times New Roman', Times, serif, cursive;">Ver pedido</h6>
                                     </button>
                                 </div>
@@ -128,7 +141,7 @@
                             </td>
                             <td>
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                    <button type="button" class="btn btn-info btn-lg ">
+                                    <button type="button" class="btn btn-info btn-lg " href="{% url 'pedido_cliente_sin_entrega' %}">
                                         <h6 style="font-family:'Times New Roman', Times, serif, cursive;">Ver pedido</h6>
                                     </button>
                                 </div>
@@ -165,7 +178,7 @@
                             </td>
                             <td>
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                                    <button type="button" class="btn btn-info btn-lg">
+                                    <button type="button" class="btn btn-info btn-lg" href="{% url 'pedido_cliente_sin_entrega' %}">
                                         <h6 style="font-family:'Times New Roman', Times, serif, cursive;">Ver pedido</h6>
                                     </button>
                                 </div>
@@ -182,13 +195,13 @@
         <div class="container">
             <div class="row">
                 <div class="col text-center">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Volver</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" href="{% url 'index_cocina' %}">Volver</button>
                 </div>
                 <div class="col-sm-4 text-center">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Ver pedidos por orden de tiempo</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" href="{% url 'ventana_orden_preparacion' %}">Ver pedidos por orden de tiempo</button>
                 </div>
                 <div class="col order-1 text-center">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Enviar pedido</button>
+                    <button type="button" class="btn btn-primary btn-lg btn-block" href="{% url '#' %}">Enviar pedido</button>
                 </div>
             </div>
         </div>
@@ -228,25 +241,25 @@
                         <h5 class="text-uppercase mb-0">Redes Sociales</h5>
                         <ul class="list-unstyled">
                             <li>
-                                <button class="btn btn-primary text-center" type="button">
+                                <button class="btn btn-primary text-center" type="button" href="www.facebook.com">
                                     <i class="bi bi-facebook p-1"></i>
                                     Facebook
                                 </button>
                             </li>
                             <li>
-                                <button class="btn btn-primary text-center" type="button">
+                                <button class="btn btn-primary text-center" type="button" href="www.instagram.com">
                                     <i class="bi bi-instagram p-1"></i>
                                     Instagram
                                 </button>
                             </li> 
                             <li>
-                                <button class="btn btn-primary text-center" type="button">
+                                <button class="btn btn-primary text-center" type="button" href="www.youtube.com">
                                     <i class="bi bi-youtube p-1"></i>
                                     YouTube
                                 </button>
                             </li>  
                             <li>
-                                <button class="btn btn-primary text-center" type="button">
+                                <button class="btn btn-primary text-center" type="button" href="www.pinterest.com">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pinterest" viewBox="0 0 16 16">
                                         <path d="M8 0a8 8 0 0 0-2.915 15.452c-.07-.633-.134-1.606.027-2.297.146-.625.938-3.977.938-3.977s-.239-.479-.239-1.187c0-1.113.645-1.943 1.448-1.943.682 0 1.012.512 1.012 1.127 0 .686-.437 1.712-.663 2.663-.188.796.4 1.446 1.185 1.446 1.422 0 2.515-1.5 2.515-3.664 0-1.915-1.377-3.254-3.342-3.254-2.276 0-3.612 1.707-3.612 3.471 0 .688.265 1.425.595 1.826a.24.24 0 0 1 .056.23c-.061.252-.196.796-.222.907-.035.146-.116.177-.268.107-1-.465-1.624-1.926-1.624-3.1 0-2.523 1.834-4.84 5.286-4.84 2.775 0 4.932 1.977 4.932 4.62 0 2.757-1.739 4.976-4.151 4.976-.811 0-1.573-.421-1.834-.919l-.498 1.902c-.181.695-.669 1.566-.995 2.097A8 8 0 1 0 8 0z"/>
                                     </svg>
@@ -266,8 +279,5 @@
             </a>
         </div>
     </footer>
-
-
-
     </body>
 </html>
