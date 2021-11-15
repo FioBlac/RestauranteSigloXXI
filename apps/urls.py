@@ -31,6 +31,7 @@ urlpatterns =[
     path('gestion_bodega', views.gestion_bodega, name='gestion_bodega'),
     path('registro_bodega', views.registro_bodega, name='registro_bodega'),
     path('index_bodeguero', views.index_bodeguero, name='index_bodeguero'),
+    path('solicitud_bodega', views.solicitud_bodega, name='solicitud_bodega'),
 
     #HTML CLIENTE
     path('cliente_hacer_pedido', views.cliente_hacer_pedido, name='cliente_hacer_pedido'),
