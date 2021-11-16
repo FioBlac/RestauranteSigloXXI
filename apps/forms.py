@@ -27,6 +27,14 @@ class AgregarProductoForm(forms.Form):
 class EliminarProductoForm(forms.Form):
     id_producto_borrar = forms.CharField()
 
+
+class EliminarUsuarioForm(forms.Form):
+    id_usuario_borrar = forms.CharField()
+
+class EliminarMesaForm(forms.Form):
+    id_mesa_borrar = forms.CharField()
+
+
 class MesaForm(forms.ModelForm):
     class Meta:
         model = Mesa

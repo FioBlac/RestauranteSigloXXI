@@ -96,6 +96,14 @@
 
     <section class="container">
         <div class="row mx-auto border justify-content-center">
+            {% if messages %}
+                {% for messages in messages %}
+                    <div class="bg-success text-center align-middle">
+                        <p class="my-auto" style="color: white;">{{ messages }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
             <form class="row g-3" method="GET">
                 <div class="input-group col-auto">
                     <input type="text" class="form-control" placeholder="Buscar ID de Mesa" aria-label="Recipient's username" aria-describedby="button-addon2" name="inputBuscarMesa">
@@ -110,7 +118,6 @@
             
             <div class="w-50">
                 <div class="table-responsive">
-
                     {% if mesas %}
                         <table class="table table-hover align-middle text-center">
                             <!--Columna-->
@@ -132,13 +139,13 @@
                                         <td class="text-center" scope="row">{{ mesa.numero_mesa }}</td>
                                         <td class="text-center" scope="row">{{ mesa.disponibilidad }}</td>
                                         <td class="text-warning fs-4 text-center" scope="row">
-                                            <a class="btn btn-outline-warning border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#ventanaEditar" href="">
+                                            <a class="btn btn-outline-warning border-0 fs-4 text-center"  data-bs-toggle="modal" data-bs-target="#ventanaEditar" href="">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
                                         </td>
                                         <td class="text-danger fs-4 text-center" scope="row">
-                                            <a class="btn btn-outline-danger border-0 fs-4 text-center" data-bs-toggle="modal" data-bs-target="#modalEliminar" href="">
-                                                <i class="bi bi-trash"></i>
+                                            <a class="btn btn-outline-danger border-0 fs-4 text-center" href="" id="{{ mesa.id_mesa }}" data-bs-toggle="modal" data-bs-target="#ventanaEliminar">
+                                                <i class="bi bi-trash" id="{{ mesa.id_mesa }}"></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -209,35 +216,55 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <!--Modal eliminar-->
-        <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Eliminar mesa</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+    <!--Modal eliminar-->
+    <div class="modal fade" id="ventanaEliminar" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Eliminar mesa</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
 
-                <div class="modal-body">
-                    ¿Desea eliminar esta mesa?
-                </div>
+            <div class="modal-body">
+                ¿Desea eliminar esta mesa?
+            </div>
 
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">
-                        No eliminar
-                    </button>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">
+                    No eliminar
+                </button>
 
-                    <button class="btn btn-danger" type="button" data-bs-target="#confirmarCancelar" data-bs-toggle="modal" data-bs-dismiss="modal">
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="id_mesa_borrar" id="id_mesa_borrar" style=display:none;>
+                    <button class="btn btn-danger" type="submit" data-bs-dismiss="modal">
                         Si, estoy seguro/a
                     </button>
-                </div>
+                </form>
+                
             </div>
-            </div>
+        </div>
         </div>
     </div>
 
     <!-- JavaScript -->
+    <script>
+        const tabla = document.querySelector(".table-responsive")
+        const eliminar = document.querySelector('#id_mesa_borrar')
+
+        //Leerá las características de cualquier elemento del html que esté dentro de la tabla
+        tabla.addEventListener('click', (e) =>{
+            id_mesa = e.target.id
+            console.log(id)
+            console.log(eliminar)
+            eliminar.value = id_mesa
+        })
+
+
+
+    </script>
 
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

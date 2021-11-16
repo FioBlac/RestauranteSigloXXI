@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
 import base64
-from .forms import AgregarProductoForm, EliminarProductoForm, ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2
+from .forms import AgregarProductoForm, EliminarProductoForm, EliminarMesaForm, ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2, EliminarUsuarioForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db.models import Q, query, query_utils
@@ -141,8 +141,15 @@ def gestion_solicitudes(request):
 @admin_view
 def gestion_usuario(request):
     usuarios = AuthUser.objects.all()
-    #grupoUser = AuthUser.objects.get()
-    #grupo = Group.objects.get(name = )
+    
+    if request.method == 'POST':
+        usuario_borrar = EliminarUsuarioForm(request.POST)
+        
+        if usuario_borrar.is_valid():
+            id_borrar = usuario_borrar.cleaned_data['id_usuario_borrar']
+
+            User = AuthUser.objects.get(id = id_borrar)
+            User.delete() 
 
     queryset = request.GET.get("inputBuscarUsuario")
     if queryset:
@@ -160,6 +167,16 @@ def gestion_usuario(request):
 @admin_view
 def gestionMesas(request):
     mesas = Mesa.objects.all()
+    
+    if request.method == 'POST':
+        mesa_borrar = EliminarMesaForm(request.POST)
+        
+        if mesa_borrar.is_valid():
+            id_borrar = mesa_borrar.cleaned_data['id_mesa_borrar']
+
+            mesa = Mesa.objects.get(id_mesa = id_borrar)
+            mesa.delete() 
+            messages.success(request,'Eliminado correctamente')
 
     queryset = request.GET.get("inputBuscarMesa")
     if queryset:
@@ -230,6 +247,9 @@ def agregar_mesa(request):
             id_mesav2 = int(str(ult_id)) + 1
             agg_mesa = Mesa(id_mesav2, numMesaAgg, dispMesaAgg)
             agg_mesa.save()
+
+            messages.success(request,'Mesa agregada correctamente')
+            return redirect(to='gestionMesas')
     else:
             aggMesaForm = MesaForm()
     return render (request, 'html/admin/agregar_mesa.html')
@@ -258,6 +278,7 @@ def gestion_bodega(request):
 
             producto = Producto.objects.get(id_producto = id_borrar)
             producto.delete() 
+            messages.success(request,'Producto eliminado correctamente')
             
     return render (request, 'html/bodega/gestion_bodega.html', {'productos':productos})
     
@@ -312,6 +333,10 @@ def registro_bodega(request):
                 tipo_alimento =  tipo_alimento
                 )
             producto.save()
+
+            messages.success(request,'Producto agregado correctamente')
+            return redirect(to='gestion_bodega')
+
     return render (request, 'html/bodega/registro_bodega.html', {'bodegas':bodegas})
 
 @login_required(login_url = 'loginAsociado')
@@ -502,11 +527,6 @@ def cobro_cliente_manual(request):
     return render (request, 'html/Cajero/cobro_cliente_manual.html')
 
 
-
-def eliminar_usuario(request, id):
-    usuario = get_object_or_404(AuthUser, id = id)
-    usuario.delete()
-    return redirect(to = "gestion_usuario")
 
 #ENVIAR CORREO (este es de prueba)
 

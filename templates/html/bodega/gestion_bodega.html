@@ -89,6 +89,14 @@
 
     <section class="container">
         <div class="row mx-auto border justify-content-center">
+            {% if messages %}
+                {% for messages in messages %}
+                    <div class="bg-success text-center align-middle">
+                        <p class="my-auto" style="color: white;">{{ messages }}</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
             <form class="row g-3">
                 <div class="col-auto">
                     <label for="staticEmail2" class="visually-hidden">Buscar producto</label>
