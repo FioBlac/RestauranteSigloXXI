@@ -149,7 +149,7 @@ def gestion_usuario(request):
             id_borrar = usuario_borrar.cleaned_data['id_usuario_borrar']
 
             User = AuthUser.objects.get(id = id_borrar)
-            User.delete() 
+            User.delete()
 
     queryset = request.GET.get("inputBuscarUsuario")
     if queryset:
@@ -177,6 +177,8 @@ def gestionMesas(request):
             mesa = Mesa.objects.get(id_mesa = id_borrar)
             mesa.delete() 
             messages.success(request,'Eliminado correctamente')
+        else:
+            print('no funca arriba pq ta malo')
 
     queryset = request.GET.get("inputBuscarMesa")
     if queryset:
