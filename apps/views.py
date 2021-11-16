@@ -401,6 +401,16 @@ def index_cocina(request):
 def gestion_receta(request):
     return render (request, 'html/Cocinero/gestion_receta.html')
 
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cocinero'])
+def ventana_pedidos(request):
+    return render (request, 'html/Cocinero/ventana_pedidos.html')
+
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cocinero'])
+def ventana_orden_preparacion(request):
+    return render (request, 'html/Cocinero/ventana_orden_preparacion.html')
+
 
 #HTML CONTADOR
 @login_required(login_url = 'loginAsociado')
