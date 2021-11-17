@@ -13,7 +13,7 @@ from django.contrib.auth.models import Group, User
 from django.http import HttpResponse
 from django.db import connection
 from django.template.loader import get_template
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives, message
 from django.conf import settings
 
 # Create your views here.
@@ -81,6 +81,7 @@ def registro(request):
             return redirect(to='index')
         else:
             formulario = CustomUserCreationFrom()
+            #messages.info(request, f'Usuario o contraseña incorrecto')
         data["form"]= formulario
 
     return render (request, 'registration/registro.html', data)
@@ -128,6 +129,8 @@ def agregar_usuario(request):
 
             messages.success(request,'Agregado correctamente')
             return redirect(to='gestion_usuario')
+        #else:
+            #messages.info(request, f'Verifique que todos los campos sean correctos')
         data["form"]= formulario
 
     return render (request, 'html/admin/agregar_usuario.html', data)

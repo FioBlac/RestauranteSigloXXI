@@ -45,14 +45,31 @@ class datosAgregarMesaForm(forms.Form):
     dispMesaAgg = forms.CharField()
 
 class CustomUserCreationFrom (UserCreationForm):
-    
+
     class Meta:
         model = User
         fields = ["username","first_name","last_name","email","password1","password2"]
+
+    """def clean_password2(self, *args, **kwargs):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+
+        if password1 != password2:
+            raise forms.ValidationError('Las contraseñas no coinciden')
+        return password2"""
 
 class CustomUserCreationFrom2 (UserCreationForm):
     
     class Meta:
         model = User
         fields = ["username","first_name","last_name","email","password1","password2"]
+
+
+    """def clean_password2(self, *args, **kwargs):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+
+        if password1 != password2:
+            raise forms.ValidationError('Las contraseñas no coinciden')
+        return password2"""
 
