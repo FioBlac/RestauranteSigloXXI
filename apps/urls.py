@@ -49,7 +49,8 @@ urlpatterns =[
     path('gestion_receta', views.gestion_receta, name='gestion_receta'),
     path('ventana_pedidos', views.ventana_pedidos, name='ventana_pedidos'),
     path('ventana_orden_preparacion', views.ventana_orden_preparacion, name='ventana_orden_preparacion'),
-    
+    path('pedido_cliente_sin_entrega', views.pedido_cliente_sin_entrega, name='pedido_cliente_sin_entrega'),
+
     #HTML CAJERO
     path('cajero_cuenta_clientes', views.cajero_cuenta_clientes, name='cajero_cuenta_clientes'),
     path('cobro_cliente_manual', views.cobro_cliente_manual, name='cobro_cliente_manual'),

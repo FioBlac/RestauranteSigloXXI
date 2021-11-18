@@ -502,6 +502,11 @@ def ventana_pedidos(request):
 def ventana_orden_preparacion(request):
     return render (request, 'html/Cocinero/ventana_orden_preparacion.html')
 
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cocinero'])
+def pedido_cliente_sin_entrega(request):
+    return render (request, 'html/Cocinero/pedido_cliente_sin_entrega.html')
+
 
 #HTML CONTADOR
 @login_required(login_url = 'loginAsociado')
