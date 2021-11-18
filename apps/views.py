@@ -533,8 +533,8 @@ def cajero_cuenta_clientes(request):
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cajero'])
-def cobro_cliente_manual(request):
-    return render (request, 'html/Cajero/cobro_cliente_manual.html')
+def Cobro_Cliente_Manual(request):
+    return render (request, 'html/Cajero/Cobro_Cliente_Manual.html')
 
 
 

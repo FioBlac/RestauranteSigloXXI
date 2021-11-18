@@ -53,7 +53,7 @@ urlpatterns =[
 
     #HTML CAJERO
     path('cajero_cuenta_clientes', views.cajero_cuenta_clientes, name='cajero_cuenta_clientes'),
-    path('cobro_cliente_manual', views.cobro_cliente_manual, name='cobro_cliente_manual'),
+    path('Cobro_Cliente_Manual', views.Cobro_Cliente_Manual, name='Cobro_Cliente_Manual'),
     path('index_cajero', views.index_cajero, name='index_cajero'),
 
     #HTML CONTADOR
