@@ -52,10 +52,6 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="{% url 'gestion_bodega' %}">Inventario</a>
-                    </li>
-
-                    <li class="nav-item">
                         <a class="nav-link " href="{% url 'gestion_usuario' %}">Usuarios</a>
                     </li>
 
@@ -123,6 +119,7 @@
                             <!--Columna-->
                             <thead>
                                 <tr>
+                                    <th scope="col">Id</th>
                                     <th scope="col">Usuario</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Apellido</th>
@@ -160,31 +157,31 @@
         <!--Modal eliminar-->
         <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Eliminar usuario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Eliminar usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-                <div class="modal-body">
-                    ¿Desea eliminar este usuario?
-                </div>
+                    <div class="modal-body">
+                        ¿Desea eliminar este usuario?
+                    </div>
 
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" data-bs-dismiss="modal">
-                        No eliminar
-                    </button>
-
-                    <form method="POST">
-                        {% csrf_token %}
-                        <input type="text" name="id_usuario_borrar" id="id_usuario_borrar" style=display:none;>
-                        <button class="btn btn-danger" type="submit" data-bs-dismiss="modal">
-                            Si, estoy seguro/a
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">
+                            No eliminar
                         </button>
-                    </form>
-                    
+
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="text" name="id_usuario_borrar" id="id_usuario_borrar" style=display:none;>
+                            <button class="btn btn-danger" type="submit" data-bs-dismiss="modal">
+                                Si, estoy seguro/a
+                            </button>
+                        </form>
+                        
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
 
@@ -214,9 +211,6 @@
             console.log(eliminar)
             eliminar.value = id
         })
-
-
-
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
