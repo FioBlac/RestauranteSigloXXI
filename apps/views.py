@@ -87,11 +87,11 @@ def registro(request):
                 messages.info(request, f'El correo ya existe')
             else:
                 formulario.save()
+                email = formulario.cleaned_data["email"]
 
-                #email = CustomUserCreationFrom.cleaned_data['email']
                 #Enviar correo de registro
-                #sendEmailRegistro(email)
-                #print(email)
+                sendEmailRegistro(email)
+                print(email)
 
 
                 #agregar usuario a un grupo automaticamente
