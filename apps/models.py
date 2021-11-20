@@ -59,7 +59,7 @@ class AuthUser(models.Model):
 
 class AuthUserGroups(models.Model):
     id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    user = models.ForeignKey(AuthUser, on_delete=models.CASCADE)
     group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
 
     class Meta:
@@ -70,7 +70,7 @@ class AuthUserGroups(models.Model):
 
 class AuthUserUserPermissions(models.Model):
     id = models.BigAutoField(primary_key=True)
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    user = models.ForeignKey(AuthUser, on_delete=models.CASCADE)
     permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
 
     class Meta:
@@ -96,7 +96,7 @@ class Boleta(models.Model):
     subtotal = models.BigIntegerField()
     modo_pago_id_modo_pago = models.ForeignKey('ModoPago', models.DO_NOTHING, db_column='modo_pago_id_modo_pago', blank=True, null=True,related_name='+')
     restaurant_rut_rest = models.ForeignKey('Restaurant', models.DO_NOTHING, db_column='restaurant_rut_rest', blank=True, null=True,related_name='+')
-    auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING, blank=True, null=True,related_name='+')
+    auth_user = models.ForeignKey(AuthUser,  blank=True, null=True,related_name='+', on_delete=models.CASCADE)
 
     class Meta:
         managed = False
@@ -105,7 +105,7 @@ class Boleta(models.Model):
 
 class Caja(models.Model):
     id_caja = models.BigIntegerField(primary_key=True)
-    boleta_id_boleta = models.ForeignKey(Boleta, models.DO_NOTHING, db_column='boleta_id_boleta', blank=True, null=True,related_name='+')
+    boleta_id_boleta = models.ForeignKey(Boleta, db_column='boleta_id_boleta', blank=True, null=True,related_name='+', on_delete=models.CASCADE)
     pedido_id_pedido = models.ForeignKey('Pedido', models.DO_NOTHING, db_column='pedido_id_pedido',related_name='+')
 
     class Meta:
@@ -122,7 +122,7 @@ class DjangoAdminLog(models.Model):
     action_flag = models.IntegerField()
     change_message = models.TextField(blank=True, null=True)
     content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True,related_name='+')
-    user = models.ForeignKey(AuthUser, models.DO_NOTHING,related_name='+')
+    user = models.ForeignKey(AuthUser, related_name='+', on_delete=models.CASCADE)
 
     class Meta:
         managed = False
@@ -166,7 +166,7 @@ class Entrega(models.Model):
     hora_salida = models.DateTimeField()
     estado = models.CharField(max_length=50)
     pedido_id_pedido = models.ForeignKey('Pedido', models.DO_NOTHING, db_column='pedido_id_pedido', blank=True, null=True,related_name='+')
-    auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING, blank=True, null=True,related_name='+')
+    auth_user = models.ForeignKey(AuthUser,  blank=True, null=True,related_name='+', on_delete=models.CASCADE)
 
     class Meta:
         managed = False
@@ -273,7 +273,7 @@ class Reserva(models.Model):
     comentario = models.CharField(max_length=200, blank=True, null=True)
     fecha_vence = models.DateTimeField()
     id_mesa = models.ForeignKey(Mesa, models.DO_NOTHING, db_column='MESA_id_mesa', blank=True, null=True,related_name='+')
-    id_usuario = models.ForeignKey(AuthUser, models.DO_NOTHING, db_column='AUTH_USER_ID', blank=True, null=True,related_name='+')
+    id_usuario = models.ForeignKey(AuthUser, db_column='AUTH_USER_ID', blank=True, null=True,related_name='+', on_delete=models.CASCADE)
 
     class Meta:
         managed = False
@@ -285,7 +285,7 @@ class Restaurant(models.Model):
     nombre_rest = models.CharField(max_length=100)
     direccion_rest = models.CharField(max_length=40)
     telefono = models.CharField(max_length=15)
-    boleta_id_boleta = models.ForeignKey(Boleta, models.DO_NOTHING, db_column='boleta_id_boleta', blank=True, null=True,related_name='+')
+    boleta_id_boleta = models.ForeignKey(Boleta,  db_column='boleta_id_boleta', blank=True, null=True,related_name='+', on_delete=models.CASCADE)
 
     class Meta:
         managed = False
@@ -299,7 +299,7 @@ class SolicPed(models.Model):
     fecha_entrega = models.DateField()
     hora_entrega = models.DateTimeField()
     estado_solicitud = models.CharField(max_length=100)
-    auth_user = models.ForeignKey(AuthUser, models.DO_NOTHING, blank=True, null=True,related_name='+')
+    auth_user = models.ForeignKey(AuthUser, blank=True, null=True,related_name='+', on_delete=models.CASCADE)
 
     class Meta:
         managed = False
