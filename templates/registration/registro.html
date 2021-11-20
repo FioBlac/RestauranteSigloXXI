@@ -139,7 +139,7 @@
                     <h1 class="text-center" id="tituloInicio">Registrate</h1>
 
                     <!--Formulario Registro-->
-                    <form class="needs-validation" novalidate method="post">
+                    <form class="needs-validation" novalidate action="" method="post">
                         {%csrf_token%}
 
                         <div class="form-floating mb-2">
@@ -180,7 +180,7 @@
 
                         <div class="form-floating mb-2">
                             {{form.password1}}
-                            <label for="password" class="form-label">Contraseña</label>
+                            <label for="password" class="form-label">{{form.password1.label}}</label>
 
                             <div class="invalid-feedback">
                                 Complete este campo
@@ -196,23 +196,28 @@
                             </div>
                         </div>
                         
-                        <div>
-                            {{form.errors}}
-                        </div>
-                        
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %} 
+                                    <div class="alert alert-danger text-center">
+                                        {{ error|escape }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if messages %}
+                            {% for messages in messages %}
+                                <div class="alert alert-danger text-center">
+                                    {{ messages }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
 
                         <div class="d-grid">
                             <input type="submit" value="Regístrate" class="btn btn-primary" >
                         </div>
-                        
-                        {% if messages %}
-                            {% for messages in messages %}
-                                <div class="mb-4 mt-3">
-                                    <p style="color: red;">{{ messages }}</p>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                        
+                    
                         <div class="mb-4 mt-3 form-check">
                             <input type="checkbox" name="connected" class="form-check-input" id="">
                             <label for="connected" class="form-check-label">Recordarme</label>
@@ -330,7 +335,7 @@
         form_fields[2].placeholder='Nombre';
         form_fields[3].placeholder='Apellido';
         form_fields[4].placeholder='Correo electrónico';
-        form_fields[5].placeholder='Contraseña';
+        form_fields[5].placeholder='Contraseñaaaaaa';
         form_fields[6].placeholder='Repita su contraseña';
 
 

@@ -148,19 +148,17 @@
                         <div class="invalid-feedback">
                             Complete este campo
                         </div>
-                    </div>       
+                    </div>
                 </div>
     
                 <div class="col-lg-6 col-md-6 col-sm-12 my-3">
                     <div class="form-floating mb-3">
                         {{form.password2}}
-                        <label for="password2" class="form-label">Repita contraseña</label>
-                        
+                        <label for="password2" class="form-label">Repita su contraseña</label>
+
                         <div class="invalid-feedback">
                             Complete este campo
                         </div>
-
-                        {{form.errors}}
                     </div>
                 </div>
             </div>
@@ -179,7 +177,29 @@
                     </div>
                 </div>
             </div>
-    
+
+            <div class="row w-75 mx-auto mt-3">
+                <div class="col-12">
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %} 
+                                <div class="alert alert-danger text-center">
+                                    {{ error|escape }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+
+                    {% if messages %}
+                        {% for messages in messages %}
+                            <div class="alert alert-danger text-center">
+                                {{ messages }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            
             <div class="row w-75 mx-auto">
                 <div class="text-center col-lg pt-3 ">
                     <a class="btn btn-outline-danger btn-lg w-50" href="{% url 'gestion_usuario' %}">

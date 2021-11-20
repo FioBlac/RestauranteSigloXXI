@@ -40,6 +40,15 @@ def index(request):
 
 @usuarioNoLogeado
 def login_usuario(request):
+    storage = messages.get_messages(request)
+    for _ in storage:
+        # This is important
+        # Without this loop _loaded_messages is empty
+        pass
+
+    for _ in list(storage._loaded_messages):
+        del storage._loaded_messages[0]
+    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -56,38 +65,59 @@ def login_usuario(request):
     return render (request, 'registration/login.html')
 
 def registro(request):
+
+    storage = messages.get_messages(request)
+    for _ in storage:
+        # This is important
+        # Without this loop _loaded_messages is empty
+        pass
+
+    for _ in list(storage._loaded_messages):
+        del storage._loaded_messages[0]
+
     data = {
         'form' : CustomUserCreationFrom()
     }
+
     if request.method == 'POST':
         formulario = CustomUserCreationFrom(data=request.POST)
         if  formulario.is_valid():
-            formulario.save()
+            
+            if AuthUser.objects.filter(email = formulario.cleaned_data["email"]).exists():
+                messages.info(request, f'El correo ya existe')
+            else:
+                formulario.save()
 
-            #email = CustomUserCreationFrom.cleaned_data['email']
-            #Enviar correo de registro
-            #sendEmailRegistro(email)
-            #print(email)
+                #email = CustomUserCreationFrom.cleaned_data['email']
+                #Enviar correo de registro
+                #sendEmailRegistro(email)
+                #print(email)
 
 
-            #agregar usuario a un grupo automaticamente
-            usuario = formulario.save()
-            group = Group.objects.get(name = 'Cliente')
-            usuario.groups.add(group)
+                #agregar usuario a un grupo automaticamente
+                usuario = formulario.save()
+                group = Group.objects.get(name = 'Cliente')
+                usuario.groups.add(group)
 
-            user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
-            login(request, user)
+                user = authenticate(username=formulario.cleaned_data["username"], password=formulario.cleaned_data["password1"])
+                login(request, user)
 
-            return redirect(to='index')
-        else:
-            formulario = CustomUserCreationFrom()
-            #messages.info(request, f'Usuario o contraseña incorrecto')
+                return redirect(to='index')
         data["form"]= formulario
 
     return render (request, 'registration/registro.html', data)
 
 #@admin_view
 def loginAsociado(request):
+    storage = messages.get_messages(request)
+    for _ in storage:
+        # This is important
+        # Without this loop _loaded_messages is empty
+        pass
+
+    for _ in list(storage._loaded_messages):
+        del storage._loaded_messages[0]
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -111,26 +141,37 @@ def admin_reportes(request):
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def agregar_usuario(request):
+    storage = messages.get_messages(request)
+    for _ in storage:
+        # This is important
+        # Without this loop _loaded_messages is empty
+        pass
+
+    for _ in list(storage._loaded_messages):
+        del storage._loaded_messages[0]
+
     data = {
-        'form' : CustomUserCreationFrom2(),
+        'form' : CustomUserCreationFrom(),
         'grupo': listar_grupos()
     }
 
     if request.method == 'POST':
         formulario = CustomUserCreationFrom2(data=request.POST)
         if  formulario.is_valid():
-            formulario.save()
-            grupo = request.POST.get('grupo')
-
-            asiGrupo = Group.objects.get(id = grupo)
-            usuario = formulario.save()
-            usuario.groups.add(asiGrupo)
             
+            if AuthUser.objects.filter(email = formulario.cleaned_data["email"]).exists():
+                messages.info(request, f'El correo ya existe')
+            else:
+                formulario.save()
+                grupo = request.POST.get('grupo')
 
-            messages.success(request,'Agregado correctamente')
-            return redirect(to='gestion_usuario')
-        #else:
-            #messages.info(request, f'Verifique que todos los campos sean correctos')
+                asiGrupo = Group.objects.get(id = grupo)
+                usuario = formulario.save()
+                usuario.groups.add(asiGrupo)
+                
+
+                messages.success(request,'Agregado correctamente')
+                return redirect(to='gestion_usuario')
         data["form"]= formulario
 
     return render (request, 'html/admin/agregar_usuario.html', data)
@@ -143,6 +184,15 @@ def gestion_solicitudes(request):
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def gestion_usuario(request):
+    storage = messages.get_messages(request)
+    for _ in storage:
+        # This is important
+        # Without this loop _loaded_messages is empty
+        pass
+
+    for _ in list(storage._loaded_messages):
+        del storage._loaded_messages[0]
+
     usuarios = AuthUser.objects.all()
     
     if request.method == 'POST':
@@ -169,6 +219,15 @@ def gestion_usuario(request):
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def gestionMesas(request):
+    storage = messages.get_messages(request)
+    for _ in storage:
+        # This is important
+        # Without this loop _loaded_messages is empty
+        pass
+
+    for _ in list(storage._loaded_messages):
+        del storage._loaded_messages[0]
+
     mesas = Mesa.objects.all()
     
     if request.method == 'POST':
@@ -235,6 +294,15 @@ def ver_reservas(request):
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def agregar_mesa(request):
+    storage = messages.get_messages(request)
+    for _ in storage:
+        # This is important
+        # Without this loop _loaded_messages is empty
+        pass
+
+    for _ in list(storage._loaded_messages):
+        del storage._loaded_messages[0]
+
     if request.method == 'POST':
 
         datosAgregarMesa = datosAgregarMesaForm(request.POST)
@@ -274,6 +342,15 @@ def index_bodeguero(request):
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Bodega'])
 def gestion_bodega(request):   
+    storage = messages.get_messages(request)
+    for _ in storage:
+        # This is important
+        # Without this loop _loaded_messages is empty
+        pass
+
+    for _ in list(storage._loaded_messages):
+        del storage._loaded_messages[0]
+
     productos = Producto.objects.all()
     if request.method == 'POST':
         producto_borrar = EliminarProductoForm(request.POST)
@@ -291,6 +368,15 @@ def gestion_bodega(request):
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Bodega'])
 def registro_bodega(request):
+    storage = messages.get_messages(request)
+    for _ in storage:
+        # This is important
+        # Without this loop _loaded_messages is empty
+        pass
+
+    for _ in list(storage._loaded_messages):
+        del storage._loaded_messages[0]
+
     bodegas = Bodega.objects.all()
 
     if request.method == 'POST':
