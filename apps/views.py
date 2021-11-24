@@ -433,7 +433,9 @@ def registro_bodega(request):
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Bodega'])
 def solicitud_bodega(request):
-    return render (request, 'html/bodega/solicitud_bodega.html')
+    productos = Producto.objects.all()
+
+    return render (request, 'html/bodega/solicitud_bodega.html', {'productos':productos})
 
 #HTML CLIENTE
 @login_required(login_url = 'login')
