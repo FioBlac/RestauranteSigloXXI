@@ -639,6 +639,11 @@ def cajero_cuenta_clientes(request):
 def Cobro_Cliente_Manual(request):
     return render (request, 'html/Cajero/Cobro_Cliente_Manual.html')
 
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cajero'])
+def pedidos_cajero(request):
+    return render (request, 'html/cajero/pedidos_cajero.html')
+
 
 
 #ENVIAR CORREO (este es de prueba)
