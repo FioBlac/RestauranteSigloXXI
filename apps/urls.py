@@ -43,6 +43,7 @@ urlpatterns =[
     path('main_garzon', views.main_garzon, name='main_garzon'),
     path('retiro_platos', views.retiro_platos, name='retiro_platos'),
     path('ver_reservaciones', views.ver_reservaciones, name='ver_reservaciones'),
+    path('detalle', views.detalle, name='detalle'),
 
     #HTML COCINERO
     path('index_cocina', views.index_cocina, name='index_cocina'),

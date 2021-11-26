@@ -566,7 +566,22 @@ def retiro_platos(request):
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])
 def ver_reservaciones(request):
-    return render (request, 'html/garzon/ver_reservaciones.html')
+    reservas = Reserva.objects.all()
+
+    queryset = request.GET.get("inputBuscarReserva")
+    if queryset:
+        reservas = Reserva.objects.filter(
+            Q(id_reserva__icontains = queryset) |
+            Q(comentario__icontains = queryset)
+        ).distinct()
+    else:
+        reservas = Reserva.objects.all()
+    return render (request, 'html/garzon/ver_reservaciones.html', {'reservas':reservas})
+
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Garzon'])
+def detalle(request):
+    return render (request, 'html/garzon/detalle.html')
 
 
 #HTML COCINERO
