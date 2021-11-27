@@ -47,6 +47,9 @@ def admin_view(view_func):
         if group == 'Garzon':
             return redirect('main_garzon')
 
+        if group == 'Contador':
+            return redirect('index_contador')
+
         if group == 'Cliente':
             return redirect('index')
     return decorator
