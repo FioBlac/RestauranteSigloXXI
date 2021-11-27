@@ -473,7 +473,6 @@ def cliente_hacer_reserva(request):
             hora_reserva = datos_reserva.cleaned_data['hora']
             comentario = datos_reserva.cleaned_data['comentario']
             
-            
             print(comentario)
 
             #Asignando variables para guardar
@@ -509,7 +508,7 @@ def cliente_hacer_reserva(request):
                             except:
                                 disponibilidad = False
                                 print('No hay mesas disponibles') 
-                            break
+                                break
                     else:
                         disponibilidad = True
             
@@ -528,6 +527,7 @@ def cliente_hacer_reserva(request):
                 )
 
             if disponibilidad == True:
+                print("Se guardó")
                 reserva.save()         
     else:
         disponibilidad = False
