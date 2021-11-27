@@ -37,7 +37,7 @@
     <!--NAVBAR-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-2" id="menu">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'index_admin' %}">
+            <a class="navbar-brand" href="{% url 'main_garzon' %}">
                 <span class="" id="tituloNavbar">
                     Restaurante Siglo XXI
                 </span> 
@@ -62,7 +62,7 @@
 
                 </ul>
 
-                <a class="btn btn-outline-secondary border-0" href="{% url 'cliente_index' %}">
+                <a class="btn btn-outline-secondary border-0" href="{% url 'main_garzon' %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                         <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -94,10 +94,13 @@
             <form class="row g-3" method="GET">
                 <div class="input-group col-auto">
                     <input type="text" class="form-control" placeholder="Buscar reserva" aria-label="Recipient's username" aria-describedby="button-addon2" name="inputBuscarReserva">
+                    
                     <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
                         <i class="bi bi-x-lg"></i>
                     </button>
+
                     &nbsp;
+                    
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </div>
             </form>
@@ -115,6 +118,8 @@
                                     <th scope="col">Fecha reserva</th>
                                     <th scope="col">Comentario</th>
                                     <th scope="col">Fecha Vencim.</th>
+                                    <th scope="col">N° de Mesa</th>
+                                    <th scope="col">Ver detalles</th>
                                 </tr>
                                 
                             </thead>
@@ -128,6 +133,12 @@
                                         <td class="text-center" scope="row">{{ reserva.fecha_reserva }}</td>
                                         <td class="text-center" scope="row">{{ reserva.comentario }}</td>
                                         <td class="text-center" scope="row">{{ reserva.fecha_vence }}</td>
+                                        <td class="text-center" scope="row">{{ reserva.numero_mesa }}</td>
+                                        <td class="text-center" scope="row">
+                                            <a class="btn btn-outline-warning border-0 fs-4 text-center" href="{% url 'detalle' %}" id="">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -139,38 +150,13 @@
         </div>
         <div class="row w-75 mx-auto justify-content-center">
             <div class="text-center col-lg pt-3 ">
-                <a class="btn btn-outline-secondary w-25" href="{% url 'index_admin' %}">
+                <a class="btn btn-outline-secondary w-25" href="{% url 'main_garzon' %}">
                     Volver
                 </a>
             </div>
         </div>
     </section>
 
-    <!--Modal eliminar-->
-    <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Eliminar reserva</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
-                ¿Desea eliminar esta reserva?
-            </div>
-
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">
-                    Cancelar
-                </button>
-
-                <button class="btn btn-danger" type="button" data-bs-target="#confirmarCancelar" data-bs-toggle="modal" data-bs-dismiss="modal">
-                    Eliminar
-                </button>
-            </div>
-        </div>
-        </div>
-    </div>
 
     <!-- JavaScript -->
 

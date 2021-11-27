@@ -176,12 +176,16 @@
     
             <div class="row w-75 mx-auto">
                 <div class="col-lg-6 col-md-6 col-sm-12 my-3">
-                    <select class="form-select" name="grupo" required>
-                        <option value="">Tipo de usuario</option>
-                        {% for g in grupo %}
-                            <option value="{{ g.0 }}"> {{ g.1 }} </option>
-                        {% endfor %}
-                    </select>
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelect" name="grupo" required>
+                            <option selected>Tipo de usuario</option>
+                            {% for g in grupo %}
+                                <option value="{{ g.0 }}"> {{ g.1 }} </option>
+                            {% endfor %}
+                        </select>
+    
+                        <label for="floatingSelect">Seleccione el tipo de usuario</label>
+                    </div>
                     
                     <div class="invalid-feedback">
                         Complete este campo
