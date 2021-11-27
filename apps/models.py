@@ -162,8 +162,8 @@ class DjangoSession(models.Model):
 
 class Entrega(models.Model):
     id_entrega = models.BigIntegerField(primary_key=True)
-    hora_entrada = models.DateTimeField()
-    hora_salida = models.DateTimeField()
+    hora_entrada = models.CharField(max_length=6)
+    hora_salida = models.CharField(max_length=6)
     estado = models.CharField(max_length=50)
     pedido_id_pedido = models.ForeignKey('Pedido', models.DO_NOTHING, db_column='pedido_id_pedido', blank=True, null=True,related_name='+')
     auth_user = models.ForeignKey(AuthUser,  blank=True, null=True,related_name='+', on_delete=models.CASCADE)
