@@ -48,6 +48,9 @@ class datosAgregarMesaForm(forms.Form):
     numMesaAgg = forms.CharField()
     dispMesaAgg = forms.CharField()
 
+class cambiarEstadoPedidoForm(forms.Form):
+    cambiarEstado = forms.CharField()
+
 
 
 class CustomUserCreationFrom(forms.ModelForm):

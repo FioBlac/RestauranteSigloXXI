@@ -1,10 +1,10 @@
 import django
 from django import template
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, Reserva, Mesa, Plato, AuthUser, Bodega
+from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
 import base64
-from .forms import AgregarProductoForm, EliminarProductoForm, EliminarMesaForm, ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2, EliminarUsuarioForm
+from .forms import AgregarProductoForm, cambiarEstadoPedidoForm, EliminarProductoForm, EliminarMesaForm, ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2, EliminarUsuarioForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db.models import Q, query, query_utils
@@ -598,7 +598,18 @@ def gestion_receta(request):
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cocinero'])
 def ventana_pedidos(request):
-    return render (request, 'html/Cocinero/ventana_pedidos.html')
+    platos = Plato.objects.all().order_by('tiempo_prepar')
+    pedidos = Pedido.objects.all().order_by('id_pedido') #quizás puedo poner los 2 order by aquí
+
+    if request.method == 'POST':
+        pedido = cambiarEstadoPedidoForm(request.POST)
+
+        if pedido.is_valid():
+            cambiarEstado = pedido.cleaned_data['cambiarEstado']
+            modificar_ped = pedidos.get(id_pedido= cambiarEstado)
+            modificar_ped.estado = 'Por Entregar'
+            modificar_ped.save() 
+    return render (request, 'html/Cocinero/ventana_pedidos.html',{'pedidos':pedidos , 'platos':platos })
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cocinero'])

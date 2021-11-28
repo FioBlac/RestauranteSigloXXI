@@ -197,10 +197,8 @@ class Pedido(models.Model):
     cantidad = models.BigIntegerField()
     precio_ampliado = models.BigIntegerField()
     total = models.BigIntegerField()
-    mesa_id_mesa = models.ForeignKey(Mesa, models.DO_NOTHING, db_column='mesa_id_mesa', blank=True, null=True,related_name='+')
     reserva_id_reserva = models.ForeignKey('Reserva', models.DO_NOTHING, db_column='reserva_id_reserva', blank=True, null=True,related_name='+')
     plato_id_plato = models.ForeignKey('Plato', models.DO_NOTHING, db_column='plato_id_plato', blank=True, null=True,related_name='+')
-    entrega_id_entrega = models.ForeignKey(Entrega, models.DO_NOTHING, db_column='entrega_id_entrega', blank=True, null=True,related_name='+')
     estado = models.CharField(max_length=30)
     detalle = models.CharField(max_length=200)
 
