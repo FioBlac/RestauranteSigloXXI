@@ -581,7 +581,7 @@ def retiro_platos(request):
             modificar_ped = pedidos.get(id_pedido = cambiarEstado)
             modificar_ped.estado = 'Entregado'
             modificar_ped.save()
-    return render (request, 'html/garzon/retiro_paltos.html', {'pedidos':pedidos , 'platos':platos, 'mesa':mesa, 'reserva':reserva })
+    return render (request, 'html/garzon/retiro_platos.html', {'pedidos':pedidos , 'platos':platos, 'mesa':mesa, 'reserva':reserva })
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])
