@@ -1,5 +1,6 @@
 import django
 from django import template
+from django.db.models.fields import NullBooleanField
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
@@ -460,13 +461,12 @@ def cliente_hacer_pedido(request):
 @login_required(login_url = 'login')
 @usuarioPermitido(allowed_roles = ['Cliente'])
 def cliente_hacer_reserva(request):
-    disponibilidad = True
+    respuesta = True
     if request.method == 'POST':
-
         datos_reserva = DatosReservaForm(request.POST)
         
-
         if datos_reserva.is_valid():
+            respuesta = True
             #Limpiar los datos del POST
             cantidad_personas = datos_reserva.cleaned_data['cantidad_personas']
             fecha_reserva = datos_reserva.cleaned_data['fecha'].strftime("%Y-%m-%d")
@@ -488,7 +488,6 @@ def cliente_hacer_reserva(request):
             #Asignar mesa que no esté ocupada esa hora.
             todas_reservas = Reserva.objects.all() #Traer todas las reservas
             mesas = Mesa.objects.all() #Traer todas las mesas
-            disponibilidad = True
             fecha_busqueda = fecha[:11]  + str(int(fecha[11:13])+3) + fecha[13:] #se le suman 3 horas para solucionar error temporal.
             num_mesa = Mesa.objects.first()
             
@@ -503,14 +502,15 @@ def cliente_hacer_reserva(request):
                             print(suma_mesa) 
                             try:
                                 num_mesa = Mesa.objects.get(id_mesa = suma_mesa)
-                                disponibilidad = True
+                                respuesta = True
                                 print('Asignó la mesa')
+                                break
                             except:
-                                disponibilidad = False
+                                respuesta = False
                                 print('No hay mesas disponibles') 
                                 break
                     else:
-                        disponibilidad = True
+                        respuesta = True
             
             #Obtener el id del usuario que hace la reserva
             if request.user.is_authenticated:
@@ -526,12 +526,16 @@ def cliente_hacer_reserva(request):
                 id_usuario = id_usuario
                 )
 
-            if disponibilidad == True:
+            if respuesta == True:
                 print("Se guardó")
-                reserva.save()         
+                reserva.save()    
+                respuesta = True 
+                print(respuesta) 
+
     else:
-        disponibilidad = False
         reserva_form = ReservaForm()
+
+    disponibilidad = respuesta
     return render (request, 'html/cliente/cliente_hacer_reserva.html', {'disponibilidad':disponibilidad})
 
 @login_required(login_url = 'login')
@@ -607,8 +611,13 @@ def ventana_pedidos(request):
         if pedido.is_valid():
             cambiarEstado = pedido.cleaned_data['cambiarEstado']
             modificar_ped = pedidos.get(id_pedido= cambiarEstado)
-            modificar_ped.estado = 'Por Entregar'
-            modificar_ped.save() 
+            if cambiarEstado == 'Cocinando':
+                modificar_ped.estado = 'Por Entregar'
+                modificar_ped.save()
+            else:
+                modificar_ped.estado = 'Cocinando'
+                modificar_ped.save()
+                 
     return render (request, 'html/Cocinero/ventana_pedidos.html',{'pedidos':pedidos , 'platos':platos })
 
 @login_required(login_url = 'loginAsociado')

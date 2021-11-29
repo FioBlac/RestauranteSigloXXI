@@ -128,7 +128,7 @@
                                     <th scope="col">Cantidad</th>
                                     <th scope="col">Tiempo Demora</th>
                                     <th scope="col">Estado</th>
-                                    <th scope="col">¿Está listo?</th>
+                                    <th scope="col">¿Listo para cocinar o enviar?</th>
                                 </tr>
                                 
                             </thead>
@@ -137,7 +137,7 @@
                             <tbody>
                                 {% for pl in platos %}
                                     {% for p in pedidos %}
-                                        {% if p.plato_id_plato.id_plato == pl.id_plato and p.estado == "Cocinando" %}                                                                          
+                                        {% if p.plato_id_plato.id_plato == pl.id_plato and p.estado == "Cocinando" or p.plato_id_plato.id_plato == pl.id_plato and p.estado == 'En Espera' %}                                                                          
                                             <form method="POST">
                                                 {% csrf_token %}
                                                 <tr>
@@ -149,10 +149,15 @@
                                                     <td class="text-center" scope="row">{{ pl.tiempo_prepar }} minutos</td>
                                                     <td class="text-center" scope="row">{{ p.estado }}</td>
                                                     <td class="text-center" scope="row">
-                                                        
-                                                        <button id="{{ p.id_pedido }}" class="btn btn-outline-success border-0 text-center" type="submit" href="">
-                                                            <i id="{{ p.id_pedido }}" class="bi bi-check-lg">Si, enviar pedido</i>
-                                                        </button>
+                                                        {% if p.estado == 'Cocinando'%}
+                                                            <button id="{{ p.id_pedido }}" class="btn btn-outline-success border-0 text-center" type="submit" href="">
+                                                                <i id="{{ p.id_pedido }}" class="bi bi-check-lg">Si, enviar pedido</i>
+                                                            </button>
+                                                        {% elif p.estado == 'En Espera' %}
+                                                            <button id="{{ p.id_pedido }}" class="btn btn-outline-info border-0 text-center" type="submit" href="">
+                                                                <i id="{{ p.id_pedido }}" class="bi bi-check-lg">Si, cocinar</i>
+                                                            </button>
+                                                        {% endif %}
                                                     </td>
                                                 </tr>
                                             </form>
