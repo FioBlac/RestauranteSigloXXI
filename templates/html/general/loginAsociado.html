@@ -151,10 +151,20 @@
                             <input type="submit" value="Iniciar sesión" class="btn btn-primary">
                         </div>
 
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %} 
+                                    <div class="alert alert-danger text-center">
+                                        {{ error|escape }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+
                         {% if messages %}
                             {% for messages in messages %}
-                                <div class="mb-4 mt-3">
-                                    <p style="color: red;">{{ messages }}</p>
+                                <div class="alert alert-danger text-center mt-3">
+                                    {{ messages }}
                                 </div>
                             {% endfor %}
                         {% endif %}

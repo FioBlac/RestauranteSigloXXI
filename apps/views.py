@@ -579,8 +579,14 @@ def retiro_platos(request):
         if pedido.is_valid():
             cambiarEstado = pedido.cleaned_data['cambiarEstado']
             modificar_ped = pedidos.get(id_pedido = cambiarEstado)
-            modificar_ped.estado = 'Entregado'
-            modificar_ped.save()
+            
+            if cambiarEstado == 'Cocinando':
+                modificar_ped.estado = 'Entregado'
+                modificar_ped.save()
+            else:
+                modificar_ped.estado = 'Por Entregar'
+                modificar_ped.save()
+
     return render (request, 'html/garzon/retiro_platos.html', {'pedidos':pedidos , 'platos':platos, 'mesa':mesa, 'reserva':reserva })
 
 @login_required(login_url = 'loginAsociado')
@@ -628,7 +634,9 @@ def ventana_pedidos(request):
 
         if pedido.is_valid():
             cambiarEstado = pedido.cleaned_data['cambiarEstado']
-            modificar_ped = pedidos.get(id_pedido= cambiarEstado)
+
+            modificar_ped = pedidos.get(id_pedido = cambiarEstado)
+
             if cambiarEstado == 'Cocinando':
                 modificar_ped.estado = 'Por Entregar'
                 modificar_ped.save()
