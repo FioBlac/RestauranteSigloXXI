@@ -582,7 +582,7 @@ def retiro_platos(request):
 
             modificar_ped = pedidos.get(id_pedido = cambiarEstado)
 
-            if cambiarEstado == 'Por Entregar':
+            if modificar_ped.estado == 'Por Entregar':
                 modificar_ped.estado = 'Entregado'
                 modificar_ped.save()
                 print('Si funca')
@@ -635,13 +635,15 @@ def ventana_pedidos(request):
 
     if request.method == 'POST':
         pedido = cambiarEstadoPedidoForm(request.POST)
-
+        print('entró al post')
         if pedido.is_valid():
+            print('post valido')
             cambiarEstado = pedido.cleaned_data['cambiarEstado']
 
             modificar_ped = pedidos.get(id_pedido = cambiarEstado)
-
-            if cambiarEstado == 'Cocinando':
+            print(cambiarEstado)
+            if modificar_ped.estado == 'Cocinando':
+                print('funcionó todo')
                 modificar_ped.estado = 'Por Entregar'
                 modificar_ped.save()
             else:
