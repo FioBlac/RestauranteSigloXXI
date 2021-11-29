@@ -104,14 +104,14 @@
             {% csrf_token %}
             <div class="row w-75 mx-auto">
                 <div class="col-lg-6 col-md-6 col-sm-12 my-3">
-                    <input type="number" class="form-control" id="numMesaAgg" name="numMesaAgg" placeholder="Número de mesa" required>
-                </div>
-            
-                <div class="col-lg-6 col-md-6 col-sm-12 my-3">
-                    <select class="form-select" aria-label="Default select example" id="dispMesaAgg" name="dispMesaAgg" required>
-                        <option value="Disponible">Disponible</option>
-                        <option value="Ocupado">Ocupado</option>
-                    </select>
+                    <div class="form-floating">
+                        <select class="form-select" id="floatingSelect" id="dispMesaAgg" name="dispMesaAgg" required>
+                            <option value="Disponible">Disponible</option>
+                            <option value="Ocupado">Ocupado</option>
+                        </select>
+                        
+                        <label for="floatingSelect">Seleccione la disponibilidad</label>
+                    </div>
                 </div>
             </div>
     

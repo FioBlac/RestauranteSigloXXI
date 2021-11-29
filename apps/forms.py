@@ -45,7 +45,6 @@ class MesaForm(forms.ModelForm):
         fields = ['id_mesa', 'numero_mesa','disponibilidad']
 
 class datosAgregarMesaForm(forms.Form):
-    numMesaAgg = forms.CharField()
     dispMesaAgg = forms.CharField()
 
 class cambiarEstadoPedidoForm(forms.Form):

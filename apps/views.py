@@ -307,19 +307,22 @@ def agregar_mesa(request):
     if request.method == 'POST':
 
         datosAgregarMesa = datosAgregarMesaForm(request.POST)
-        print(datosAgregarMesa)
         if datosAgregarMesa.is_valid():
             #Limpiar los datos del POST
-            numMesaAgg = datosAgregarMesa.cleaned_data['numMesaAgg']
+            #numMesaAgg = datosAgregarMesa.cleaned_data['numMesaAgg']
             dispMesaAgg = datosAgregarMesa.cleaned_data['dispMesaAgg']
 
             #Asignando variables para guardar
             try:
-                ult_id = Mesa.objects.latest('id_mesa').id_mesa #Último ID registrado en reservas
+                ult_id = Mesa.objects.latest('id_mesa').id_mesa #Último ID registrado en las mesas
+                ult_num = Mesa.objects.latest('numero_mesa').numero_mesa #Último numero de mesa registrado en mesa
             except:
                 ult_id= 0
+                ult_num= 0
+
             id_mesav2 = int(str(ult_id)) + 1
-            agg_mesa = Mesa(id_mesav2, numMesaAgg, dispMesaAgg)
+            num_mesa = int(ult_num) + 1
+            agg_mesa = Mesa(id_mesav2, num_mesa, dispMesaAgg)
             agg_mesa.save()
 
             messages.success(request,'Mesa agregada correctamente')
@@ -565,12 +568,27 @@ def main_garzon(request):
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])
 def retiro_platos(request):
-    return render (request, 'html/garzon/retiro_paltos.html')
+    platos = Plato.objects.all().order_by('tiempo_prepar')
+    pedidos = Pedido.objects.all().order_by('id_pedido') #quizás puedo poner los 2 order by aquí
+    mesa = Mesa.objects.all()
+    reserva = Reserva.objects.all()
+
+    if request.method == 'POST':
+        pedido = cambiarEstadoPedidoForm(request.POST)
+
+        if pedido.is_valid():
+            cambiarEstado = pedido.cleaned_data['cambiarEstado']
+            modificar_ped = pedidos.get(id_pedido = cambiarEstado)
+            modificar_ped.estado = 'Entregado'
+            modificar_ped.save()
+    return render (request, 'html/garzon/retiro_paltos.html', {'pedidos':pedidos , 'platos':platos, 'mesa':mesa, 'reserva':reserva })
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])
 def ver_reservaciones(request):
     reservas = Reserva.objects.all()
+    mesa = Mesa.objects.all()
+    usuario = AuthUser.objects.all()
 
     queryset = request.GET.get("inputBuscarReserva")
     if queryset:
@@ -580,7 +598,7 @@ def ver_reservaciones(request):
         ).distinct()
     else:
         reservas = Reserva.objects.all()
-    return render (request, 'html/garzon/ver_reservaciones.html', {'reservas':reservas})
+    return render (request, 'html/garzon/ver_reservaciones.html', {'reservas':reservas , 'mesa':mesa , 'usuario':usuario})
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])
@@ -617,7 +635,7 @@ def ventana_pedidos(request):
             else:
                 modificar_ped.estado = 'Cocinando'
                 modificar_ped.save()
-                 
+                
     return render (request, 'html/Cocinero/ventana_pedidos.html',{'pedidos':pedidos , 'platos':platos })
 
 @login_required(login_url = 'loginAsociado')

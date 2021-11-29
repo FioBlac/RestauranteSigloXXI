@@ -121,20 +121,38 @@
                                         <th scope="col">Total</th>
                                         <th scope="col">N° de reserva</th>
                                         <th scope="col">N° de Mesa</th>
-                                        <th scope="col">Estado</th>
+                                        <th scope="col">Acción</th>
                                     </tr>
                                     
                                 </thead>
     
                                 <!--Filas-->
                                 <tbody>
-                                    <tr>
-                                        <td class="text-center" scope="row">Centolla</td>
-                                        <td class="text-center" scope="row">5500</td>
-                                        <td class="text-center" scope="row">1</td>
-                                        <td class="text-center" scope="row">2</td>
-                                        <td class="text-center bg-warning" scope="row">Cocinando</td>
-                                    </tr>
+                                    {% for pl in platos %}
+                                        {% for p in pedidos %}
+                                            {% for r in reserva %}
+                                                {% for m in mesa %}
+                                                    {% if p.plato_id_plato.id_plato == pl.id_plato and p.estado == "Por Entregar" and p.reserva_id_reserva.id_reserva == r.id_reserva and  r.id_mesa.id_mesa == m.id_mesa %}
+                                                        <form method="POST">
+                                                            {% csrf_token %}
+                                                            <tr>
+                                                                <input type="text" class="d-none" name="cambiarEstado" id="cambiarEstado">
+                                                                <td class="text-center" scope="row">pl.nombre_palto</td>
+                                                                <td class="text-center" scope="row">pl.precio</td>
+                                                                <td class="text-center" scope="row">r.id_reserva</td>
+                                                                <td class="text-center" scope="row">m.numero_mesa</td>
+                                                                <td class="text-center" scope="row">
+                                                                    <button id="{{ p.id_pedido }}" class="btn btn-outline-success border-0 text-center" type="submit" href="">
+                                                                        <i id="{{ p.id_pedido }}" class="bi bi-check-lg">Entregar pedido</i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </form>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endfor %}
+                                        {% endfor %}
+                                    {% endfor %}
                                 </tbody>
                             </table>
 
