@@ -121,6 +121,7 @@
                                         <th scope="col">N° de Mesa</th>
                                         <th scope="col">Plato</th>
                                         <th scope="col">Total</th>
+                                        <th scope="col">Estado</th>
                                         <th scope="col">Acción</th>
                                     </tr>
                                     
@@ -136,11 +137,12 @@
                                                         <form method="POST">
                                                             {% csrf_token %}
                                                             <tr>
-                                                                <input type="text" class="d-none" name="cambiarEstado" id="cambiarEstado">
+                                                                <input type="text" name="cambiarEstado" id="cambiarEstado" style=display:none;>
                                                                 <td class="text-center" scope="row">{{ r.id_reserva }}</td>
                                                                 <td class="text-center" scope="row">{{ m.numero_mesa }}</td>
                                                                 <td class="text-center" scope="row">{{ pl.nombre_plato }}</td>
                                                                 <td class="text-center" scope="row">{{ pl.precio }}</td>
+                                                                <td class="text-center bg-warning" scope="row">{{ p.estado }}</td>
                                                                 <td class="text-center" scope="row">
                                                                     <button id="{{ p.id_pedido }}" class="btn btn-outline-success border-0 text-center" type="submit" href="">
                                                                         <i id="{{ p.id_pedido }}" class="bi bi-check-lg">Entregar pedido</i>

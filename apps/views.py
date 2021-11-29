@@ -568,8 +568,9 @@ def main_garzon(request):
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])
 def retiro_platos(request):
+    #OBTENER DATOS PARA MOSTRAR EN LA TABLA
     platos = Plato.objects.all().order_by('tiempo_prepar')
-    pedidos = Pedido.objects.all().order_by('id_pedido') #quizás puedo poner los 2 order by aquí
+    pedidos = Pedido.objects.all().order_by('id_pedido')
     mesa = Mesa.objects.all()
     reserva = Reserva.objects.all()
 
@@ -578,12 +579,15 @@ def retiro_platos(request):
 
         if pedido.is_valid():
             cambiarEstado = pedido.cleaned_data['cambiarEstado']
+
             modificar_ped = pedidos.get(id_pedido = cambiarEstado)
-            
-            if cambiarEstado == 'Cocinando':
+
+            if cambiarEstado == 'Por Entregar':
                 modificar_ped.estado = 'Entregado'
                 modificar_ped.save()
+                print('Si funca')
             else:
+                print('No funca')
                 modificar_ped.estado = 'Por Entregar'
                 modificar_ped.save()
 
