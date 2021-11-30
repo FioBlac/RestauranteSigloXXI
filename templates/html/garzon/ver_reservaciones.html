@@ -130,7 +130,7 @@
                                 {% for r in reservas %}
                                     {% for m in mesa %}
                                         {% for u in usuario %}
-                                            {% if r.id_mesa.id_mesa == m.id_mesa and r.id_usuario.id == u.id %}
+                                            {% if r.mesa_id_mesa.id_mesa == m.id_mesa and r.auth_user.id == u.id %}
                                                 <tr>
                                                     <td class="text-center" scope="row">{{ r.id_reserva }}</td>
                                                     <td class="text-center" scope="row">{{ u.first_name }}</td>

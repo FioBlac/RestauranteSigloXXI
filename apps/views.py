@@ -2,7 +2,8 @@ import django
 from django import template
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
+from .models import Producto, Reserva, Mesa, AuthUser, Bodega
+#from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
 import base64
 from .forms import AgregarProductoForm, cambiarEstadoPedidoForm, EliminarProductoForm, EliminarMesaForm, ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2, EliminarUsuarioForm
@@ -525,8 +526,8 @@ def cliente_hacer_reserva(request):
                 fecha_reserva = fecha, 
                 comentario = comentario, 
                 fecha_vence = fecha_vence,
-                id_mesa = num_mesa,
-                id_usuario = id_usuario
+                mesa_id_mesa = num_mesa,
+                auth_user = id_usuario
                 )
 
             if respuesta == True:
@@ -569,7 +570,7 @@ def main_garzon(request):
 @usuarioPermitido(allowed_roles = ['Garzon'])
 def retiro_platos(request):
     #OBTENER DATOS PARA MOSTRAR EN LA TABLA
-    platos = Plato.objects.all().order_by('tiempo_prepar')
+    """ platos = Plato.objects.all().order_by('tiempo_prepar')
     pedidos = Pedido.objects.all().order_by('id_pedido')
     mesa = Mesa.objects.all()
     reserva = Reserva.objects.all()
@@ -589,9 +590,9 @@ def retiro_platos(request):
             else:
                 print('No funca')
                 modificar_ped.estado = 'Por Entregar'
-                modificar_ped.save()
+                modificar_ped.save() """
 
-    return render (request, 'html/garzon/retiro_platos.html', {'pedidos':pedidos , 'platos':platos, 'mesa':mesa, 'reserva':reserva })
+    return render (request, 'html/garzon/retiro_platos.html' ) #, {'pedidos':pedidos , 'platos':platos, 'mesa':mesa, 'reserva':reserva }
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])
@@ -630,7 +631,7 @@ def gestion_receta(request):
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cocinero'])
 def ventana_pedidos(request):
-    platos = Plato.objects.all().order_by('tiempo_prepar')
+    """ platos = Plato.objects.all().order_by('tiempo_prepar')
     pedidos = Pedido.objects.all().order_by('id_pedido') #quizás puedo poner los 2 order by aquí
 
     if request.method == 'POST':
@@ -648,9 +649,9 @@ def ventana_pedidos(request):
                 modificar_ped.save()
             else:
                 modificar_ped.estado = 'Cocinando'
-                modificar_ped.save()
+                modificar_ped.save() """
                 
-    return render (request, 'html/Cocinero/ventana_pedidos.html',{'pedidos':pedidos , 'platos':platos })
+    return render (request, 'html/Cocinero/ventana_pedidos.html') #,{'pedidos':pedidos , 'platos':platos }
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cocinero'])

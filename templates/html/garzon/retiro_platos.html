@@ -129,11 +129,11 @@
     
                                 <!--Filas-->
                                 <tbody>
-                                    {% for pl in platos %}
-                                        {% for p in pedidos %}
+                                    {% for pl in platos %} <!--CAMBIAR EL PLATO POR LA NUEVA TABLA QUE ES PRODUCTO-->
+                                        {% for p in pedidos %} <!--CAMBIAR EL PEDIDO POR LA NUEVA TABLA QUE PRODUCTS-->
                                             {% for r in reserva %}
                                                 {% for m in mesa %}
-                                                    {% if p.plato_id_plato.id_plato == pl.id_plato and p.estado == "Por Entregar" and p.reserva_id_reserva.id_reserva == r.id_reserva and  r.id_mesa.id_mesa == m.id_mesa %}
+                                                    {% if p.plato_id_plato.id_plato == pl.id_plato and p.estado == "Por Entregar" and p.reserva_id_reserva.id_reserva == r.id_reserva and  r.mesa_id_mesa.id_mesa == m.id_mesa %}
                                                         <form method="POST">
                                                             {% csrf_token %}
                                                             <tr>
