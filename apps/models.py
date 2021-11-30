@@ -208,8 +208,8 @@ class DjangoSession(models.Model):
 
 class Entrega(models.Model):
     id_entrega = models.BigIntegerField(primary_key=True)
-    hora_entrada = models.DateTimeField()
-    hora_salida = models.DateTimeField()
+    hora_entrada = models.CharField(max_length=6)
+    hora_salida = models.CharField(max_length=6)
     estado = models.CharField(max_length=50)
     auth_user = models.ForeignKey(AuthUser, related_name='+', on_delete=models.CASCADE, blank=True, null=True)
 
