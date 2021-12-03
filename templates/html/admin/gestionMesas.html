@@ -105,8 +105,12 @@
         <div class="row mx-auto border rounded justify-content-center">
             {% if messages %}
                 {% for messages in messages %}
-                    <div class="bg-success text-center align-middle">
-                        <p class="my-auto" style="color: white;">{{ messages }}</p>
+                    <div class="alert d-flex alert-success text-center align-items-center " role="alert">
+                        <i class="bi bi-check-circle-fill"></i>
+                        &nbsp;                      
+                        <div>
+                            {{ messages }}
+                        </div>
                     </div>
                 {% endfor %}
             {% endif %}
