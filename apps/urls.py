@@ -57,6 +57,7 @@ urlpatterns =[
     path('Cobro_Cliente_Manual', views.Cobro_Cliente_Manual, name='Cobro_Cliente_Manual'),
     path('index_cajero', views.index_cajero, name='index_cajero'),
     path('pedidos_cajero', views.pedidos_cajero, name='pedidos_cajero'),
+    path('ver_pedidos_historicos',views.ver_pedidos_historicos, name='ver_pedidos_historicos'),
 
     #HTML CONTADOR
     path('index_contador', views.index_contador, name='index_contador'),

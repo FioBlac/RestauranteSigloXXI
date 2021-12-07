@@ -697,7 +697,10 @@ def Cobro_Cliente_Manual(request):
 def pedidos_cajero(request):
     return render (request, 'html/cajero/pedidos_cajero.html')
 
-
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cajero'])
+def ver_pedidos_historicos(request):
+    return render (request, 'html/cajero/ver_pedidos_historicos.html')
 
 #ENVIAR CORREO (este es de prueba)
 
