@@ -63,7 +63,7 @@
                 </ul>
 
             {% if user.is_authenticated %}
-                    <a class="btn btn-outline-secondary border-0" href="{% url 'main_garzon' %}">
+                    <a class="btn btn-outline-secondary border-0" href="{% url 'index_cajero' %}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                             <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                             <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
@@ -91,7 +91,12 @@
         <img class="img-fluid" src="{% static 'img/imagenSuperiorUsuarios.jpg' %}" alt="">
     </section>
 
-    <section class="container mb-4">
+    <!--TITULO-->
+    <section class="w-50 mx-auto text-center pt-5" id="sectionInicio">
+        <h1 class="border-top border-2 py-3" id="tituloInicio">Historial de pedidos</h1>
+    </section>
+
+    <section class="container mb-4" style="table-layout: center;">
         <div class="row mx-auto border rounded justify-content-center">
             <div class="w-100">
                 <div class="table-responsive">
@@ -116,12 +121,19 @@
                 </div>
             </div>
         </div>
+        <div>
+            <div class="text-center col-lg pt-3 ">
+                <a class="btn btn-outline-secondary w-25" href="">
+                    Generar Informe 
+                </a>
+            </div>
+            <div class="text-center col-lg pt-3 ">
+                <a class="btn btn-outline-secondary w-25" href="{% url 'pedidos_cajero' %}">
+                    Volver
+                </a>
+            </div>
+        </div>
     </section>    
-
-    <!--TITULO-->
-    <section class="w-50 mx-auto text-center pt-5" id="sectionInicio">
-        <h1 class="border-top border-2 py-3" id="tituloInicio">Historial de pedidos</h1>
-    </section>
 
     <!--Pie de pagina o barra footer-->
     <footer style="margin-top: 20px;" class="bg-primary text-white text-center text-lg-start">
