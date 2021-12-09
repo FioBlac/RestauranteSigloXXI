@@ -2,7 +2,7 @@ import django
 from django import template
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, Reserva, Mesa, AuthUser, Bodega
+from .models import Producto, Reserva, Mesa, AuthUser, Bodega, ProductsProduct, OrdenOrden
 #from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
 import base64
@@ -570,8 +570,8 @@ def main_garzon(request):
 @usuarioPermitido(allowed_roles = ['Garzon'])
 def retiro_platos(request):
     #OBTENER DATOS PARA MOSTRAR EN LA TABLA
-    """ platos = Plato.objects.all().order_by('tiempo_prepar')
-    pedidos = Pedido.objects.all().order_by('id_pedido')
+    platos = ProductsProduct.objects.all().order_by('tiempo')
+    pedidos = OrdenOrden.objects.all().order_by('id_orden')
     mesa = Mesa.objects.all()
     reserva = Reserva.objects.all()
 
@@ -581,18 +581,18 @@ def retiro_platos(request):
         if pedido.is_valid():
             cambiarEstado = pedido.cleaned_data['cambiarEstado']
 
-            modificar_ped = pedidos.get(id_pedido = cambiarEstado)
+            modificar_ped = pedidos.get(id_orden = cambiarEstado)
 
-            if modificar_ped.estado == 'Por Entregar':
-                modificar_ped.estado = 'Entregado'
+            if modificar_ped.status == 'Por Entregar':
+                modificar_ped.status = 'Entregado'
                 modificar_ped.save()
                 print('Si funca')
             else:
                 print('No funca')
-                modificar_ped.estado = 'Por Entregar'
-                modificar_ped.save() """
+                modificar_ped.status = 'Por Entregar'
+                modificar_ped.save()
 
-    return render (request, 'html/garzon/retiro_platos.html' ) #, {'pedidos':pedidos , 'platos':platos, 'mesa':mesa, 'reserva':reserva }
+    return render (request, 'html/garzon/retiro_platos.html', {'pedidos':pedidos , 'platos':platos, 'mesa':mesa, 'reserva':reserva } )
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])
