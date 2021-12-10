@@ -104,9 +104,9 @@
             
                 <div class="col-lg-6 col-md-6 col-sm-12 my-3">
                     <select class="form-select" name="id_bodega" aria-label="Default select example">
-                        <option selected>ID Bodega</option>
+                        <option selected>Bodega</option>
                         {% for b in bodegas %}
-                            <option value="{{ b.id_bodega }}">{{ b.id_bodega }}</option>
+                            <option value="{{ b.categoria_producto }}">{{ b.categoria_producto }}</option>
                         {% endfor %}
                     </select>
                 </div>
