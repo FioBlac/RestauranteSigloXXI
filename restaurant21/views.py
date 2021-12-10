@@ -13,9 +13,7 @@ from django.http import HttpResponseRedirect
 
 def index (request):
     productos=Product.objects.all()
-    return render(request,'index.html',{
-        'productos':productos,
-    })
+    return render(request,'index.html',{'productos':productos,})
     
 
 def salir(request):

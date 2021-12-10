@@ -32,7 +32,6 @@ urlpatterns = [
     path('',include(('apps.urls'))),
     path('account/',include('django.contrib.auth.urls')),
     path('product', ProductListView.as_view(), name='index'),
-    path('admin/', admin.site.urls),
     path('usuarios/salir', views.salir, name='salir'),
     path('productos/',include('products.urls')),
     path('carrito/',include('carts.urls')),

@@ -3,29 +3,28 @@
 
 <html lang="en">
 <head>
-   <!-- Required meta tags -->
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-   <!-- Bootstrap CSS -->
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-   
-   <!--CSS -->
-   <link rel="stylesheet" href="{% static 'css/css_index.css' %}">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    
+    <!--CSS -->
+    <link rel="stylesheet" href="{% static 'css/css_index.css' %}">
 
-   <!--FONTS-->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
+    <!--FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
 
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">    
-   <title>Restaurante Siglo XXI</title>
-       
-   
-    <title>Restaurant Siglo XXI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">    
+
+    <title>Restaurante Siglo XXI</title>
+    
 </head>
 <body>
     
@@ -95,10 +94,10 @@
 
                 &nbsp;
 
-               
                 <a class="btn btn-outline-secondary border-0" href="{% url 'cart' %}">
                     <i class="bi bi-cart4 fs-6"></i>
                 </a>
+                
                 &nbsp;
 
                 <a class="btn btn-primary btn-primary-outline-success" type="submit" href="{% url 'salir' %}">
@@ -119,19 +118,19 @@
     <div class="container">
         
         {%include "message.html"%}     
-     
-           {%block breadcrumb%}
-             {%endblock%}  
-     
-     
-                 {%block content%}
-                 
-                 {%endblock%}
-     
+    
+        {%block breadcrumb%}
+            {%endblock%}  
+    
+    
+                {%block content%}
+                
+                {%endblock%}
+    
+        
+    
             
-     
-             
-             </div>
+            </div>
     </div>
 
 
