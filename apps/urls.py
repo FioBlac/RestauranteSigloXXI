@@ -25,6 +25,7 @@ urlpatterns =[
     path('ver_reservas', views.ver_reservas, name='ver_reservas'),
     path('agregar_mesa', views.agregar_mesa, name='agregar_mesa'),
     path('logoutUserAsoci', views.logoutUserAsoci, name= 'logoutUserAsoci'),
+    path('crear_plato', views.crear_plato, name= 'crear_plato'),
 
     #HTML BODEGA
     path('gestion_bodega', views.gestion_bodega, name='gestion_bodega'),

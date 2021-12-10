@@ -37,7 +37,3 @@ def remove(request):
 
 
         return redirect('cart')
-
-      
-
-    

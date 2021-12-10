@@ -133,7 +133,7 @@
                                         {% for p in pedidos %} <!--ORDEN_ORDEN-->
                                             {% for r in reserva %}
                                                 {% for m in mesa %}
-                                                    {% if p.products_product_id_producto.id_producto == pl.id_pedido and p.status == "Por Entregar" and p.reserva_id_reserva.id_reserva == r.id_reserva and  r.mesa_id_mesa.id_mesa == m.id_mesa %}
+                                                    {% if p.products_product_id.id == pl.id and p.status == "Por Entregar" and p.reserva_id_reserva.id_reserva == r.id_reserva and  r.mesa_id_mesa.id_mesa == m.id_mesa %}
                                                         <form method="POST">
                                                             {% csrf_token %}
                                                             <tr>

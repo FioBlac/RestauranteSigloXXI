@@ -260,6 +260,22 @@ def index_admin(request):
 
 @login_required(login_url = 'loginAsociado')
 @admin_view
+def crear_plato(request):
+
+    storage = messages.get_messages(request)
+    for _ in storage:
+        # This is important
+        # Without this loop _loaded_messages is empty
+        pass
+
+    for _ in list(storage._loaded_messages):
+        del storage._loaded_messages[0]
+
+    return render (request, 'html/admin/crear_plato.html')
+
+
+@login_required(login_url = 'loginAsociado')
+@admin_view
 def modificar_usuario(request):
     return render (request, 'html/admin/modificar_usuario.html')
 

@@ -47,6 +47,16 @@ class MesaForm(forms.ModelForm):
 class datosAgregarMesaForm(forms.Form):
     dispMesaAgg = forms.CharField()
 
+class crearPlato(forms.Form):
+    id = forms.CharField()
+    title = forms.CharField()
+    price = forms.CharField()
+    description = forms.CharField()
+    image = forms.CharField()
+    tiempo = forms.CharField()
+    created_at = forms.CharField()
+    slug = forms.CharField()
+
 class cambiarEstadoPedidoForm(forms.Form):
     cambiarEstado = forms.CharField()
 
