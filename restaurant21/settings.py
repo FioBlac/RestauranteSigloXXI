@@ -43,6 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps',
     'crispy_forms',
+    'products',
+    'categories',
+    'users',
+    'carts',
+    'orden',
     
 ]
 
@@ -85,7 +90,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': '127.0.0.1:1521/orcl',
-        'USER': 'rest21',
+        'USER': 'DML1',
         'PASSWORD': 'oracle',
         'TEST': {
             'USER': 'default_test',
@@ -136,8 +141,11 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    '/var/www/static/',
+    
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 
 EMAIL_HOST = 'smtp.googlemail.com'

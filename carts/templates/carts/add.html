@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load funcion_tag %}
+{%block content%}
+<div class="col-3">
+    {%if product.image%}
+    <img src="{{product.image.url}}" alt="ProductoImagen" width="200" height="200">
+    {%endif%}
+</div>
+<div class="col">
+    <div class="h3 font-monospace alert-success">
+        Su plato a sido  agregado
+    </div>
+    <div>
+        <a href="{%url 'product' product.slug%}">{{product.tittle}}</a>
+    </div>
+    <div class="h3 font-monospace alert-danger">
+        {{product.price | precio_tag}}
+    </div>
+</div>
+
+
+{%endblock%}

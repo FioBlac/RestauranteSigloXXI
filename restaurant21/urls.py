@@ -18,12 +18,27 @@ from django.urls import path, include
 #from django.contrib.auth.views import login, logout_then_login
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib import admin
+from django.urls import path
+from . import views
+from products.views import  ProductListView
+from django.urls import include
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include(('apps.urls'))),
     path('account/',include('django.contrib.auth.urls')),
+    path('product', ProductListView.as_view(), name='index'),
+    path('admin/', admin.site.urls),
+    path('usuarios/salir', views.salir, name='salir'),
+    path('productos/',include('products.urls')),
+    path('carrito/',include('carts.urls')),
+    path('orden/',include('orden.urls')),
     
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

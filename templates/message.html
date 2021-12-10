@@ -1,0 +1,14 @@
+{%if messages %}
+    {%for m in messages %}
+    {%if m.tag == 'sucess'%}
+    <div class="alert alert-success" >
+        {{m}}                       
+    </div>
+    {%else%}
+    <div class="alert alert-success" >
+        {{m}}  
+    </div>
+   
+    {%endif%}
+    {%endfor%}
+    {%endif%}

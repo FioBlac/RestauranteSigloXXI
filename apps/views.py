@@ -37,7 +37,7 @@ def listar_grupos():
 
 #HTML GENERAL
 
-def index(request):
+def apps(request):
     return render (request,'html/general/index.html')
 
 @usuarioNoLogeado

@@ -5,7 +5,7 @@ from . import views
 
 urlpatterns =[
     #HTML GENERAL
-    path('', views.index, name='index'),
+    path('', views.apps, name='apps'),
     path('login', views.login_usuario, name='login'),
     path('registro', views.registro, name='registro'),
 
