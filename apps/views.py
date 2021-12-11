@@ -718,16 +718,6 @@ def pedidos_cajero(request):
 def ver_pedidos_historicos(request):
     return render (request, 'html/cajero/ver_pedidos_historicos.html')
 
-#ENVIAR CORREO (este es de prueba)
-
-def verificar(request):
-    if request.method == 'POST':
-        mail = request.POST.get('mail')
-
-        sendEmailReserva(mail)
-        print('envio correo')
-    return render (request, 'html/general/verificar.html', {})
-
 
 def sendEmailReserva(username):
     context = {

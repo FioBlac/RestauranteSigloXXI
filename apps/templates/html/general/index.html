@@ -55,28 +55,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Contactanos</a>
+                        <a class="nav-link " href="#contactanos">Contactanos</a>
                     </li>
-                    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Menú
-                        </a>
-                    </li>
-
-                    <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="#">Platos de entrada</a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item" href="#">Platos de fondo</a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item" href="#">Postres</a>
-                        </li>
-                    </ul>
                 </ul>
 
             {% if user.is_authenticated %}
@@ -156,8 +136,8 @@
     
 
     <!--MISION Y VISION-->
-    <section class="w-50 mx-auto text-center pt-5" id="sectionMyV" id="misionVision">
-        <h1 class="p-3 border-top border-2" id="tituloInicio">Mision y Visión</h1>
+    <section class="w-50 mx-auto text-center pt-5" id="misionVision">
+        <h1 class="p-3 border-top border-2" name="misionVision" id="tituloInicio">Mision y Visión</h1>
         <span class="fs-5">
             A lo largo de nuestro trayecto como restaurant hemos logrado aprender sobre como atender a la clientela
             que se nos presenta dia a dia, y para eso es que nos tratamos de mantener en vanguardia y mantener la misma
@@ -177,9 +157,9 @@
             </div>
         </div>
     </section>
-
+    
     <!--PIE DE PAGINA O FOOTER-->
-    <footer style="margin-top: 20px;" class="bg-primary text-white text-center text-lg-start">
+    <footer style="margin-top: 20px;" class="bg-primary text-white text-center text-lg-start" >
         <div class="container p-4">
             <div class="row">
 
@@ -193,7 +173,7 @@
     
             <!--Barra de atencion al cliente-->
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">Atencion al cliente</h5>
+                <h5 class="text-uppercase" name="contactanos">Atencion al cliente</h5>
             
                 <ul class="list-unstyled mb-0">
                     <li>
