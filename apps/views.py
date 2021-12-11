@@ -2,7 +2,9 @@ import django
 from django import template
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Producto, Reserva, Mesa, AuthUser, Bodega, ProductsProduct, OrdenOrden
+from .models import Producto, Reserva, Mesa, AuthUser, Bodega
+from products.models import Product
+from orden.models import Orden
 #from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
 import base64
@@ -586,8 +588,8 @@ def main_garzon(request):
 @usuarioPermitido(allowed_roles = ['Garzon'])
 def retiro_platos(request):
     #OBTENER DATOS PARA MOSTRAR EN LA TABLA
-    platos = ProductsProduct.objects.all().order_by('tiempo')
-    pedidos = OrdenOrden.objects.all().order_by('id_orden')
+    products = Product.objects.all().order_by('tiempo')
+    orden = Orden.objects.all().order_by('id')
     mesa = Mesa.objects.all()
     reserva = Reserva.objects.all()
 
@@ -597,7 +599,7 @@ def retiro_platos(request):
         if pedido.is_valid():
             cambiarEstado = pedido.cleaned_data['cambiarEstado']
 
-            modificar_ped = pedidos.get(id_orden = cambiarEstado)
+            modificar_ped = Orden.get(id = cambiarEstado)
 
             if modificar_ped.status == 'Por Entregar':
                 modificar_ped.status = 'Entregado'
@@ -608,7 +610,7 @@ def retiro_platos(request):
                 modificar_ped.status = 'Por Entregar'
                 modificar_ped.save()
 
-    return render (request, 'html/garzon/retiro_platos.html', {'pedidos':pedidos , 'platos':platos, 'mesa':mesa, 'reserva':reserva } )
+    return render (request, 'html/garzon/retiro_platos.html', {'orden':orden , 'products':products, 'mesa':mesa, 'reserva':reserva } )
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])

@@ -1,6 +1,9 @@
 from django.db import models
 from users.models import User
-from  carts.models import Cart
+from carts.models import Cart
+from products.models import Product
+from apps.models import Entrega
+from apps.models import Reserva
 from django.db.models.signals import pre_save
 import uuid
 from .comun import OrdenStatus
@@ -18,6 +21,8 @@ class Orden(models.Model):
     status = models.CharField(max_length=40, choices=choices, default=OrdenStatus.CREATED)
     total= models.DecimalField(default=0, max_digits=9, decimal_places=2)
     created_at =models.DateTimeField(auto_now_add=True)
+    id_cart = models.ForeignKey(Cart, models.DO_NOTHING, db_column='id_cart_p', blank=True, null=True, related_name = '+')
+    id_products = models.ForeignKey(Product, models.DO_NOTHING, db_column='id_products_p', blank=True, null=True, related_name = '+')
 
     def __str__(self):
         return self.ordenID

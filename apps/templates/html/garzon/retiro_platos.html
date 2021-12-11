@@ -117,8 +117,8 @@
                                 <!-- Nombre de Columna-->
                                 <thead>
                                     <tr>
-                                        <th scope="col">N° de reserva</th>
-                                        <th scope="col">N° de Mesa</th>
+                                        <!-- <th scope="col">N° de reserva</th> -->
+                                        <!-- <th scope="col">N° de Mesa</th> -->
                                         <th scope="col">Plato</th>
                                         <th scope="col">Total</th>
                                         <th scope="col">Estado</th>
@@ -129,30 +129,26 @@
     
                                 <!--Filas-->
                                 <tbody>
-                                    {% for pl in platos %} <!--PRODUCTS_PRODUCT-->
-                                        {% for p in pedidos %} <!--ORDEN_ORDEN-->
-                                            {% for r in reserva %}
-                                                {% for m in mesa %}
-                                                    {% if p.products_product_id.id == pl.id and p.status == "Por Entregar" and p.reserva_id_reserva.id_reserva == r.id_reserva and  r.mesa_id_mesa.id_mesa == m.id_mesa %}
-                                                        <form method="POST">
-                                                            {% csrf_token %}
-                                                            <tr>
-                                                                <input type="text" name="cambiarEstado" id="cambiarEstado" style=display:none;>
-                                                                <td class="text-center" scope="row">{{ r.id_reserva }}</td>
-                                                                <td class="text-center" scope="row">{{ m.numero_mesa }}</td>
-                                                                <td class="text-center" scope="row">{{ pl.nombre_plato }}</td>
-                                                                <td class="text-center" scope="row">{{ pl.precio }}</td>
-                                                                <td class="text-center bg-warning" scope="row">{{ p.estado }}</td>
-                                                                <td class="text-center" scope="row">
-                                                                    <button id="{{ p.id_pedido }}" class="btn btn-outline-success border-0 text-center" type="submit" href="">
-                                                                        <i id="{{ p.id_pedido }}" class="bi bi-check-lg">Entregar pedido</i>
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        </form>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            {% endfor %}
+                                    {% for p in products %} <!--PRODUCTS_PRODUCT-->
+                                        {% for o in orden %} <!--ORDEN_ORDEN-->
+                                            {% if o.id_products_p.id == p.id and o.status == "En Espera" %}
+                                                <form method="POST">
+                                                    {% csrf_token %}
+                                                    <tr>
+                                                        <input type="text" name="cambiarEstado" id="cambiarEstado" style=display:none;>
+                                                        <!-- <td class="text-center" scope="row">{{ r.id_reserva }}</td> -->
+                                                        <!-- <td class="text-center" scope="row">{{ m.numero_mesa }}</td> -->
+                                                        <td class="text-center" scope="row">{{ p.title }}</td>
+                                                        <td class="text-center" scope="row">{{ p.price }}</td>
+                                                        <td class="text-center bg-warning" scope="row">{{ o.status }}</td>
+                                                        <td class="text-center" scope="row">
+                                                            <button id="{{ o.id}" class="btn btn-outline-success border-0 text-center" type="submit" href="">
+                                                                <i id="{{ o.id}" class="bi bi-check-lg">Entregar pedido</i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </form>
+                                            {% endif %}
                                         {% endfor %}
                                     {% endfor %}
                                 </tbody>
