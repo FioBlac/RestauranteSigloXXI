@@ -776,4 +776,13 @@ def pagar(request):
 #Formularios
 #Formulario de Hacer Reserva
 #def crearReserva(request):
-    
+
+#crear PDF
+from django.shortcuts import render
+from django.views.generic import ListView
+from .models import PedidosHistoricos
+
+class Listapedidoshistoricos(ListView):
+    model = PedidosHistoricos
+    template_name = "templates/html/Cajero/modelo_pdf.html"
+    context_object_name = 'modelo_pdf'   
