@@ -768,6 +768,9 @@ def sendEmailRegistro(email):
 def correo(request):
     return render (request, 'html/general/correo.html')
 
+def manual(request):
+    return render (request, 'html/general/manual.html')
+
 
 #HTML PAGAR
 def metodo_pago(request):
