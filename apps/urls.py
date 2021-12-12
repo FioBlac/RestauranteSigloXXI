@@ -1,3 +1,5 @@
+from os import name
+from django import urls
 from django.urls import path
 #from .views import home, login
 from . import views
@@ -68,5 +70,17 @@ urlpatterns =[
     #HTML DE PAGO
     path('metodo_pago',views.metodo_pago , name= 'metodo_pago'),
     path('pagar',views.pagar , name= 'pagar')
-
 ]
+#url.py
+from django.contrib import admin
+from . import views
+
+app_name = "persona_app"
+
+urlpatterns = {
+    path(
+        'lista/',
+        views.Listapedidoshistoricos.as_view(),
+        name= 'Lista'
+        ),
+}
