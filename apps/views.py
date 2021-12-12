@@ -2,6 +2,8 @@ import django
 from django import template
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import render, redirect, get_object_or_404
+
+from apps.utils import render_to_pdf
 from .models import Producto, Reserva, Mesa, AuthUser, Bodega
 from products.models import Product
 from orden.models import Orden
@@ -779,10 +781,19 @@ def pagar(request):
 
 #crear PDF
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, View
 from .models import PedidosHistoricos
 
 class Listapedidoshistoricos(ListView):
     model = PedidosHistoricos
     template_name = "templates/html/Cajero/modelo_pdf.html"
-    context_object_name = 'modelo_pdf'   
+    context_object_name = 'modelo_pdf'  
+
+#Create your views here.
+class ListEmpleados(View):
+    def get (self, request, *args, **kwargs):
+        modelo_pdf = PedidosHistoricos.objects.all()
+        data = {
+            'modelo_pdf': modelo_pdf
+        }
+        pdf = render_to_pdf ('')
