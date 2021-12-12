@@ -58,28 +58,12 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="#">Contactanos</a>
-                    </li>
-                    
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Menú
-                        </a>
+                        <a class="nav-link " href="#contactanos">Contactanos</a>
                     </li>
 
-                    <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="#">Platos de entrada</a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item" href="#">Platos de fondo</a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item" href="#">Postres</a>
-                        </li>
-                    </ul>
+                    <li class="nav-item">
+                        <a class="nav-link " href="{% url 'manual' %}">Nuestro sistema</a>
+                    </li>
                 </ul>
 
             {% if user.is_authenticated %}
@@ -93,14 +77,14 @@
                 </a>
 
                 &nbsp;
-
+                
                 <a class="btn btn-outline-secondary border-0" href="{% url 'cart' %}">
                     <i class="bi bi-cart4 fs-6"></i>
                 </a>
                 
                 &nbsp;
 
-                <a class="btn btn-primary btn-primary-outline-success" type="submit" href="{% url 'salir' %}">
+                <a class="btn btn-primary btn-primary-outline-success" type="submit" href="{% url 'logout' %}">
                     Cerrar sesion
                 </a>
                 

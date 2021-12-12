@@ -3,7 +3,7 @@ from django import template
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import render, redirect, get_object_or_404
 
-from apps.utils import render_to_pdf
+#from apps.utils import render_to_pdf
 from .models import Producto, Reserva, Mesa, AuthUser, Bodega
 from products.models import Product
 from orden.models import Orden
@@ -41,7 +41,7 @@ def listar_grupos():
 
 #HTML GENERAL
 
-def apps(request):
+def index(request):
     return render (request,'html/general/index.html')
 
 @usuarioNoLogeado
@@ -784,7 +784,7 @@ def pagar(request):
 #def crearReserva(request):
 
 #crear PDF
-from django.shortcuts import render
+""" from django.shortcuts import render
 from django.views.generic import ListView, View
 from .models import PedidosHistoricos
 
@@ -800,4 +800,4 @@ class ListEmpleados(View):
         data = {
             'modelo_pdf': modelo_pdf
         }
-        pdf = render_to_pdf ('')
+        pdf = render_to_pdf ('') """

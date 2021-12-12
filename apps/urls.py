@@ -7,10 +7,10 @@ from . import views
 
 urlpatterns =[
     #HTML GENERAL
-    path('', views.apps, name='apps'),
+    path('', views.index, name='index'),
     path('login', views.login_usuario, name='login'),
     path('registro', views.registro, name='registro'),
-    
+
     path('manual', views.manual, name='manual'),
 
     path('loginAsociado', views.loginAsociado, name='loginAsociado'),
@@ -73,7 +73,7 @@ urlpatterns =[
     path('metodo_pago',views.metodo_pago , name= 'metodo_pago'),
     path('pagar',views.pagar , name= 'pagar')
 ]
-#url.py
+""" #url.py
 from django.contrib import admin
 from . import views
 
@@ -85,4 +85,4 @@ urlpatterns = {
         views.Listapedidoshistoricos.as_view(),
         name= 'Lista'
         ),
-}
+} """
