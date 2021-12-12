@@ -10,6 +10,7 @@ urlpatterns =[
     path('', views.apps, name='apps'),
     path('login', views.login_usuario, name='login'),
     path('registro', views.registro, name='registro'),
+    
     path('manual', views.manual, name='manual'),
 
     path('loginAsociado', views.loginAsociado, name='loginAsociado'),
