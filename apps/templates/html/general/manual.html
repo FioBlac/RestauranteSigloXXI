@@ -56,6 +56,10 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link " href="{% url 'index_productos' %}">Platos</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link " href="{% url 'manual' %}">Nuestro sistema</a>
                     </li>
                 </ul>
@@ -78,7 +82,7 @@
     </section>
 
 <!--MANUAL-->
-    <div class="container pt-4 border border-2 rounded shadow">
+    <div class="container pt-4 pb-4 border border-2 rounded shadow">
         <div class="row g-0 border-bottom border-2">
             <div class="col-lg-5 d-flex flex-column w-50">
                 <!-- TEXTO -->
@@ -194,12 +198,15 @@
             </div>
         </div>
 
-        <section class="w-100 text-center badge align-items-center py-5 bg-primary" id="sectionInicio">
-            <h1 class="" id="tituloInicio">Felicidades!</h1>
-            <span class="fs-5">
-                Ya estás listo para usar nuestro sistema
-            </span>
-        </section>
+        <div class="row g-0 pt-4 border-bottom border-2">
+            <div class="w-100 text-center badge align-items-center py-5 bg-primary">
+                <h1 class="" id="tituloInicio">Felicidades!</h1>
+                <span class="fs-5">
+                    Ya estás listo para usar nuestro sistema
+                </span>
+            </div>
+            
+        </div>
     </div>
 
     
