@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">    
-    <title>Retiro de platos</title>
+    <title>Platos a Cocinar</title>
 </head>
 
 <body>
@@ -122,6 +122,7 @@
                             <!-- Nombre de Columna-->
                             <thead>
                                 <tr>
+                                    <th scope="col">N° Orden</th>
                                     <th scope="col">Plato</th>
                                     <th scope="col">Cantidad</th>
                                     <th scope="col">Tiempo Demora</th>
@@ -133,36 +134,39 @@
                             <!--Filas-->
                             <tbody>
                                 {% for pl in platos %} <!--CAMBIAR EL PLATO POR LA NUEVA TABLA QUE ES PRODUCTS_PRODUCT-->
-                                    {% for c in cantidadPedido %} <!--CAMBIAR EL PEDIDO POR LA NUEVA TABLA QUE ORDEN_ORDEN-->
-                                        {% for p in pedidos %}
-                                            {% if p.status == 'En Espera' or p.status == 'Cocinando'  %}
-                                            <form method="POST">
-                                                {% csrf_token %}
-                                                <tr>
-                                                    <input type="text" name="cambiarEstado" id="cambiarEstado" style=display:none;>
-                                                    <td class="text-center" scope="row">{{ pl.title }}</td>
-                                                    {% if c.cart_id == p.cart_id %}
-                                                        <td class="text-center" scope="row">{{ c.quantity }}</td>
-                                                    {% else %}
-                                                        <td class="text-center" scope="row">Indefinido</td>
-                                                    {% endif %}            
-                                                    <td class="text-center" scope="row">{{ pl.tiempo }} minutos</td>
-                                                    <td class="text-center" scope="row">{{ p.status }}</td>
-                                                    <td class="text-center" scope="row">
-                                                        {% if p.estado == 'Cocinando'%}
-                                                            <button id="{{ p.id_pedido }}" class="btn btn-outline-success border-0 text-center" type="submit" href="">
-                                                                <i id="{{ p.id_pedido }}" class="bi bi-check-lg">Si, enviar pedido</i>
-                                                            </button>
-                                                        {% elif p.estado == 'En Espera' %}
-                                                            <button id="{{ p.id_pedido }}" class="btn btn-outline-info border-0 text-center" type="submit" href="">
-                                                                <i id="{{ p.id_pedido }}" class="bi bi-check-lg">Si, cocinar</i>
-                                                            </button>
-                                                        {% endif %}
-                                                    </td>
-                                                </tr>
-                                            </form>
+                                    {% for c in cantidadPedido %}
+                                        {% for p in pedidos %} <!--CAMBIAR EL PEDIDO POR LA NUEVA TABLA QUE ORDEN_ORDEN-->
+                                            {% if c.cart_id == p.cart_id and pl.id == c.product_id%}
+                                                {% if p.status == 'En Espera' or p.status == 'Cocinando'%}
+                                                <form method="POST">
+                                                    {% csrf_token %}
+                                                    <tr>
+                                                        <td class="text-center" scope="row">{{ p.id }}</td>
+                                                        <input type="text" name="cambiarEstado" id="cambiarEstado" style=display:none;>
+                                                        <td class="text-center" scope="row">{{ pl.title }}</td>
+                                                        {% if c.cart_id == p.cart_id %}
+                                                            <td class="text-center" scope="row">{{ c.quantity }}</td>
+                                                        {% else %}
+                                                            <td class="text-center" scope="row">Indefinido</td>
+                                                        {% endif %}            
+                                                        <td class="text-center" scope="row">{{ pl.tiempo }} minutos</td>
+                                                        <td class="text-center" scope="row">{{ p.status }}</td>
+                                                        <td class="text-center" scope="row">
+                                                            {% if p.status == 'Cocinando'%}
+                                                                <button id="{{ p.id }}" class="btn btn-outline-success border-0 text-center" type="submit" href="">
+                                                                    <i id="{{ p.id }}" class="bi bi-check-lg">Si, enviar pedido</i>
+                                                                </button>
+                                                            {% elif p.status == 'En Espera' %}
+                                                                <button id="{{ p.id }}" class="btn btn-outline-info border-0 text-center" type="submit" href="">
+                                                                    <i id="{{ p.id }}" class="bi bi-check-lg">Si, cocinar</i>
+                                                                </button>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                </form>
+                                                {% endif %}
                                             {% endif %}
-                                            {% endfor %}
+                                        {% endfor %}
                                     {% endfor %}
                                 {% endfor %}
                             </tbody>

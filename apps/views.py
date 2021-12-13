@@ -694,8 +694,6 @@ def ventana_pedidos(request):
     platos = Product.objects.all().order_by('tiempo')
     cantidadPedido = CartProduct.objects.all().order_by('created_at')
     pedidos = Orden.objects.all().order_by('id')
-    """ platos = Plato.objects.all().order_by('tiempo_prepar')
-    pedidos = Pedido.objects.all().order_by('id_pedido') #quizás puedo poner los 2 order by aquí
 
     if request.method == 'POST':
         pedido = cambiarEstadoPedidoForm(request.POST)
@@ -704,16 +702,16 @@ def ventana_pedidos(request):
             print('post valido')
             cambiarEstado = pedido.cleaned_data['cambiarEstado']
 
-            modificar_ped = pedidos.get(id_pedido = cambiarEstado)
+            modificar_ped = pedidos.get(id = cambiarEstado)
             print(cambiarEstado)
-            if modificar_ped.estado == 'Cocinando':
+            if modificar_ped.status == 'Cocinando':
                 print('funcionó todo')
-                modificar_ped.estado = 'Por Entregar'
+                modificar_ped.status = 'Por Entregar'
                 modificar_ped.save()
             else:
-                modificar_ped.estado = 'Cocinando'
-                modificar_ped.save() """
-                
+                modificar_ped.status = 'Cocinando'
+                modificar_ped.save()          
+
     return render (request, 'html/Cocinero/ventana_pedidos.html',{'pedidos':pedidos , 'platos':platos , 'cantidadPedido':cantidadPedido })
 
 @login_required(login_url = 'loginAsociado')
