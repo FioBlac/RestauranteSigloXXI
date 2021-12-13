@@ -88,7 +88,7 @@ def cancelar_orden(request):
     deleteOrden(request)
 
     messages.error(request,'Orden eliminada correctamente')
-    return redirect('index')
+    return redirect('index_productos')
 
 @login_required(login_url='login') 
 def completado(request):
