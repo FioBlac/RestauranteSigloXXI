@@ -644,7 +644,9 @@ def retiro_platos(request):
             if modificar_ped.status == 'Por Entregar':
                 modificar_ped.status = 'Entregado'
                 modificar_ped.save()
+                messages.success(request,'Plato entregado corectamente')
                 print('Si funca')
+                
             else:
                 print('No funca')
                 modificar_ped.status = 'Por Entregar'

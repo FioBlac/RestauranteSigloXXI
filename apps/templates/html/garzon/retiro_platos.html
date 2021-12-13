@@ -96,6 +96,18 @@
 
         <!--CUERPO DE LA TABLA-->
         <section class="container mb-4">
+            {% if messages %}
+                {% for messages in messages %}
+                    <div class="alert d-flex alert-success text-center align-items-center " role="alert">
+                        <i class="bi bi-check-circle-fill"></i>
+                        &nbsp;                      
+                        <div>
+                            {{ messages }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
             <div class="row mx-auto border rounded justify-content-center">
                 <form class="row g-3" method="GET">
                     <div class="input-group col-auto">
@@ -124,7 +136,6 @@
                                         <th scope="col">Estado</th>
                                         <th scope="col">Acción</th>
                                     </tr>
-                                    
                                 </thead>
     
                                 <!--Filas-->
