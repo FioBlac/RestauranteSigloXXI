@@ -115,37 +115,27 @@
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </div>
             </form>
-
             <div class="w-100">
                 <div class="table-responsive">
-                        <table class="table table-hover align-middle text-center">
-                            <!-- Nombre de Columna-->
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID Pedido</th>
-                                    <th scope="col">Plato</th>
-                                    <th scope="col">Cantidad</th>
-                                    <th scope="col">Estado</th>
-                                </tr>
+                    <table class="table table-hover align-middle text-center">
+                        <!-- Nombre de Columna-->
+                        <thead>
+                            <tr>
+                                <th scope="col">ID Pedido</th>
+                                <th scope="col">Plato</th>
+                                <th scope="col">Precio</th>
+                            </tr>
                                 
-                            </thead>
-
-                            <!--Filas-->
-                            <tbody>
-                                {% for pl in platos %}
-                                    {% for p in pedidos %}
-                                        {% if p.plato_id_plato.id_plato == pl.id_plato and p.estado == "Cocinando" or p.plato_id_plato.id_plato == pl.id_plato and p.estado == 'En Espera' %}
-                                            <tr>
-                                                <td class="text-center" scope="row">{{ p.id_pedido }}</td>
-                                                <td class="text-center" scope="row">{{ pl.nombre_plato }}</td>
-                                                <td class="text-center" scope="row">{{ p.cantidad }}</td>
-                                                <td class="text-center" scope="row">{{ p.estado }}</td>
-                                            </tr>
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endfor %}        
-                            </tbody>
-                        </table>
+                        </thead>
+                        <!--Filas-->
+                        <tbody>
+                            <tr>
+                                <td class="text-center" scope="row">001p</td>
+                                <td class="text-center" scope="row">Ceviche </td>
+                                <td class="text-center" scope="row">$2000</td>
+                            </tr>        
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
