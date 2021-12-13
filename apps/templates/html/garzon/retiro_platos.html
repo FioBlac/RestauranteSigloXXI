@@ -21,7 +21,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">    
-        <title>Retiro de platos</title>
+        <title>Ver pedidos</title>
     </head>
 
     <body>
@@ -91,7 +91,7 @@
 
         <!--TITULO-->
         <section class="w-50 mx-auto text-center pt-5" id="sectionInicio">
-            <h1 class="border-top border-2 py-3" id="tituloInicio">Ver platos</h1>
+            <h1 class="border-top border-2 py-3" id="tituloInicio">Ver pedidos</h1>
         </section>
 
         <!--CUERPO DE LA TABLA-->
@@ -119,7 +119,7 @@
                                     <tr>
                                         <!-- <th scope="col">N° de reserva</th> -->
                                         <!-- <th scope="col">N° de Mesa</th> -->
-                                        <th scope="col">Plato</th>
+                                        <th scope="col">ID de orden</th>
                                         <th scope="col">Total</th>
                                         <th scope="col">Estado</th>
                                         <th scope="col">Acción</th>
@@ -129,17 +129,17 @@
     
                                 <!--Filas-->
                                 <tbody>
-                                    {% for p in products %} <!--PRODUCTS_PRODUCT-->
+                                    <!--PRODUCTS_PRODUCT-->
                                         {% for o in orden %} <!--ORDEN_ORDEN-->
-                                            {% if o.id_products_p.id == p.id and o.status == "En Espera" %}
+                                            {% if o.status == "En Espera" %}
                                                 <form method="POST">
                                                     {% csrf_token %}
                                                     <tr>
                                                         <input type="text" name="cambiarEstado" id="cambiarEstado" style=display:none;>
                                                         <!-- <td class="text-center" scope="row">{{ r.id_reserva }}</td> -->
                                                         <!-- <td class="text-center" scope="row">{{ m.numero_mesa }}</td> -->
-                                                        <td class="text-center" scope="row">{{ p.title }}</td>
-                                                        <td class="text-center" scope="row">{{ p.price }}</td>
+                                                        <td class="text-center" scope="row">{{ o.id }}</td>
+                                                        <td class="text-center" scope="row">{{ o.total }}</td>
                                                         <td class="text-center bg-warning" scope="row">{{ o.status }}</td>
                                                         <td class="text-center" scope="row">
                                                             <button id="{{ o.id}" class="btn btn-outline-success border-0 text-center" type="submit" href="">
@@ -150,7 +150,6 @@
                                                 </form>
                                             {% endif %}
                                         {% endfor %}
-                                    {% endfor %}
                                 </tbody>
                             </table>
 
@@ -264,10 +263,10 @@
 
             //Leerá las características de cualquier elemento del html que esté dentro de la tabla
             tabla.addEventListener('click', (e) =>{
-                id_pedido = e.target.id
-                console.log(id_pedido)
+                id = e.target.id
+                console.log(id)
                 console.log(cambiar)
-                cambiar.value = id_pedido
+                cambiar.value = id
             })
         </script>
         

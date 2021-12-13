@@ -120,7 +120,6 @@
                                     <th scope="col">Comentario</th>
                                     <th scope="col">Fecha Vencim.</th>
                                     <th scope="col">N° de Mesa</th>
-                                    <th scope="col">Ver detalles</th>
                                 </tr>
                                 
                             </thead>
@@ -139,11 +138,6 @@
                                                     <td class="text-center" scope="row">{{ r.comentario }}</td>
                                                     <td class="text-center" scope="row">{{ r.fecha_vence }}</td>
                                                     <td class="text-center" scope="row">{{ m.numero_mesa }}</td>
-                                                    <td class="text-center" scope="row">
-                                                        <a class="btn btn-outline-warning border-0 fs-4 text-center" href="{% url 'detalle' %}" id="">
-                                                            <i class="bi bi-eye"></i>
-                                                        </a>
-                                                    </td>
                                                 </tr>
                                             {% endif %}
                                         {% endfor %}
