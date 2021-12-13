@@ -131,7 +131,7 @@
                                 <tbody>
                                     <!--PRODUCTS_PRODUCT-->
                                         {% for o in orden %} <!--ORDEN_ORDEN-->
-                                            {% if o.status == "En Espera" %}
+                                            {% if o.status == "Por Entregar" %}
                                                 <form method="POST">
                                                     {% csrf_token %}
                                                     <tr>
@@ -142,8 +142,8 @@
                                                         <td class="text-center" scope="row">{{ o.total }}</td>
                                                         <td class="text-center bg-warning" scope="row">{{ o.status }}</td>
                                                         <td class="text-center" scope="row">
-                                                            <button id="{{ o.id}" class="btn btn-outline-success border-0 text-center" type="submit" href="">
-                                                                <i id="{{ o.id}" class="bi bi-check-lg">Entregar pedido</i>
+                                                            <button id="{{ o.id }}" class="btn btn-outline-success border-0 text-center" type="submit" href="">
+                                                                <i id="{{ o.id }}" class="bi bi-check-lg">Entregar pedido</i>
                                                             </button>
                                                         </td>
                                                     </tr>
