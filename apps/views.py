@@ -555,7 +555,7 @@ def cliente_hacer_reserva(request):
                 reserva.save()    
                 respuesta = True 
                 print(respuesta) 
-
+        messages.success(request,'¡Reserva hecha correctamente! Le recordamos que tiene un plazo de 20 minutos a partir de la fecha y hora de la reserva para llegar al Restaurante. Si no llega, la reserva será cancelada.')
     else:
         reserva_form = ReservaForm()
 
@@ -575,9 +575,9 @@ def Cliente_Observar_Disponibilidad(request):
 @login_required(login_url = 'login')
 @usuarioPermitido(allowed_roles = ['Cliente'])
 def cliente_ver_reserva(request):
-    reservas = Reserva.objects.all()
+    reservas = Reserva.objects.all().order_by('id_reserva')
     print("No entró al post")
-    
+
     if request.method == 'POST':
         print("entró al post")
         reserva_borrar = EliminarReservaForm(request.POST)
