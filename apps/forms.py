@@ -38,6 +38,8 @@ class EliminarUsuarioForm(forms.Form):
 class EliminarMesaForm(forms.Form):
     id_mesa_borrar = forms.CharField()
 
+class EliminarReservaForm(forms.Form):
+    id_reserva_borrar= forms.CharField()
 
 class MesaForm(forms.ModelForm):
     class Meta:

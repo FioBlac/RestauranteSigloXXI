@@ -10,7 +10,7 @@ from orden.models import Orden
 #from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
 import base64
-from .forms import AgregarProductoForm, cambiarEstadoPedidoForm, EliminarProductoForm, EliminarMesaForm, ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2, EliminarUsuarioForm
+from .forms import AgregarProductoForm, cambiarEstadoPedidoForm, EliminarProductoForm, EliminarReservaForm, EliminarMesaForm, ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2, EliminarUsuarioForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db.models import Q, query, query_utils
@@ -576,6 +576,21 @@ def Cliente_Observar_Disponibilidad(request):
 @usuarioPermitido(allowed_roles = ['Cliente'])
 def cliente_ver_reserva(request):
     reservas = Reserva.objects.all()
+    print("No entró al post")
+    
+    if request.method == 'POST':
+        print("entró al post")
+        reserva_borrar = EliminarReservaForm(request.POST)
+        
+        if reserva_borrar.is_valid():
+            id_borrar = reserva_borrar.cleaned_data['id_reserva_borrar']
+
+            reserva = Reserva.objects.get(id_reserva = id_borrar)
+            reserva.delete() 
+            messages.success(request,'Eliminado correctamente')
+        else:
+            print('no funca arriba pq ta malo')
+        
     return render (request, 'html/cliente/cliente_ver_reserva.html', {'reservas':reservas})
 
 
