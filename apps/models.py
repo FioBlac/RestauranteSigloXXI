@@ -267,7 +267,7 @@ class Producto(models.Model):
     proveedor_rut_proveedor = models.ForeignKey('Proveedor', models.DO_NOTHING, db_column='proveedor_rut_proveedor', blank=True, null=True)
     bodega_id_bodega = models.ForeignKey(Bodega, models.DO_NOTHING, db_column='bodega_id_bodega', blank=True, null=True)
     solic_ped_id_soli_prod = models.ForeignKey('SolicPed', models.DO_NOTHING, db_column='solic_ped_id_soli_prod', blank=True, null=True)
-    products_product_id_producto = models.ForeignKey('ProductsProduct', models.DO_NOTHING, db_column='products_product_id_producto', blank=True, null=True)
+    products_product_id_producto = models.ForeignKey('ProductsProduct', models.DO_NOTHING, db_column='products_product_id', blank=True, null=True)
 
     class Meta:
         managed = False

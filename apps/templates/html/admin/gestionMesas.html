@@ -250,7 +250,7 @@
                 <form method="POST">
                     {% csrf_token %}
                     <input type="text" name="id_mesa_borrar" id="id_mesa_borrar" style=display:none;>
-                    <button class="btn btn-danger" type="submit" data-bs-dismiss="modal">
+                    <button class="btn btn-danger" type="submit" data-bs-target="#confirmarCancelar" data-bs-toggle="modal" data-bs-dismiss="modal">
                         Si, estoy seguro/a
                     </button>
                 </form>
