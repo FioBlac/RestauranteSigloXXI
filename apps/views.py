@@ -3,14 +3,16 @@ from django import template
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import render, redirect, get_object_or_404
 
+from carts.models import CartProduct #from RestauranteSigloXXI.carts.models import CartProduct <-- es el original
+
 #from apps.utils import render_to_pdf
-from .models import Producto, Reserva, Mesa, AuthUser, Bodega
+from .models import AuthGroup, AuthUserGroups, Producto, ProductsProduct, Reserva, Mesa, AuthUser, Bodega
 from products.models import Product
 from orden.models import Orden
 #from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
 import base64
-from .forms import AgregarProductoForm, cambiarEstadoPedidoForm, EliminarProductoForm, EliminarReservaForm, EliminarMesaForm, ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2, EliminarUsuarioForm
+from .forms import AgregarProductoForm, cambiarEstadoPedidoForm,fechaReporteForm, EliminarProductoForm, EliminarReservaForm, EliminarMesaForm, ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2, EliminarUsuarioForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db.models import Q, query, query_utils
@@ -21,6 +23,7 @@ from django.db import connection
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives, message
 from django.conf import settings
+
 
 # Create your views here.
 from .decorators import usuarioPermitido, usuarioNoLogeado, admin_view
@@ -142,6 +145,23 @@ def loginAsociado(request):
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def admin_reportes(request):
+
+    if request.method == 'POST':
+        reporteForm = fechaReporteForm(request.POST)
+
+        if reporteForm.is_valid():
+            fecha = reporteForm.cleaned_data['mesReporte']
+            mesas = Mesa.objects.all()
+            #usuarios = AuthUserGroups.objects.get()
+            grupoCliente = AuthGroup.objects.get(name = 'Cliente')
+            contarCliente = 0
+
+            #for u in usuarios:
+            #    if u.AUTH_GROUP_ID == grupoCliente.ID:
+            #        contarCliente = contarCliente+1
+
+            return render (request, 'html/admin/reporte.html',{'mesas':mesas})#, 'contarCliente':contarCliente})
+
     return render (request, 'html/admin/admin_reportes.html')
 
 @login_required(login_url = 'loginAsociado')
@@ -609,14 +629,17 @@ def retiro_platos(request):
     orden = Orden.objects.all().order_by('id')
     mesa = Mesa.objects.all()
     reserva = Reserva.objects.all()
+    print("no entró")
 
     if request.method == 'POST':
+        print("entró")
         pedido = cambiarEstadoPedidoForm(request.POST)
 
         if pedido.is_valid():
+            print("es válido")
             cambiarEstado = pedido.cleaned_data['cambiarEstado']
 
-            modificar_ped = Orden.get(id = cambiarEstado)
+            modificar_ped = orden.get(id = cambiarEstado)
 
             if modificar_ped.status == 'Por Entregar':
                 modificar_ped.status = 'Entregado'
@@ -666,6 +689,9 @@ def gestion_receta(request):
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cocinero'])
 def ventana_pedidos(request):
+    platos = Product.objects.all().order_by('tiempo')
+    cantidadPedido = CartProduct.objects.all().order_by('created_at')
+    pedidos = Orden.objects.all().order_by('id')
     """ platos = Plato.objects.all().order_by('tiempo_prepar')
     pedidos = Pedido.objects.all().order_by('id_pedido') #quizás puedo poner los 2 order by aquí
 
@@ -686,7 +712,7 @@ def ventana_pedidos(request):
                 modificar_ped.estado = 'Cocinando'
                 modificar_ped.save() """
                 
-    return render (request, 'html/Cocinero/ventana_pedidos.html') #,{'pedidos':pedidos , 'platos':platos }
+    return render (request, 'html/Cocinero/ventana_pedidos.html',{'pedidos':pedidos , 'platos':platos , 'cantidadPedido':cantidadPedido })
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cocinero'])

@@ -49,6 +49,9 @@ class MesaForm(forms.ModelForm):
 class datosAgregarMesaForm(forms.Form):
     dispMesaAgg = forms.CharField()
 
+class fechaReporteForm(forms.Form):
+    mesReporte = forms.CharField()
+
 class crearPlato(forms.Form):
     id = forms.CharField()
     title = forms.CharField()
