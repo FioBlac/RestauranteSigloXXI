@@ -607,7 +607,7 @@ def cliente_ver_reserva(request):
 
             reserva = Reserva.objects.get(id_reserva = id_borrar)
             reserva.delete() 
-            messages.success(request,'Eliminado correctamente')
+            messages.success(request,'Reserva cancelada correctamente')
         else:
             print('no funca arriba pq ta malo')
         

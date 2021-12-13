@@ -3,18 +3,26 @@
 {%block content%}
 <div class="col-3">
     {%if product.image%}
-    <img src="{{product.image.url}}" alt="ProductoImagen" width="200" height="200">
+        <img src="{{product.image.url}}" alt="ProductoImagen" width="200" height="200">
     {%endif%}
 </div>
 <div class="col">
-    <div class="h3 font-monospace alert-success">
+    <div class="h4">
         Su plato a sido  agregado
     </div>
     <div>
         <a href="{%url 'product' product.slug%}">{{product.tittle}}</a>
     </div>
-    <div class="h3 font-monospace alert-danger">
+
+    <div class="h4">
         {{product.price | precio_tag}}
+    </div>
+
+    <div class="mt-2">
+        <a href="{%url 'index_productos'%}" class="btn btn-primary"> 
+            <i class="bi bi-cart-plus-fill"></i>
+            Seguir comprando
+        </a>
     </div>
 </div>
 
