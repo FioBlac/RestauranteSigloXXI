@@ -24,6 +24,10 @@ from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives, message
 from django.conf import settings
 
+from django.http import HttpRequest
+from django.shortcuts import render
+
+
 
 # Create your views here.
 from .decorators import usuarioPermitido, usuarioNoLogeado, admin_view
@@ -705,8 +709,7 @@ def retiro_platos(request):
     #OBTENER DATOS PARA MOSTRAR EN LA TABLA
     products = Product.objects.all().order_by('tiempo')
     orden = Orden.objects.all().order_by('id')
-    mesa = Mesa.objects.all()
-    reserva = Reserva.objects.all()
+    cart = CartProduct.objects.all().order_by('created_at')
     print("no entró")
 
     if request.method == 'POST':
@@ -730,7 +733,7 @@ def retiro_platos(request):
                 modificar_ped.status = 'Por Entregar'
                 modificar_ped.save()
 
-    return render (request, 'html/garzon/retiro_platos.html', {'orden':orden , 'products':products, 'mesa':mesa, 'reserva':reserva } )
+    return render (request, 'html/garzon/retiro_platos.html', {'orden':orden , 'products':products, 'cart':cart } )
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])
@@ -786,6 +789,8 @@ def ventana_pedidos(request):
                 print('funcionó todo')
                 modificar_ped.status = 'Por Entregar'
                 modificar_ped.save()
+                messages.success(request,'Plato listo para su entrega')
+
             else:
                 modificar_ped.status = 'Cocinando'
                 modificar_ped.save()          
@@ -840,6 +845,10 @@ def pedidos_cajero(request):
 @usuarioPermitido(allowed_roles = ['Cajero'])
 def ver_pedidos_historicos(request):
     return render (request, 'html/cajero/ver_pedidos_historicos.html')
+
+def listar_pedidos(request):
+    listarpedido = ListarPedido.objects.all()
+    return render(request, "pedidos_cajero.html", {"listarpedido":ListarPedido})
 
 
 def sendEmailReserva(username):

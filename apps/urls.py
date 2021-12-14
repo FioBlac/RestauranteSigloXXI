@@ -64,6 +64,7 @@ urlpatterns =[
     path('pedidos_cajero', views.pedidos_cajero, name='pedidos_cajero'),
     path('ver_pedidos_historicos',views.ver_pedidos_historicos, name='ver_pedidos_historicos'),
 
+    
     #HTML CONTADOR
     path('index_contador', views.index_contador, name='index_contador'),
     path('movimientos_dinero', views.movimientos_dinero, name='movimientos_dinero'),
