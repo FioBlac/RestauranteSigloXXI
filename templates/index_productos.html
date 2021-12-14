@@ -9,16 +9,16 @@
 <div class="row">
     {% for i in product_list %}
         <div class="col-3 mt-4">
-    {% include 'products/snippets/product.html'%}
+        {% include 'products/snippets/product.html'%}
 
-    </div>
+        </div>
     {%endfor%}
+</div>
 
-
-
-
-
-
+<div class="container pt-4 text-center">
+    <a class="btn btn-lg btn-outline-secondary w-50" href="{% url 'codigoqr' %}">
+        Ver nuestra carta
+    </a>
 </div>
 
 </div>   

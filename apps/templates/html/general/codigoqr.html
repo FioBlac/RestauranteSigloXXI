@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     
     <!--CSS -->
-    <link rel="stylesheet" href="{% static 'css/css_index.css' %}">
+    <link rel="stylesheet" href="../../../static/css/css_registro.css">
 
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    {% load crispy_forms_tags %}
+{% load crispy_forms_tags %}
     <header class="container-fluid bg-primary 
     d-flex justify-content-center">
         <p class="text-light mb-0 p-2 fs-7">
@@ -42,8 +42,9 @@
                 </span> 
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -66,114 +67,42 @@
                         <a class="nav-link " href="{% url 'manual' %}">Nuestro sistema</a>
                     </li>
                 </ul>
-
-            {% if user.is_authenticated %}
-                <a class="btn btn-outline-secondary border-0" href="{% url 'cliente_index' %}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                    </svg>
-                    &nbsp;
-                    {{user.first_name}}
-                </a>
-
-                &nbsp;
-                
-                <a class="btn btn-outline-secondary border-0" href="{% url 'cart' %}">
-                    <i class="bi bi-cart4 fs-6"></i>
-                </a>
-                
-                &nbsp;
-
-                <a class="btn btn-primary btn-primary-outline-success" type="submit" href="{% url 'logout' %}">
-                    Cerrar sesion
-                </a>
-                
-                
-            {% else %}
+            
+            <form class="d-flex">
                 <a class="btn btn-outline-secondary me-md-3" type="button" type="submit" href="{% url 'login' %}">
                     Iniciar Sesion
                 </a>
-            {% endif %}
+            </form>
             
             </div>
         </div>
     </nav>
 
-<!--SLIDER-->
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="3000">
-                <img src="{% static 'img/cazuelaSlide.jpg' %}" class="d-block w-100" alt="Plato entrada">
-            </div>
+    <section class="w-50 mx-auto text-center py-5" id="sectionInicio">
+        <h1 class="" id="tituloInicio">¿Quieres conocer nuestra carta?</h1>
+        <span class="fs-5">
+            Visita el siguiente codigo QR.
+        </span>
+    </section>
 
-            <div class="carousel-item" data-bs-interval="3000">
-                <img src="{% static 'img/charquicanSlide.jpg' %}" class="d-block w-100" alt="Plato de fondo">
-            </div>
-
-            <div class="carousel-item">
-                <img src="{% static 'img/pastelSlide.jpg' %}" class="d-block w-100" alt="Postre">
-            </div>
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+<!--MANUAL-->
+    <div class="container pt-4 pb-4 border border-2 rounded shadow">
+        <section class="text-center ">
+            <img class="img-fluid" src="{% static 'img/codigoQR.png' %}" alt="codigo QR de carta">
+        </section>
     </div>
 
-<!--INTRO-->
-    <section class="w-50 mx-auto text-center pt-5" id="sectionInicio">
-        <h1 class="p-3 border-top border-2" id="tituloInicio">50 años dando el mejor servico a tu paladar</h1>
-        <span class="fs-5">
-            En restaurant Siglo XXI nos encargamos de brindar el mejor servicio gastronómico a los residentes y turistas que
-            nos visiten durante su estadia en la zona.
-        </span>
-    </section>
+    <div class="row w-75 mx-auto justify-content-center">
+        <div class="text-center col-lg pt-3 ">
+            <a class="btn btn-outline-secondary btn-lg w-50" href="{% url 'index_productos' %}">
+                Volver
+            </a>
+        </div>        
+    </div>
 
-    <section class="container-fluid">
-        <div class="row w-75 mx-auto my-5 sectionInicioIMG">  
-            <div class="col-lg-6 col-md12 col-sm-12 d-flex justify-content-start my-5  icono-wrap">
-                <img src="{% static 'img/rest21 2.jpg' %}" alt="" width="350" height="260">
-            </div>
-
-            <div class="col-lg-6 col-md12 col-sm-12 d-flex justify-content-start my-5  icono-wrap">
-                <img src="{% static 'img/rest21 3.jpg' %}" alt="" width="350" height="260">
-            </div>
-        </div>
-    </section>
-    
-
-    <!--MISION Y VISION-->
-    <section class="w-50 mx-auto text-center pt-5" id="misionVision">
-        <h1 class="p-3 border-top border-2" name="misionVision" id="tituloInicio">Mision y Visión</h1>
-        <span class="fs-5">
-            A lo largo de nuestro trayecto como restaurant hemos logrado aprender sobre como atender a la clientela
-            que se nos presenta dia a dia, y para eso es que nos tratamos de mantener en vanguardia y mantener la misma
-            calidad hogareña de nuestro servicio
-        </span>
-    </section>
-
-    <!--CAMBIAR IMAGENES DE PAGINA WEB-->
-    <section class="container-fluid">
-        <div class="row w-75 mx-auto my-5 sectionInicioIMG">
-            <div class="col-lg-6 col-md12 col-sm-12 d-flex justify-content-start my-5 icono-wrap">
-                <img src="{% static 'img/rest21 1.jpg' %}" alt="" width="350" height="260">
-            </div>
-
-            <div class="col-lg-6 col-md12 col-sm-12 d-flex justify-content-start my-5 icono-wrap">
-                <img src="{% static 'img/rest21.jpg' %}" alt="" width="350" height="260">
-            </div>
-        </div>
-    </section>
     
     <!--PIE DE PAGINA O FOOTER-->
-    <footer style="margin-top: 20px;" class="bg-primary text-white text-center text-lg-start" >
+    <footer style="margin-top: 20px;" class="bg-primary text-white text-center text-lg-start">
         <div class="container p-4">
             <div class="row">
 
@@ -187,7 +116,7 @@
     
             <!--Barra de atencion al cliente-->
             <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase" name="contactanos">Atencion al cliente</h5>
+                <h5 class="text-uppercase">Atencion al cliente</h5>
             
                 <ul class="list-unstyled mb-0">
                     <li>
@@ -251,7 +180,8 @@
             </a>
         </div>
     </footer>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="/js/loginAsociado.js"></script>
 </body>
 </html>

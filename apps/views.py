@@ -907,6 +907,9 @@ def metodo_pago(request):
 
 def pagar(request):
     return render (request, 'html/pago/pagar.html')
+
+def codigoqr(request):
+    return render (request, 'html/general/codigoqr.html')
 #Formularios
 #Formulario de Hacer Reserva
 #def crearReserva(request):
