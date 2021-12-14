@@ -125,16 +125,19 @@
                                 <th scope="col">Plato</th>
                                 <th scope="col">Precio</th>
                             </tr>
-                                
                         </thead>
                         <!--Filas-->
-                        <tbody>
-                            <tr>
-                                <td class="text-center" scope="row">001p</td>
-                                <td class="text-center" scope="row">Ceviche </td>
-                                <td class="text-center" scope="row">$2000</td>
-                            </tr>        
-                        </tbody>
+                        {% for Producto in Productos %}
+                            {for Product in Products}
+                            <tbody>
+                                <tr>
+                                    <td class="text-center" scope="row"> {{ Producto.id_producto }} </td>
+                                    <td class="text-center" scope="row"> {{ Producto.Nombre }} </td>
+                                    <td class="text-center" scope="row"> {{ Product.price }} </td>
+                                </tr>        
+                            </tbody>
+                            {% endfor %}
+                        {% endfor %}
                     </table>
                 </div>
             </div>

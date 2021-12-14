@@ -26,6 +26,8 @@ from django.conf import settings
 
 from django.http import HttpRequest
 from django.shortcuts import render
+from apps.models import Producto
+from products.models import Product
 
 
 
@@ -846,10 +848,14 @@ def pedidos_cajero(request):
 def ver_pedidos_historicos(request):
     return render (request, 'html/cajero/ver_pedidos_historicos.html')
 
-def listar_pedidos(request):
-    listarpedido = ListarPedido.objects.all()
-    return render(request, "pedidos_cajero.html", {"listarpedido":ListarPedido})
+class ListadoProductos(HttpRequest):
+    def listar_Producto(request):
+        Producto = apps.objects.all()
+        return render(request, "pedidos_cajero.html", {"Producto":Producto})
 
+    def listar_producto2(request):
+        Product = Product.objects.all()
+        return render(request, "pedidos_cajero.html", {"Product":Product})
 
 def sendEmailReserva(username):
     context = {
