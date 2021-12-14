@@ -132,6 +132,7 @@
             <tbody>
                 <!--Podría usar un post para extraer el id para saber cual boton borraría la reserva-->
                 {% for reserva in reservas %}
+                    {% if id_usuario == reserva.auth_user.id %}
                     <tr>
                         <td class="text-center" scope="row">{{ reserva.id_reserva }}</th>
                         <td>{{ reserva.fecha_reserva }}</td>
@@ -141,6 +142,7 @@
                             <button id="{{ reserva.id_reserva }}" class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#ventanaCancelar">Cancelar</button>
                         </td>
                     </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
         </table>

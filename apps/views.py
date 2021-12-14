@@ -145,22 +145,97 @@ def loginAsociado(request):
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def admin_reportes(request):
-
+    
     if request.method == 'POST':
         reporteForm = fechaReporteForm(request.POST)
 
         if reporteForm.is_valid():
             fecha = reporteForm.cleaned_data['mesReporte']
             mesas = Mesa.objects.all()
-            #usuarios = AuthUserGroups.objects.get()
+            usuarios = AuthUserGroups.objects.all()
             grupoCliente = AuthGroup.objects.get(name = 'Cliente')
+            
             contarCliente = 0
 
-            #for u in usuarios:
-            #    if u.AUTH_GROUP_ID == grupoCliente.ID:
-            #        contarCliente = contarCliente+1
 
-            return render (request, 'html/admin/reporte.html',{'mesas':mesas})#, 'contarCliente':contarCliente})
+            #Contar Clientes Nuevos
+            for u in usuarios:
+                if u.group_id == grupoCliente.id:
+                    contarCliente = contarCliente+1
+                
+            #Contar Reservas Concretadas
+            contarReservas = Reserva.objects.all().count()
+
+            #Contar Ordenes Realizadas
+            contarOrdenes = Orden.objects.all().count()
+
+            #Contar Trabajadores Nuevos
+            contarTrabajadores = 0
+            for u in usuarios:
+                if u.group_id != grupoCliente.id:
+                    contarTrabajadores = contarTrabajadores+1
+            
+            #Contar Administradores Nuevos
+            contarAdministradores = 0
+            grupoAdmin = AuthGroup.objects.get(name = 'Admin')
+            for u in usuarios:
+                if u.group_id == grupoAdmin.id:
+                    contarAdministradores = contarAdministradores+1
+
+            #Contar Bodegueros Nuevos
+            contarBodegueros = 0
+            grupoBodega = AuthGroup.objects.get(name = 'Bodega')
+            for u in usuarios:
+                if u.group_id == grupoBodega.id:
+                    contarBodegueros = contarBodegueros+1
+
+            #Contar Cajeros Nuevos
+            contarCajeros = 0
+            grupoCajero = AuthGroup.objects.get(name = 'Cajero')
+            for u in usuarios:
+                if u.group_id == grupoCajero.id:
+                    contarCajeros = contarCajeros+1
+
+            #Contar Cocineros Nuevos
+            contarCocineros = 0
+            grupoCocinero = AuthGroup.objects.get(name = 'Cocinero')
+            for u in usuarios:
+                if u.group_id == grupoCocinero.id:
+                    contarCocineros = contarCocineros+1
+
+            #Contar Garzones Nuevos
+            contarGarzones = 0
+            grupoGarzon = AuthGroup.objects.get(name = 'Garzon')
+            for u in usuarios:
+                if u.group_id == grupoGarzon.id:
+                    contarGarzones = contarGarzones+1    
+
+            #Sacar Ganancias del Mes
+            totalGanancias = Orden.objects.all()
+            ganancias = 0
+            for g in totalGanancias:
+                if g.status != "Cancelado":
+                    ganancias = ganancias + g.total
+            
+            #Sacar Gastos del Mes
+            totalGastos = 53670
+
+            #Sacar Total
+            resultadoTotal = ganancias - totalGastos
+
+            return render (request, 'html/admin/reporte.html',{'mesas':mesas, 
+            'contarCliente':contarCliente,
+            'contarReservas':contarReservas,
+            'contarOrdenes':contarOrdenes,
+            'contarTrabajadores':contarTrabajadores,
+            'contarAdministradores':contarAdministradores,
+            'contarBodegueros':contarBodegueros,
+            'contarCajeros':contarCajeros,
+            'contarCocineros':contarCocineros,
+            'contarGarzones':contarGarzones,
+            'ganancias':ganancias,
+            'totalGastos':totalGastos,
+            'resultadoTotal':resultadoTotal})
 
     return render (request, 'html/admin/admin_reportes.html')
 
@@ -598,6 +673,9 @@ def cliente_ver_reserva(request):
     reservas = Reserva.objects.all().order_by('id_reserva')
     print("No entró al post")
 
+    if request.user.is_authenticated:
+                id_usuario = AuthUser.objects.get(id = request.user.id).id
+
     if request.method == 'POST':
         print("entró al post")
         reserva_borrar = EliminarReservaForm(request.POST)
@@ -611,7 +689,7 @@ def cliente_ver_reserva(request):
         else:
             print('no funca arriba pq ta malo')
         
-    return render (request, 'html/cliente/cliente_ver_reserva.html', {'reservas':reservas})
+    return render (request, 'html/cliente/cliente_ver_reserva.html', {'reservas':reservas, 'id_usuario':id_usuario})
 
 
 
