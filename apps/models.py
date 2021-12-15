@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from products.models import Product
 import base64
 
 
@@ -267,7 +268,7 @@ class Producto(models.Model):
     proveedor_rut_proveedor = models.ForeignKey('Proveedor', models.DO_NOTHING, db_column='proveedor_rut_proveedor', blank=True, null=True)
     bodega_id_bodega = models.ForeignKey(Bodega, models.DO_NOTHING, db_column='bodega_id_bodega', blank=True, null=True)
     solic_ped_id_soli_prod = models.ForeignKey('SolicPed', models.DO_NOTHING, db_column='solic_ped_id_soli_prod', blank=True, null=True)
-    products_product_id_producto = models.ForeignKey('ProductsProduct', models.DO_NOTHING, db_column='products_product_id', blank=True, null=True)
+    products_id = models.ForeignKey(Product, models.DO_NOTHING, db_column='products_product_id', blank=True, null=True)
 
     class Meta:
         managed = False
