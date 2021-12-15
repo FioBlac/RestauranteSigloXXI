@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+
+body{
+    font-family: 'Nunito Sans', sans-serif !important;
+}
+
+/*
+===========================================NAVBAR===========================================
+*/
+#menu li > a{
+    font-size: 18px !important;
+    color: 3f3f3f !important;
+}
+
+#tituloNavbar{
+    font-family: 'Lobster', cursive !important;
+    color: #212529;
+}
+
+#menu form > button{
+    font: 18px !important;
+}
+
+/*
+===========================================TITULO===========================================
+*/
+
+#tituloInicio{
+    font-family: 'Lobster', cursive !important;
+}
+
+/*
+===========================================Botones Fecha===========================================
+*/
+
+.horas{
+    list-style-type:none;
+    margin:10px 0 0 0;
+    padding:0;
+    float: left;
+}
+
+
+
+.input-radio{
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 30px;
+}
+
+input[type=radio] {
+    display: none;
+}
+
+input[type=radio] + label {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border: 2px solid green;
+    margin: 2px;
+}
+
+input[type=radio] + label:hover {
+    border: 2px solid blue;
+}
+
+input[type=radio]:checked + label {
+    border: 2px solid blue;
+}
+
+.ocupado{
+    border: 2px solid red !important;
+}
+
+
+.disponible{
+    border-color:green;
+}
+
+.carta{
+    min-height: 350px;
+}
+    

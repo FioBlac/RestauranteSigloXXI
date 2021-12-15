@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    
+        <!--CSS -->
+        <link rel="stylesheet" href="{% static 'css/css_index_admin.css' %}">
+    
+        <!--FONTS-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> 
+    </head>
+    <body style="background-color: rgb(247, 247, 248); ">
+        <div>
+            <h1 style="text-align: center; margin-top: 40px; font-family: Lobster,cursive; " >
+                <a>
+                    Restaurante SigloXXI
+                </a>
+            </h1>
+            <h3 style="text-align: center; margin-top: 20px;">
+                <a>
+                    Informe del historial de pedidos
+                </a>
+            </h3>
+        </div>
+        <section class="container mb-4" style="margin-top: 30px;">
+            <div class="row mx-auto border rounded justify-content-center">
+                <div class="w-100">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle text-center">
+                            <!-- Nombre de Columna-->
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID Pedido</th>
+                                    <th scope="col">Precio pagado</th>
+                                    <th scope="col">Fecha de pago</th>
+                                </tr>
+                            </thead>
+                            <!--Filas-->
+                            <tbody>
+                                <tr>
+                                    <td class="text-center" scope="row">ped-001</td>
+                                    <td class="text-center" scope="row">$20.000</td>
+                                    <td class="text-center" scope="row">13/12/2000</td>
+                                </tr>        
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>    
+        
+    </body>
+</html>

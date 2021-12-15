@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+        <!--CSS -->
+        <link rel="stylesheet" href="{% static 'css/css_index_admin.css' %}">
+
+        <!--FONTS-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">  
+
+    
+        <!-- Titulo de la pestaña-->
+        <title>Restaurantes Siglo XXI</title>
+    </head>
+<body>
+    <header class="container-fluid bg-info d-flex justify-content-center">
+        <br>
+    </header>
+
+    <div class="ms-5 ps-5">
+        <img class="img-fluid" src="{% static 'img/webpay.png' %}" alt="webpay logo">
+    </div>
+
+    <div class="container w-25 pt-4 border-2 rounded shadow">
+        <div> 
+            <div class="row w-75 mx-auto">
+                <div class="col">
+                    <div class="d-flex">
+                        <p>Estas pagando en:</p>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <h6 id="tituloNavbar">Restaurante Siglo XXI</h6>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="d-flex justify-content-center">
+                        <p>Monto a pagar:</p>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <p>$49.500</p>
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                    <p>Banco:</p>
+                </div>
+
+                <select class="form-select" aria-label="Default select example">
+                    <option class="bi bi-bank" selected> Selecciona tu banco</option>
+                    <option class="fa" value="1">BANCO SANTANDER</option>
+                    <option class="fa" value="2">BANCO ITAU</option>
+                    <option class="fa" value="3">BANCO BCI</option>
+                    <option class="fa" value="4">BANCO ESTADO</option>
+                    <option class="fa" value="5">BANCO FALABELLA</option>
+                </select>
+
+                <button class="btn btn-primary mt-3 mb-4">
+                    Pagar
+                </button>
+            </div>
+
+            <a class="text-decoration-none" href="{% url 'cliente_index' %}">
+                < Anular compra y volver al comercio
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+{%extends "base.html"%}
+
+{%block breadcrumb %}
+{%include "orden/snippets/breadcrumb.html"%}
+{%endblock%}
+
+{%block content%}
+<div class="col-8">
+    <div class="h3">
+        Confirmación
+    </div>
+</div>
+
+<div class="card-">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-4">
+                <div class="badge bg-primary text-wrap">
+                    Metodo Pago
+                </div>
+                
+                <div class="fst-italic">
+                    Tarjeta de pago : 1645
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+<div class="alert alert-primary" role="alert">
+    Detalle de su orden 
+    <a href="{%url 'orden'%} " class="alert-link">Mi orden</a>
+</div>
+
+<div class="mt-1">
+    <div class="card">
+        <div class="card-body">
+            {%for product in cart.products.all%}
+                {%include 'orden/snippets/product.html'%}
+            {%endfor%}    
+        </div>
+    </div>
+</div>
+
+<div class="col">
+    {%url 'completado' as next_url %}
+    {%include 'orden/snippets/detalles.html' with next_url=next_url%}
+
+    <div class="">
+        <div class=''>
+            <div class="card card border-warning mb-3" style="width: 18rem;">
+                    <div class="card body">
+                        <a class="btn btn-danger d-grid gap-2 " href="{%url 'cancelar'%}">
+                            Eliminar orden</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</div>
+
+{%endblock%}
