@@ -18,8 +18,9 @@ class Orden(models.Model):
     ordenID= models.CharField(max_length=100, null=False, blank=False, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     cart=models.ForeignKey(Cart, on_delete=models.CASCADE)
-    status = models.CharField(max_length=40, choices=choices, default=OrdenStatus.CREATED)
+    status = models.CharField(max_length=40, choices=choices, default='En Espera')
     total= models.DecimalField(default=0, max_digits=9, decimal_places=2)
+    pagado = models.CharField(max_length=40, choices=choices, default='No')
     created_at =models.DateTimeField(auto_now_add=True)
     id_cart = models.ForeignKey(Cart, models.DO_NOTHING, db_column='id_cart_p', blank=True, null=True, related_name = '+')
     id_products = models.ForeignKey(Product, models.DO_NOTHING, db_column='id_products_p', blank=True, null=True, related_name = '+')
@@ -39,7 +40,7 @@ class Orden(models.Model):
         self.save()
     
     def completado(self):
-        self.status = 'En Espera'
+        self.status = 'Completado'
         self.save()
         
 
