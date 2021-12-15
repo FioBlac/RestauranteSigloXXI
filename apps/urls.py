@@ -3,7 +3,6 @@ from django import urls
 from django.urls import path
 #from .views import home, login
 from . import views
-from apps.views import ListadoProductos
 urlpatterns =[
     #HTML GENERAL
     path('', views.index, name='index'),
@@ -63,7 +62,6 @@ urlpatterns =[
     path('index_cajero', views.index_cajero, name='index_cajero'),
     path('pedidos_cajero', views.pedidos_cajero, name='pedidos_cajero'),
     path('ver_pedidos_historicos',views.ver_pedidos_historicos, name='ver_pedidos_historicos'),
-    path( 'listar_Producto/',ListadoProductos.listar_Producto, name= 'listar_Producto'),
     
     #HTML CONTADOR
     path('index_contador', views.index_contador, name='index_contador'),
