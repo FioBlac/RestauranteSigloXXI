@@ -24,7 +24,7 @@ from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives, message
 from django.conf import settings
 from django.db.models import Sum
-
+from products.models import Product 
 
 # Create your views here.
 from .decorators import usuarioPermitido, usuarioNoLogeado, admin_view
@@ -862,6 +862,14 @@ def ListarComprasRealizadas(request):
     listacompra = Product.objects.all()
     Lista = {'listarcompras':listacompra}
     return render(request, 'apps/templates/html/Cajero/pedidos_cajero.html',)
+
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cajero'])
+def ListarComprasRealizadas(request):
+    listacompra = Product.objects.all()
+    Lista = {'listarcompras':listacompra}
+    return render(request, 'apps/templates/html/Cajero/pedidos_cajero.html',)
+
 
 
 

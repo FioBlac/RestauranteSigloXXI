@@ -1,4 +1,3 @@
-{% extends 'products/templates/product.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -131,15 +130,19 @@
                         <!--Filas-->
                             <tbody>
                                 {% if listacompra %}
-                                {% for listarcompras %}
+                                {% for Lista in listacompra  %}
                                 <tr>
                                     <td class="text-center" scope="row"> </td>
-                                    <td class="text-center" scope="row"> {{listacompra.d}} </td>
+                                    <td class="text-center" scope="row"> {{listacompra.title}} </td>
                                     <td class="text-center" scope="row"> {{listacompra.price}} </td>
-                                </tr>        
+                                </tr>
+                                {% endfor %}
+                                {% else %} 
+                                <h4 style="margin: 20px;">No hay registro de pagos</h4>
+                                {% endif %}           
                             </tbody>
                     </table>
-                    {% end block %}
+                    {% endblock %}
                 </div>
             </div>
         </div>
