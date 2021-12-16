@@ -464,8 +464,10 @@ def menu_reportes(request):
 @admin_view
 def reporte_contable(request):
     orden = Orden.objects.all()
-    totalGanancias = Orden.objects.aggregate(Sum('total'))
-    print(totalGanancias)
+    totalGanancias = 0
+
+    for tg in orden:
+        totalGanancias = totalGanancias + tg.total
     return render(request, 'html/admin/reporte_contable.html', {'orden':orden, 'totalGanancias':totalGanancias})
 
 
