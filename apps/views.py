@@ -23,6 +23,7 @@ from django.db import connection
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives, message
 from django.conf import settings
+from django.db.models import Sum
 
 
 # Create your views here.
@@ -453,6 +454,29 @@ def logoutUserAsoci(request):
     return redirect('loginAsociado')
 
 
+@login_required(login_url = 'loginAsociado')
+@admin_view
+def menu_reportes(request):
+    return render(request, 'html/admin/menu_reportes.html')
+
+
+@login_required(login_url = 'loginAsociado')
+@admin_view
+def reporte_contable(request):
+    orden = Orden.objects.all()
+    totalGanancias = Orden.objects.aggregate(Sum('total'))
+    print(totalGanancias)
+    return render(request, 'html/admin/reporte_contable.html', {'orden':orden, 'totalGanancias':totalGanancias})
+
+
+@login_required(login_url = 'loginAsociado')
+@admin_view
+def reporte_stock(request):
+
+    return render(request, 'html/admin/reporte_stock.html')
+
+
+
 #HTML BODEGA
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Bodega'])
@@ -842,7 +866,12 @@ def pedidos_cajero(request):
 def ver_pedidos_historicos(request):
     return render (request, 'html/cajero/ver_pedidos_historicos.html')
 
-
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cajero'])
+def ListarComprasRealizadas(request):
+    listacompra = Product.objects.all()
+    Lista = {'listarcompras':listacompra}
+    return render(request, 'apps/templates/html/Cajero/pedidos_cajero.html',)
 
 
 

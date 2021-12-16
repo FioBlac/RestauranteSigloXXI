@@ -29,6 +29,9 @@ urlpatterns =[
     path('agregar_mesa', views.agregar_mesa, name='agregar_mesa'),
     path('logoutUserAsoci', views.logoutUserAsoci, name= 'logoutUserAsoci'),
     path('crear_plato', views.crear_plato, name= 'crear_plato'),
+    path('reporte_contable', views.reporte_contable, name= 'reporte_contable'),
+    path('reporte_stock', views.reporte_stock, name= 'reporte_stock'),
+    path('menu_reportes', views.menu_reportes, name= 'menu_reportes'),
 
     #HTML BODEGA
     path('gestion_bodega', views.gestion_bodega, name='gestion_bodega'),
@@ -55,7 +58,8 @@ urlpatterns =[
     path('ventana_pedidos', views.ventana_pedidos, name='ventana_pedidos'),
     path('ventana_orden_preparacion', views.ventana_orden_preparacion, name='ventana_orden_preparacion'),
     path('pedido_cliente_sin_entrega', views.pedido_cliente_sin_entrega, name='pedido_cliente_sin_entrega'),
-
+    path('pedido_cajero',views.ListarComprasRealizadas, name= 'pedido_cajero'),
+    
     #HTML CAJERO
     path('cajero_cuenta_clientes', views.cajero_cuenta_clientes, name='cajero_cuenta_clientes'),
     path('Cobro_Cliente_Manual', views.Cobro_Cliente_Manual, name='Cobro_Cliente_Manual'),

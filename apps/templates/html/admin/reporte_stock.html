@@ -98,11 +98,11 @@
     </section>
 
     <section class="w-50 mx-auto text-center pt-5" id="sectionInicio">
-        <h1 class="p-3 border-top border-2" id="tituloInicio">Gestión de usuarios</h1>
+        <h1 class="p-3 border-top border-2" id="tituloInicio">Ganancias</h1>
     </section>
 
     <section class="container">
-        <div class="row mx-auto border justify-content-center">
+        <div class="row mx-auto border rounded justify-content-center">
             {% if messages %}
                 {% for messages in messages %}
                     <div class="alert d-flex alert-success text-center align-items-center " role="alert">
@@ -115,118 +115,73 @@
                 {% endfor %}
             {% endif %}
 
-            <form class="row g-3" method="GET">
-                <div class="input-group col-auto">
-                    <input type="text" class="form-control" placeholder="Buscar usuario" aria-label="Recipient's username" aria-describedby="button-addon2" name="inputBuscarUsuario">
-                    
-                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                    &nbsp;
-                    <button type="submit" class="btn btn-primary">Buscar</button>
-                </div>
-            </form>
-
             <div class="w-100">
                 <div class="table-responsive">
-                    {% if usuarios %}
-                        <table class="table table-hover align-middle text-center">
-                            <!--Columna-->
-                            <thead>
-                                <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Usuario</th>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Apellido</th>
-                                    <th scope="col">Correo electrónico</th>
-                                    <th scope="col">Fecha que se unió</th>
-                                    <th scope="col" colspan="2">Opciones</th>
-                                </tr>
-                                
-                            </thead>
+                    <table class="table table-hover align-middle text-center">
+                        <!--Columna-->
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Total pagado</th>
+                            </tr>
+                            
+                        </thead>
 
-                            <!--Filas-->
-                            <tbody>
-                                {% for u in usuarios %}
-                                    <tr>
-                                        <td class="text-center" scope="row">{{ u.id }}</td>
-                                        <td class="text-center" scope="row">{{ u.username }}</td>
-                                        <td class="text-center" scope="row">{{ u.first_name }}</td>
-                                        <td class="text-center" scope="row">{{ u.last_name }}</td>
-                                        <td class="text-center" scope="row">{{ u.email }}</td>
-                                        <td class="text-center" scope="row">{{ u.date_joined }}</td>
-                                        <td class="text-danger fs-4 text-center" scope="row">
-                                            <a class="btn btn-outline-danger border-0 fs-4 text-center" href="" id="{{ u.id }}" data-bs-toggle="modal" data-bs-target="#modalEliminar">
-                                                <i class="bi bi-trash" id="{{ u.id }}"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    {% endif %}
+                        <!--Filas-->
+                        <tbody>
+                                <tr>
+                                    <td class="text-center" scope="row">{{ o.id }}</td>
+                                    <td class="text-center" scope="row">{{ o.username }}</td>
+                                    <td class="text-center" scope="row">{{ o.first_name }}</td>
+                                </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!--Modal eliminar-->
-        <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Eliminar usuario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+    <section class="w-50 mx-auto text-center pt-5" id="sectionInicio">
+        <h1 class="p-3 border-top border-2" id="tituloInicio">Pérdidas</h1>
+    </section>
 
-                    <div class="modal-body">
-                        ¿Desea eliminar este usuario?
-                    </div>
+    <section class="container">
+        <div class="row mx-auto border rounded justify-content-center">
+            <div class="w-100">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle text-center">
+                        <!--Columna-->
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Producto</th>
+                                <th scope="col">Costo</th>
+                            </tr>
+                            
+                        </thead>
 
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" data-bs-dismiss="modal">
-                            No eliminar
-                        </button>
-
-                        <form method="POST">
-                            {% csrf_token %}
-                            <input type="text" name="id_usuario_borrar" id="id_usuario_borrar" style=display:none;>
-                            <button class="btn btn-danger" type="submit" data-bs-dismiss="modal">
-                                Si, estoy seguro/a
-                            </button>
-                        </form>
-                        
-                    </div>
+                        <!--Filas-->
+                        <tbody>
+                                <tr>
+                                    <td class="text-center" scope="row"></td>
+                                    <td class="text-center" scope="row"></td>
+                                    <td class="text-center" scope="row"></td>
+                                </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
         <div class="row w-75 mx-auto justify-content-center">
             <div class="text-center col-lg pt-3 ">
-                <a class="btn btn-primary btn-primary-outline-success btn-lg w-50" href="{% url 'index_admin' %}">
+                <a class="btn  btn-outline-secondary btn-lg w-50" href="{% url 'index_admin' %}">
                     Volver
                 </a>
             </div>
-
-            <div class="text-center col-lg p-3 ">
-                <a class="btn btn-success btn-primary-outline-success btn-lg w-50" href="{% url 'agregar_usuario' %}">
-                    Agregar usuario
-                </a>
-            </div>            
         </div>
     </section>
-
-    <script>
-        const tabla = document.querySelector(".table-responsive")
-        const eliminar = document.querySelector('#id_usuario_borrar')
-
-        //Leerá las características de cualquier elemento del html que esté dentro de la tabla
-        tabla.addEventListener('click', (e) =>{
-            id = e.target.id
-            console.log(id)
-            console.log(eliminar)
-            eliminar.value = id
-        })
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
