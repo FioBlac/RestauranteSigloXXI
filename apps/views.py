@@ -473,12 +473,14 @@ def gestion_bodega(request):
 
     productos = Producto.objects.all()
     if request.method == 'POST':
+        print("entra al post")
         producto_borrar = EliminarProductoForm(request.POST)
         
         if producto_borrar.is_valid():
+            print("post valido")
             id_borrar = producto_borrar.cleaned_data['id_producto_borrar']
 
-            producto = Producto.objects.get(id_producto = id_borrar)
+            producto = Producto.objects.get(id = id_borrar)
             producto.delete() 
             messages.success(request,'Producto eliminado correctamente')
             
@@ -534,7 +536,7 @@ def registro_bodega(request):
 
             #bodega_id_bodega
             producto = Producto(
-                id_producto  = nuevo_id, 
+                id = nuevo_id, 
                 bodega_id_bodega = bodega, 
                 nombre = nombre_alimento, 
                 temperatura_conservacion = t_conservacion, 
