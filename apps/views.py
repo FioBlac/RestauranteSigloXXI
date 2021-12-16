@@ -844,7 +844,12 @@ def pedidos_cajero(request):
 def ver_pedidos_historicos(request):
     return render (request, 'html/cajero/ver_pedidos_historicos.html')
 
-
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cajero'])
+def ListarComprasRealizadas(request):
+    listacompra = Product.objects.all()
+    Lista = {'listarcompras':listacompra}
+    return render(request, 'apps/templates/html/Cajero/pedidos_cajero.html',)
 
 
 
