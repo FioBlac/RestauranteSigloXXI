@@ -471,13 +471,11 @@ def gestion_bodega(request):
     for _ in list(storage._loaded_messages):
         del storage._loaded_messages[0]
 
-    productos = Producto.objects.all()
+    productos = Producto.objects.all().order_by('id')
     if request.method == 'POST':
-        print("entra al post")
         producto_borrar = EliminarProductoForm(request.POST)
         
         if producto_borrar.is_valid():
-            print("post valido")
             id_borrar = producto_borrar.cleaned_data['id_producto_borrar']
 
             producto = Producto.objects.get(id = id_borrar)
@@ -525,7 +523,7 @@ def registro_bodega(request):
             #Asignando variables para guardar
             #Tengo que hacer el que pasaria si no hay registros para el id
             try:
-                ultimo_id_alimento = Producto.objects.latest('id_producto').id_producto #Último ID registrado en reservas
+                ultimo_id_alimento = Producto.objects.latest('id').id #Último ID registrado en reservas
             except:
                 ultimo_id_alimento= 0
 
@@ -555,7 +553,7 @@ def registro_bodega(request):
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Bodega'])
 def solicitud_bodega(request):
-    productos = Producto.objects.all()
+    productos = Producto.objects.all().order_by('id')
 
     return render (request, 'html/bodega/solicitud_bodega.html', {'productos':productos})
 
