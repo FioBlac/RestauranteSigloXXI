@@ -98,52 +98,7 @@
     </section>
 
     <section class="w-50 mx-auto text-center pt-5" id="sectionInicio">
-        <h1 class="p-3 border-top border-2" id="tituloInicio">Ganancias</h1>
-    </section>
-
-    <section class="container">
-        <div class="row mx-auto border rounded justify-content-center">
-            {% if messages %}
-                {% for messages in messages %}
-                    <div class="alert d-flex alert-success text-center align-items-center " role="alert">
-                        <i class="bi bi-check-circle-fill"></i>
-                        &nbsp;                      
-                        <div>
-                            {{ messages }}
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endif %}
-
-            <div class="w-100">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle text-center">
-                        <!--Columna-->
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Total pagado</th>
-                            </tr>
-                            
-                        </thead>
-
-                        <!--Filas-->
-                        <tbody>
-                                <tr>
-                                    <td class="text-center" scope="row">{{ o.id }}</td>
-                                    <td class="text-center" scope="row">{{ o.username }}</td>
-                                    <td class="text-center" scope="row">{{ o.first_name }}</td>
-                                </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="w-50 mx-auto text-center pt-5" id="sectionInicio">
-        <h1 class="p-3 border-top border-2" id="tituloInicio">Pérdidas</h1>
+        <h1 class="p-3 border-top border-2" id="tituloInicio">Productos usados en el día</h1>
     </section>
 
     <section class="container">
@@ -156,6 +111,7 @@
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Producto</th>
+                                <th scope="col">Cantidad gastada</th>
                                 <th scope="col">Costo</th>
                             </tr>
                             
@@ -163,11 +119,21 @@
 
                         <!--Filas-->
                         <tbody>
+                            {% for p in product %}
                                 <tr>
-                                    <td class="text-center" scope="row"></td>
-                                    <td class="text-center" scope="row"></td>
-                                    <td class="text-center" scope="row"></td>
+                                    <td class="text-center" scope="row">{{ p.id }}</td>
+                                    <td class="text-center" scope="row">{{ p.title }}</td>
+                                    <td class="text-center" scope="row">{{ p.cantidad }}</td>
+                                    <td class="text-center" scope="row">$ </td>
                                 </tr>
+                            {% endfor %}
+                        </tbody>
+                        
+                        <tbody>
+                            <tr class="table-info">
+                                <th class="text-center" scope="row" colspan="3">Total del costo</th>
+                                <td class="text-center" scope="row">$ 5350</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -176,7 +142,7 @@
 
         <div class="row w-75 mx-auto justify-content-center">
             <div class="text-center col-lg pt-3 ">
-                <a class="btn  btn-outline-secondary btn-lg w-50" href="{% url 'index_admin' %}">
+                <a class="btn  btn-outline-secondary btn-lg w-50" href="{% url 'menu_reportes' %}">
                     Volver
                 </a>
             </div>

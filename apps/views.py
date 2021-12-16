@@ -7,7 +7,7 @@ from carts.models import CartProduct #from RestauranteSigloXXI.carts.models impo
 
 #from apps.utils import render_to_pdf
 from .models import AuthGroup, AuthUserGroups, Producto, Reserva, Mesa, AuthUser, Bodega
-from products.models import Product
+from products.models import Product, Ingredientes
 from orden.models import Orden
 #from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
@@ -472,8 +472,10 @@ def reporte_contable(request):
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def reporte_stock(request):
+    product = Product.objects.all()
+    ingredientes = Ingredientes.objects.all()
+    return render(request, 'html/admin/reporte_stock.html',{'product':product, 'ingredientes':ingredientes})
 
-    return render(request, 'html/admin/reporte_stock.html')
 
 
 
@@ -585,21 +587,7 @@ def solicitud_bodega(request):
 @login_required(login_url = 'login')
 @usuarioPermitido(allowed_roles = ['Cliente'])
 def cliente_hacer_pedido(request):
-    platos = Plato.objects.all()
-
-    arreglo = []
-
-    for i in platos:
-        data = {
-            'id_plato': i.id_plato,
-            'nombre_plato': i.nombre_plato,
-            'precio': i.precio,
-            'tipo_plato': i.tipo_plato,
-            'foto_plato': str(base64.b64encode(i.foto_plato.read()),'utf-8')
-        }
-        arreglo.append(data)
-
-    return render (request, 'html/cliente/cliente_hacer_pedido.html', {'arreglo' :arreglo})#data
+    return render (request, 'html/cliente/cliente_hacer_pedido.html')#data
 
 @login_required(login_url = 'login')
 @usuarioPermitido(allowed_roles = ['Cliente'])
