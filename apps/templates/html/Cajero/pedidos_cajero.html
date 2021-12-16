@@ -1,3 +1,4 @@
+{% extends 'products/templates/product.html' %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -117,6 +118,7 @@
             </form>
             <div class="w-100">
                 <div class="table-responsive">
+                    {% block content %}
                     <table class="table table-hover align-middle text-center">
                         <!-- Nombre de Columna-->
                         <thead>
@@ -128,13 +130,16 @@
                         </thead>
                         <!--Filas-->
                             <tbody>
+                                {% if listacompra %}
+                                {% for listarcompras %}
                                 <tr>
-                                    <td class="text-center" scope="row">  </td>
-                                    <td class="text-center" scope="row">  </td>
-                                    <td class="text-center" scope="row">  </td>
+                                    <td class="text-center" scope="row"> </td>
+                                    <td class="text-center" scope="row"> {{listacompra.d}} </td>
+                                    <td class="text-center" scope="row"> {{listacompra.price}} </td>
                                 </tr>        
                             </tbody>
                     </table>
+                    {% end block %}
                 </div>
             </div>
         </div>
@@ -143,12 +148,6 @@
             <div class="text-center col-lg pt-3 ">
                 <a class="btn btn-outline-secondary w-25" href="{% url 'index_cajero' %}">
                     Volver
-                </a>
-            </div>
-
-            <div class="text-center col-lg pt-3 ">
-                <a class="btn btn-outline-secondary w-50" href="{% url 'ver_pedidos_historicos' %}">
-                    Ver pedidos historicos
                 </a>
             </div>
         </div>
