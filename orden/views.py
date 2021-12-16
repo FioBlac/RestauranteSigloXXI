@@ -2,7 +2,7 @@ from django.contrib import  messages
 from django.shortcuts import render, redirect
 from carts.funciones import funcionCarrito, deleteCart
 from .models import Orden
-from .utils import funcionOrden, deleteOrden
+from .utils import funcionOrden, deleteOrden, funcionRestarIngredientes
 from django.contrib.auth.decorators import login_required
 from .utils import breadcrumb
 from .import views
@@ -36,6 +36,10 @@ def orden (request):
 
     cart = funcionCarrito(request)
     orden = funcionOrden(cart, request)
+    
+    #Aquí se registra los ingredientes utilizados en el pedido
+    funcionRestarIngredientes(cart)
+    #Termina el registro de los ingredientes
 
     return render(request,'orden/orden.html',{
     'cart': cart,

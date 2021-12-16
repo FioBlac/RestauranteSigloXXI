@@ -81,6 +81,9 @@ class Bodega(models.Model):
     total_merma = models.CharField(max_length=100)
     categoria_producto = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.categoria_producto
+
 
 
 class Boleta(models.Model):
@@ -152,6 +155,8 @@ class Producto(models.Model):
     bodega_id_bodega = models.ForeignKey(Bodega, models.DO_NOTHING, db_column='bodega_id_bodega', blank=True, null=True)
     solic_ped_id_soli_prod = models.ForeignKey('SolicPed', models.DO_NOTHING, db_column='solic_ped_id_soli_prod', blank=True, null=True)
 
+    def __str__(self):
+        return self.nombre
 
 class Proveedor(models.Model):
     rut_proveedor = models.CharField(primary_key=True, max_length=20)

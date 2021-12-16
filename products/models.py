@@ -29,5 +29,5 @@ pre_save.connect(new_slug, sender=Product)
 
 class Ingredientes(models.Model):
     product= models.ForeignKey(Product, models.DO_NOTHING)
-    producto = models.ForeignKey(Producto, models.DO_NOTHING)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.IntegerField()
