@@ -9,4 +9,5 @@ admin.site.register(Boleta)
 admin.site.register(Mesa)
 admin.site.register(Bodega)
 admin.site.register(Ingredientes)
+admin.site.register(Producto)
 

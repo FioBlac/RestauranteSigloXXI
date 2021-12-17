@@ -1,7 +1,7 @@
 from apps.models import Producto
 from carts.models import CartProduct
 from products.models import Ingredientes
-from .models import Orden
+from .models import Orden, Merma
 from django.urls import  reverse
 
 def funcionOrden(cart, request):
@@ -25,12 +25,18 @@ def funcionRestarIngredientes(cart):
             numPlatos = numPlatos - 1
             ingredientes = Ingredientes.objects.filter(product = p.product)
             print(ingredientes)
+
             for i in ingredientes:
                 cantidadIngredientes = i.cantidad
                 ingrediente= Producto.objects.get(id = i.producto.id)
                 ingrediente.cantidad =  int(ingrediente.cantidad) - int(cantidadIngredientes)
                 ingrediente.save()
-       
+
+                
+                #merma.producto = ingrediente
+                #merma.cant_usada = i.cantidad
+                merma = Merma.objects.create(producto = ingrediente, cant_usada = i.cantidad)
+                #merma.save()
 
         
 

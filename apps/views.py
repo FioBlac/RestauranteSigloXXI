@@ -463,7 +463,7 @@ def menu_reportes(request):
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def reporte_contable(request):
-    orden = Orden.objects.all()
+    orden = Orden.objects.filter(status = 'Completado')
     totalGanancias = 0
 
     for tg in orden:

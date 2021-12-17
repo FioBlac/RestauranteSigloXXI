@@ -2,7 +2,7 @@ from django.db import models
 from users.models import User
 from carts.models import Cart
 from products.models import Product
-from apps.models import Reserva
+from apps.models import Producto, Reserva
 from django.db.models.signals import pre_save
 import uuid
 from .comun import OrdenStatus
@@ -44,7 +44,12 @@ class Orden(models.Model):
         self.save()
         
 
-    
+class Merma(models.Model):
+    fecha_merma = models.DateField(auto_now_add = True)
+    cant_usada = models.IntegerField()
+    producto = models.ForeignKey(Producto, models.DO_NOTHING, db_column='id_producto', blank=True, null=True, related_name = '+')
+
+
 
 
 def enviarOrden(sender, instance, *args, **kwargs):
