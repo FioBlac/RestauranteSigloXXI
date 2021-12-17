@@ -129,7 +129,7 @@
                             <tr>
                                 <th scope="col">ID Alimento</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Peso / Volumen (KG / LT)</th>
+                                <th scope="col">Cantidad</th>
                                 <th scope="col">T° Conservación</th>
                                 <th scope="col">Fecha de Caducidad</th>
                                 <th scope="col"> Zona de Conservación</th>
@@ -145,8 +145,8 @@
                                 <tr>
                                     <td class="text-center" scope="row">{{ p.id }}</td>
                                     <td class="text-center" scope="row">{{ p.nombre }}</td>
-                                    <td class="text-center" scope="row">{{ p.cantidad }}</td>
-                                    <td class="text-center" scope="row">{{ p.temperatura_conservacion }} grados celsius</td>
+                                    <td class="text-center" scope="row">{{ p.cantidad }} {{ p.unidad_medida }}</td>
+                                    <td class="text-center" scope="row">{{ p.temperatura_conservacion }} °C</td>
                                     <td class="text-center" scope="row">{{ p.fecha_caducidad }} </td>
                                     <td class="text-center" scope="row">{{ p.zona_conservacion }}</td>
                                     <td class="text-center" scope="row">{{ p.tipo_alimento }}</td>

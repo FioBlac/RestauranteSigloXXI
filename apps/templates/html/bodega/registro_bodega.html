@@ -129,10 +129,24 @@
 
             <div class="row w-75 mx-auto">
                 <div class="col-lg-6 col-md-6 col-sm-12 my-3">
-                    <input type="text" name="cantidad_alimento" class="form-control" id="left-registro" placeholder="Cantidad: Unidad, Kilogramos o Litros">
+                    <input type="text" name="cantidad_alimento" class="form-control" id="left-registro" placeholder="Cantidad del producto">
                 </div>
 
-                
+                <div class="col-lg-6 col-md-6 col-sm-12 my-3">
+                    <select class="form-select" name="unidad_medida" aria-label="Default select example">
+                        <option selected>Unidad de Medida</option>
+                        <option value="Kilogramos">Kilogramos</option>
+                        <option value="Litros">Litros</option>
+                        <option value="Unidades">Unidades</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row w-75 mx-auto">
+                <div class="col-lg-6 col-md-6 col-sm-12 my-3">
+                    <input type="text" name="valor" class="form-control" id="left-registro" placeholder="Coste por unidad de medida del Producto en CLP">
+                </div>
+            
             </div>
 
             <div class="row w-75 mx-auto">

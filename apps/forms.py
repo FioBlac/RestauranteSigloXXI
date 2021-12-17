@@ -23,10 +23,12 @@ class AgregarProductoForm(forms.Form):
     id_bodega = forms.CharField()
     nombre_alimento = forms.CharField()
     t_conservacion = forms.CharField()
+    unidad_medida= forms.CharField()
     cantidad_alimento = forms.CharField()
     fecha_caducidad = forms.DateTimeField()
     zona_refrigeracion = forms.CharField()
     tipo_alimento = forms.CharField()
+    valor = forms.CharField()
 
 class EliminarProductoForm(forms.Form):
     id_producto_borrar = forms.CharField()

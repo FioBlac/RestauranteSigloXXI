@@ -536,9 +536,12 @@ def registro_bodega(request):
             nombre_alimento = datos_item.cleaned_data['nombre_alimento']
             t_conservacion = datos_item.cleaned_data['t_conservacion']
             cantidad_alimento = datos_item.cleaned_data['cantidad_alimento']
+            unidad_medida = datos_item.cleaned_data['unidad_medida']
             fecha_caducidad = datos_item.cleaned_data['fecha_caducidad']
             zona_refrigeracion = datos_item.cleaned_data['zona_refrigeracion']
             tipo_alimento = datos_item.cleaned_data['tipo_alimento']
+            valor = datos_item.cleaned_data['valor']
+
 
             print(id_bodega)
             print(nombre_alimento)
@@ -567,9 +570,11 @@ def registro_bodega(request):
                 nombre = nombre_alimento, 
                 temperatura_conservacion = t_conservacion, 
                 cantidad = cantidad_alimento,
+                unidad_medida = unidad_medida,
                 fecha_caducidad = fecha_caducidad,
                 zona_conservacion = zona_refrigeracion,
-                tipo_alimento =  tipo_alimento
+                tipo_alimento =  tipo_alimento,
+                valor = valor
                 )
             producto.save()
 
