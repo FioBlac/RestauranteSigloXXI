@@ -24,7 +24,9 @@ from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives, message
 from django.conf import settings
 from django.db.models import Sum
-from products.models import Product 
+from apps.forms import crearPlato 
+from orden.models import Orden
+from products.models import Product
 
 # Create your views here.
 from .decorators import usuarioPermitido, usuarioNoLogeado, admin_view
@@ -865,20 +867,11 @@ def ver_pedidos_historicos(request):
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cajero'])
-def ListarComprasRealizadas(request):
+def ListaComprasRealizadas(request):
+    listacompra = Orden.objects.all()
     listacompra = Product.objects.all()
     Lista = {'listarcompras':listacompra}
-    return render(request, 'apps/templates/html/Cajero/pedidos_cajero.html',)
-
-@login_required(login_url = 'loginAsociado')
-@usuarioPermitido(allowed_roles = ['Cajero'])
-def ListarComprasRealizadas(request):
-    listacompra = Product.objects.all()
-    Lista = {'listarcompras':listacompra}
-    return render(request, 'apps/templates/html/Cajero/pedidos_cajero.html',)
-
-
-
+    return render(request, 'apps/templates/Cajero/pedidos_cajero.html', Lista)
 
 def sendEmailReserva(username):
     context = {

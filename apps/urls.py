@@ -3,6 +3,7 @@ from django import urls
 from django.urls import path
 #from .views import home, login
 from . import views
+from apps.views import ListaComprasRealizadas  
 urlpatterns =[
     #HTML GENERAL
     path('', views.index, name='index'),
@@ -58,7 +59,7 @@ urlpatterns =[
     path('ventana_pedidos', views.ventana_pedidos, name='ventana_pedidos'),
     path('ventana_orden_preparacion', views.ventana_orden_preparacion, name='ventana_orden_preparacion'),
     path('pedido_cliente_sin_entrega', views.pedido_cliente_sin_entrega, name='pedido_cliente_sin_entrega'),
-    path('pedido_cajero',views.ListarComprasRealizadas, name= 'pedido_cajero'),
+    path('pedido_cajero',views.ListaComprasRealizadas, name= 'pedido_cajero'),
     
     #HTML CAJERO
     path('cajero_cuenta_clientes', views.cajero_cuenta_clientes, name='cajero_cuenta_clientes'),
@@ -66,7 +67,8 @@ urlpatterns =[
     path('index_cajero', views.index_cajero, name='index_cajero'),
     path('pedidos_cajero', views.pedidos_cajero, name='pedidos_cajero'),
     path('ver_pedidos_historicos',views.ver_pedidos_historicos, name='ver_pedidos_historicos'),
-    
+    path('pedido_cajero',views.ListaComprasRealizadas, name= 'pedido_cajero'),
+
     #HTML CONTADOR
     path('index_contador', views.index_contador, name='index_contador'),
     path('movimientos_dinero', views.movimientos_dinero, name='movimientos_dinero'),
