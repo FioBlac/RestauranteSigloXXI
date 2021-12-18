@@ -155,7 +155,7 @@ def admin_reportes(request):
         if reporteForm.is_valid():
             fecha = reporteForm.cleaned_data['mesReporte']
             mesReporte = fecha[:7]
-           
+        
             mesas = Mesa.objects.all()
             
             
@@ -516,14 +516,30 @@ def menu_reportes(request):
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def reporte_contable(request):
-    orden = Orden.objects.filter(status = 'Completado')
     merma = Merma.objects.all()
     producto = Producto.objects.all()
     totalGanancias = 0
+    totalPerdidas = 0
+    reporteHoy = datetime.now().strftime('%Y-%m-%d')
+    orden = Orden.objects.filter(status = 'Completado')
+    
+    print(reporteHoy)
 
     for tg in orden:
-        totalGanancias = totalGanancias + tg.total
-    return render(request, 'html/admin/reporte_contable.html', {'orden':orden, 'totalGanancias':totalGanancias, 'merma':merma, 'producto':producto})
+        dia_reporte = tg.created_at.strftime('%Y-%m-%d')
+
+        if dia_reporte == reporteHoy:
+            totalGanancias = totalGanancias + tg.total
+
+
+
+    for tp in merma:
+        dia_reporte = tp.fecha_merma.strftime('%Y-%m-%d')
+
+        if dia_reporte == reporteHoy:
+            valorProducto = producto.get( id = tp.producto.id ).valor
+            totalPerdidas = totalPerdidas + (valorProducto * tp.cant_usada)
+    return render(request, 'html/admin/reporte_contable.html', {'orden':orden, 'totalGanancias':totalGanancias, 'merma':merma, 'producto':producto, 'totalPerdidas':totalPerdidas})
 
 
 @login_required(login_url = 'loginAsociado')

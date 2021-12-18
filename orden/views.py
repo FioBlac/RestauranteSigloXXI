@@ -37,9 +37,7 @@ def orden (request):
     cart = funcionCarrito(request)
     orden = funcionOrden(cart, request)
     
-    #Aquí se registra los ingredientes utilizados en el pedido
-    funcionRestarIngredientes(cart)
-    #Termina el registro de los ingredientes
+
 
     return render(request,'orden/orden.html',{
     'cart': cart,
@@ -61,6 +59,9 @@ def confirmacion(request):
     cart=funcionCarrito(request)
     orden=funcionOrden(cart, request)
 
+    #Aquí se registra los ingredientes utilizados en el pedido
+    funcionRestarIngredientes(cart)
+    #Termina el registro de los ingredientes
 
 
     return render(request,'orden/confirmacion.html',{

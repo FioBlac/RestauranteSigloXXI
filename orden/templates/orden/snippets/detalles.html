@@ -33,11 +33,11 @@
 
     {% if orden.status == 'Entregado' %}
         <div class="d-grid gap-2 mt-2">
-            <a class="btn btn-primary"  href="{{next_url }}">Pagar</a>
+            <a class="btn btn-primary"  href="{{ next_url }}">Pagar</a>
         </div>
     {% else %}
         <div class="d-grid gap-2 mt-2">
-            <button class="btn btn-primary"  href="{{next_url }}" disabled>Pagar</button>
+            <button class="btn btn-primary"  href="{{ next_url }}" disabled>Pagar</button>
         </div>
 
         <div class="alert d-flex alert-danger text-center align-items-center mt-3" role="alert">

@@ -164,23 +164,31 @@
                             <tr>
                                 <th scope="col">ID de producto</th>
                                 <th scope="col">Nombre</th>
+                                <th scope="col">Cantidad usada</th>
                                 <th scope="col">Gastos</th>
                             
                         </thead>
 
                         <!--Filas-->
                         <tbody>
-                            <tr>
-                                <td class="text-center" scope="row">{{ o.id }}</td>
-                                <td class="text-center" scope="row">{{ o.created_At }}</td>
-                                <td class="text-center" scope="row">{{ o.total }}</td>
-                            </tr>
+                            {% for p in producto %}
+                                {% for m in merma %}
+                                    {% if m.producto == p.id %}
+                                        <tr>
+                                            <td class="text-center" scope="row">{{ m.producto }}</td>
+                                            <td class="text-center" scope="row">{{ p.nombre }}</td>
+                                            <td class="text-center" scope="row">{{ m.cant_usada }}</td>
+                                            <td class="text-center" scope="row">{{ p.valor }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
                         </tbody>
 
                         <tbody>
-                            <tr class="table-danger">
-                                <th class="text-center" scope="row" colspan="2">Total pérdidas</th>
-                                <td class="text-center" scope="row">0</td>
+                            <tr class="table-warning">
+                                <th class="text-center" scope="row" colspan="3">Total pérdidas</th>
+                                <td class="text-center" scope="row">$ {{ totalPerdidas }}</td>
                             </tr>
                         </tbody>
                     </table>
