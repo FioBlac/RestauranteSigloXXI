@@ -8,7 +8,7 @@ from carts.models import CartProduct #from RestauranteSigloXXI.carts.models impo
 #from apps.utils import render_to_pdf
 from .models import AuthGroup, AuthUserGroups, Producto, Reserva, Mesa, AuthUser, Bodega
 from products.models import Product, Ingredientes
-from orden.models import Orden
+from orden.models import Merma, Orden
 #from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
 import base64
@@ -152,74 +152,125 @@ def admin_reportes(request):
 
         if reporteForm.is_valid():
             fecha = reporteForm.cleaned_data['mesReporte']
+            mesReporte = fecha[:7]
+           
             mesas = Mesa.objects.all()
-            usuarios = AuthUserGroups.objects.all()
-            grupoCliente = AuthGroup.objects.get(name = 'Cliente')
             
-            contarCliente = 0
+            
+            
 
 
             #Contar Clientes Nuevos
-            for u in usuarios:
+            gruposUsuarios = AuthUserGroups.objects.all()
+            grupoCliente = AuthGroup.objects.get(name = 'Cliente')
+            contarCliente = 0
+
+            for u in gruposUsuarios:
+
                 if u.group_id == grupoCliente.id:
-                    contarCliente = contarCliente+1
+                    usuarios = AuthUser.objects.get(id = u.user_id)
+                    ingresoUsuario = usuarios.date_joined.strftime('%Y-%m')
+
+                    if ingresoUsuario == mesReporte:
+                        contarCliente = contarCliente+1
                 
             #Contar Reservas Concretadas
-            contarReservas = Reserva.objects.all().count()
+            reservas = Reserva.objects.all()
+            contarReservas = 0
+            for r in reservas:
+                fecha_reserva = r.fecha_reserva.strftime('%Y-%m')
+                if fecha_reserva == mesReporte:
+                    contarReservas = contarReservas +1
+                    
 
             #Contar Ordenes Realizadas
-            contarOrdenes = Orden.objects.all().count()
+            ordenes = Orden.objects.all()
+            contarOrdenes = 0
+            for o in ordenes:
+                fecha_orden = o.created_at.strftime('%Y-%m')
+                if fecha_orden == mesReporte:
+                    contarOrdenes = contarOrdenes +1
 
             #Contar Trabajadores Nuevos
             contarTrabajadores = 0
-            for u in usuarios:
+            for u in gruposUsuarios:
                 if u.group_id != grupoCliente.id:
                     contarTrabajadores = contarTrabajadores+1
             
             #Contar Administradores Nuevos
             contarAdministradores = 0
             grupoAdmin = AuthGroup.objects.get(name = 'Admin')
-            for u in usuarios:
+            for u in gruposUsuarios:
+
                 if u.group_id == grupoAdmin.id:
-                    contarAdministradores = contarAdministradores+1
+                    usuarios = AuthUser.objects.get(id = u.user_id)
+                    ingresoUsuario = usuarios.date_joined.strftime('%Y-%m')
+
+                    if ingresoUsuario == mesReporte:
+                        contarAdministradores = contarAdministradores+1
+                    
 
             #Contar Bodegueros Nuevos
             contarBodegueros = 0
             grupoBodega = AuthGroup.objects.get(name = 'Bodega')
-            for u in usuarios:
+            for u in gruposUsuarios:
                 if u.group_id == grupoBodega.id:
-                    contarBodegueros = contarBodegueros+1
+                    usuarios = AuthUser.objects.get(id = u.user_id)
+                    ingresoUsuario = usuarios.date_joined.strftime('%Y-%m')
+
+                    if ingresoUsuario == mesReporte:
+                        contarBodegueros = contarBodegueros+1
 
             #Contar Cajeros Nuevos
             contarCajeros = 0
             grupoCajero = AuthGroup.objects.get(name = 'Cajero')
-            for u in usuarios:
+            for u in gruposUsuarios:
                 if u.group_id == grupoCajero.id:
-                    contarCajeros = contarCajeros+1
+                    usuarios = AuthUser.objects.get(id = u.user_id)
+                    ingresoUsuario = usuarios.date_joined.strftime('%Y-%m')
+
+                    if ingresoUsuario == mesReporte:
+                        contarCajeros = contarCajeros+1
 
             #Contar Cocineros Nuevos
             contarCocineros = 0
             grupoCocinero = AuthGroup.objects.get(name = 'Cocinero')
-            for u in usuarios:
+            for u in gruposUsuarios:
                 if u.group_id == grupoCocinero.id:
-                    contarCocineros = contarCocineros+1
+                    usuarios = AuthUser.objects.get(id = u.user_id)
+                    ingresoUsuario = usuarios.date_joined.strftime('%Y-%m')
+
+                    if ingresoUsuario == mesReporte:
+                        contarCocineros = contarCocineros+1
 
             #Contar Garzones Nuevos
             contarGarzones = 0
             grupoGarzon = AuthGroup.objects.get(name = 'Garzon')
-            for u in usuarios:
+            for u in gruposUsuarios:
                 if u.group_id == grupoGarzon.id:
-                    contarGarzones = contarGarzones+1    
+                    usuarios = AuthUser.objects.get(id = u.user_id)
+                    ingresoUsuario = usuarios.date_joined.strftime('%Y-%m')
+
+                    if ingresoUsuario == mesReporte:
+                        contarGarzones = contarGarzones+1    
 
             #Sacar Ganancias del Mes
             totalGanancias = Orden.objects.all()
             ganancias = 0
             for g in totalGanancias:
-                if g.status != "Cancelado":
+                fecha_orden = o.created_at.strftime('%Y-%m')
+
+                if g.status != "Cancelado" and fecha_orden == mesReporte:
                     ganancias = ganancias + g.total
             
             #Sacar Gastos del Mes
-            totalGastos = 53670
+            mermas = Merma.objects.all()
+            totalGastos = 0
+            for m in mermas:
+                fechaMerma = m.fecha_merma.strftime('%Y-%m')
+
+                if fechaMerma == mesReporte:
+                    totalGastos = totalGastos +(m.cant_usada * Producto.objects.get(id = m.id_producto).precio)
 
             #Sacar Total
             resultadoTotal = ganancias - totalGastos
