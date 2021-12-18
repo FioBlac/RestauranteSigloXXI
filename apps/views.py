@@ -516,21 +516,32 @@ def menu_reportes(request):
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def reporte_contable(request):
+    
     merma = Merma.objects.all()
     producto = Producto.objects.all()
     totalGanancias = 0
     totalPerdidas = 0
     reporteHoy = datetime.now().strftime('%Y-%m-%d')
-    orden = Orden.objects.filter(status = 'Completado')
+    ordenSinFecha = Orden.objects.filter(status = 'Completado')
     
-    print(reporteHoy)
+    orden = []
 
-    for tg in orden:
+    for tg in ordenSinFecha:
         dia_reporte = tg.created_at.strftime('%Y-%m-%d')
 
-        if dia_reporte == reporteHoy:
-            totalGanancias = totalGanancias + tg.total
+        #print(dia_reporte)
+        #print(reporteHoy)
 
+        if dia_reporte == reporteHoy:
+            data = {
+                'id': tg.id,
+                'created_at': tg.created_at,
+                'total': tg.total
+            }
+            print('hola')
+            orden.append(data)
+
+            totalGanancias = totalGanancias + tg.total
 
 
     for tp in merma:
@@ -548,8 +559,6 @@ def reporte_stock(request):
     product = Product.objects.all()
     ingredientes = Ingredientes.objects.all()
     return render(request, 'html/admin/reporte_stock.html',{'product':product, 'ingredientes':ingredientes})
-
-
 
 
 #HTML BODEGA
