@@ -8,7 +8,7 @@ from carts.models import CartProduct #from RestauranteSigloXXI.carts.models impo
 #from apps.utils import render_to_pdf
 from .models import AuthGroup, AuthUserGroups, Producto, Reserva, Mesa, AuthUser, Bodega
 from products.models import Product, Ingredientes
-from orden.models import Orden
+from orden.models import Orden, Merma
 #from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
 import base64
@@ -464,11 +464,13 @@ def menu_reportes(request):
 @admin_view
 def reporte_contable(request):
     orden = Orden.objects.filter(status = 'Completado')
+    merma = Merma.objects.all()
+    producto = Producto.objects.all()
     totalGanancias = 0
 
     for tg in orden:
         totalGanancias = totalGanancias + tg.total
-    return render(request, 'html/admin/reporte_contable.html', {'orden':orden, 'totalGanancias':totalGanancias})
+    return render(request, 'html/admin/reporte_contable.html', {'orden':orden, 'totalGanancias':totalGanancias, 'merma':merma, 'producto':producto})
 
 
 @login_required(login_url = 'loginAsociado')
