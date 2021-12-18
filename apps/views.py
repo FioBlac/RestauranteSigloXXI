@@ -8,7 +8,7 @@ from carts.models import CartProduct #from RestauranteSigloXXI.carts.models impo
 #from apps.utils import render_to_pdf
 from .models import AuthGroup, AuthUserGroups, Producto, Reserva, Mesa, AuthUser, Bodega
 from products.models import Product, Ingredientes
-from orden.models import Merma, Orden
+from orden.models import Orden, Merma
 #from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
 from datetime import datetime, timedelta
 import base64
@@ -24,7 +24,9 @@ from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives, message
 from django.conf import settings
 from django.db.models import Sum
-from products.models import Product 
+from apps.forms import crearPlato 
+from orden.models import Orden
+from products.models import Product
 
 # Create your views here.
 from .decorators import usuarioPermitido, usuarioNoLogeado, admin_view
@@ -515,11 +517,13 @@ def menu_reportes(request):
 @admin_view
 def reporte_contable(request):
     orden = Orden.objects.filter(status = 'Completado')
+    merma = Merma.objects.all()
+    producto = Producto.objects.all()
     totalGanancias = 0
 
     for tg in orden:
         totalGanancias = totalGanancias + tg.total
-    return render(request, 'html/admin/reporte_contable.html', {'orden':orden, 'totalGanancias':totalGanancias})
+    return render(request, 'html/admin/reporte_contable.html', {'orden':orden, 'totalGanancias':totalGanancias, 'merma':merma, 'producto':producto})
 
 
 @login_required(login_url = 'loginAsociado')
@@ -914,20 +918,11 @@ def ver_pedidos_historicos(request):
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cajero'])
-def ListarComprasRealizadas(request):
+def ListaComprasRealizadas(request):
+    listacompra = Orden.objects.all()
     listacompra = Product.objects.all()
     Lista = {'listarcompras':listacompra}
-    return render(request, 'apps/templates/html/Cajero/pedidos_cajero.html',)
-
-@login_required(login_url = 'loginAsociado')
-@usuarioPermitido(allowed_roles = ['Cajero'])
-def ListarComprasRealizadas(request):
-    listacompra = Product.objects.all()
-    Lista = {'listarcompras':listacompra}
-    return render(request, 'apps/templates/html/Cajero/pedidos_cajero.html',)
-
-
-
+    return render(request, 'apps/templates/Cajero/pedidos_cajero.html', Lista)
 
 def sendEmailReserva(username):
     context = {

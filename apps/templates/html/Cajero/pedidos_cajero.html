@@ -129,12 +129,12 @@
                         </thead>
                         <!--Filas-->
                             <tbody>
-                                {% if listacompra %}
-                                {% for Lista in listacompra  %}
+                                {% if listarcompras %}
+                                {% for listacompra in listarcompras  %}
                                 <tr>
-                                    <td class="text-center" scope="row"> </td>
-                                    <td class="text-center" scope="row"> {{listacompra.title}} </td>
-                                    <td class="text-center" scope="row"> {{listacompra.price}} </td>
+                                    <td class="text-center" scope="row"> {{ listacompra.ordenID }} </td>
+                                    <td class="text-center" scope="row"> {{ listacompra.title }} </td>
+                                    <td class="text-center" scope="row"> {{ listacompra.total }} </td>
                                 </tr>
                                 {% endfor %}
                                 {% else %} 
