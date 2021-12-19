@@ -516,21 +516,17 @@ def menu_reportes(request):
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def reporte_contable(request):
-    
     merma = Merma.objects.all()
     producto = Producto.objects.all()
     totalGanancias = 0
     totalPerdidas = 0
+    total = 0
     reporteHoy = datetime.now().strftime('%Y-%m-%d')
     ordenSinFecha = Orden.objects.filter(status = 'Completado')
     
     orden = []
-
     for tg in ordenSinFecha:
         dia_reporte = tg.created_at.strftime('%Y-%m-%d')
-
-        #print(dia_reporte)
-        #print(reporteHoy)
 
         if dia_reporte == reporteHoy:
             data = {
@@ -538,27 +534,71 @@ def reporte_contable(request):
                 'created_at': tg.created_at,
                 'total': tg.total
             }
-            print('hola')
             orden.append(data)
 
             totalGanancias = totalGanancias + tg.total
 
-
+    mermaProduc = []
     for tp in merma:
         dia_reporte = tp.fecha_merma.strftime('%Y-%m-%d')
 
         if dia_reporte == reporteHoy:
+            data = {
+                'id': tp.producto.id,
+                'nombre': tp.producto.nombre,
+                'cant_usada': tp.cant_usada,
+                'gastos': tp.producto.valor
+            }
+            mermaProduc.append(data)
+
+            #SACAR ID DEL PRODUCTO JUNTO A SU VALOR
             valorProducto = producto.get( id = tp.producto.id ).valor
+
+            #CALCULAR VALOR DE LAS PERDIDAS
             totalPerdidas = totalPerdidas + (valorProducto * tp.cant_usada)
-    return render(request, 'html/admin/reporte_contable.html', {'orden':orden, 'totalGanancias':totalGanancias, 'merma':merma, 'producto':producto, 'totalPerdidas':totalPerdidas})
+
+    total = totalGanancias - totalPerdidas
+    
+    return render(request, 'html/admin/reporte_contable.html', {'orden':orden, 
+                                                                'totalGanancias':totalGanancias, 
+                                                                'totalPerdidas':totalPerdidas,
+                                                                'total':total,
+                                                                'merma':merma, 
+                                                                'producto':producto, 
+                                                                'mermaProduc':mermaProduc})
 
 
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def reporte_stock(request):
-    product = Product.objects.all()
-    ingredientes = Ingredientes.objects.all()
-    return render(request, 'html/admin/reporte_stock.html',{'product':product, 'ingredientes':ingredientes})
+    merma = Merma.objects.all()
+    producto = Producto.objects.all()
+    totalUsado = 0
+    reporteHoy = datetime.now().strftime('%Y-%m-%d')
+
+    mermaProduc = []
+    for tp in merma:
+        dia_reporte = tp.fecha_merma.strftime('%Y-%m-%d')
+
+        if dia_reporte == reporteHoy:
+            data = {
+                'id': tp.producto.id,
+                'nombre': tp.producto.nombre,
+                'cant_usada': tp.cant_usada,
+                'gastos': tp.producto.valor
+            }
+            mermaProduc.append(data)
+
+            #SACAR ID DEL PRODUCTO JUNTO A SU VALOR
+            valorProducto = producto.get( id = tp.producto.id ).valor
+
+            #CALCULAR VALOR DE LAS PERDIDAS
+            totalUsado = totalUsado + (valorProducto * tp.cant_usada)
+
+    return render(request, 'html/admin/reporte_stock.html',{'merma':merma, 
+                                                            'producto':producto, 
+                                                            'totalUsado':totalUsado,
+                                                            'mermaProduc':mermaProduc})
 
 
 #HTML BODEGA
