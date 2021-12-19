@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -52,7 +53,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="{% url 'pedidos_cajero' %}">Ver pedidos</a>
+                        <a class="nav-link " href="{% url 'lista_compras' %}">Ver pedidos</a>
                     </li>
 
                     <li class="nav-item">
@@ -100,62 +101,55 @@
     </section>
 
     <!--CUERPO DE LA TABLA-->
+    {%block content%}
+    {% load crispy_forms_tags%}
     <section class="container mb-4">
-        <div class="row mx-auto border rounded justify-content-center">
-            <form class="row g-3" method="GET">
-                <div class="input-group col-auto">
-                    <input type="text" class="form-control" placeholder="Buscar Pedido" aria-label="Recipient's username" aria-describedby="button-addon2" name="inputBuscarReserva">
+        <h2>Lista compras</h2>
+    
+        <div class="w-100">
+            <div class="table-responsive">
+    
                     
-                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-
-                    &nbsp;
-                    
-                    <button type="submit" class="btn btn-primary">Buscar</button>
-                </div>
-            </form>
-            <div class="w-100">
-                <div class="table-responsive">
-                    {% block content %}
                     <table class="table table-hover align-middle text-center">
                         <!-- Nombre de Columna-->
+                        
                         <thead>
                             <tr>
-                                <th scope="col">ID Pedido</th>
-                                <th scope="col">Plato</th>
-                                <th scope="col">Precio</th>
+                                
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Fecha creacion</th>
+                                <th scope="col">Total</th>
+                                
+    
                             </tr>
+                            
                         </thead>
+    
                         <!--Filas-->
-                            <tbody>
-                                {% if listarcompras %}
-                                {% for listacompra in listarcompras  %}
-                                <tr>
-                                    <td class="text-center" scope="row"> {{ listacompra.ordenID }} </td>
-                                    <td class="text-center" scope="row"> {{ listacompra.title }} </td>
-                                    <td class="text-center" scope="row"> {{ listacompra.total }} </td>
-                                </tr>
-                                {% endfor %}
-                                {% else %} 
-                                <h4 style="margin: 20px;">No hay registro de pagos</h4>
-                                {% endif %}           
-                            </tbody>
+                        <tbody>
+                           
+                                    {% for p in orden %}
+                                       
+                                            <tr>
+                                                <td class="text-center" scope="row">{{ p.user }}</td>                                           
+                                                <td class="text-center" scope="row">{{ p.created_at }}</td>
+                                                <td class="text-center" scope="row">{{ p.total }}</td>
+                                                
+                                                
+                                            </tr>
+                                       
+                                    {% endfor %}
+                              
+                        </tbody>
                     </table>
-                    {% endblock %}
-                </div>
+                
+    
             </div>
         </div>
-
-        <div class="row w-75 mx-auto justify-content-center">
-            <div class="text-center col-lg pt-3 ">
-                <a class="btn btn-outline-secondary w-25" href="{% url 'index_cajero' %}">
-                    Volver
-                </a>
-            </div>
-        </div>
+    
+    
     </section>
-
+    {%endblock%}
     <!--Pie de pagina o barra footer-->
     <footer style="margin-top: 20px;" class="bg-primary text-white text-center text-lg-start">
         <div class="container p-4">
