@@ -109,34 +109,31 @@
                         <!--Columna-->
                         <thead>
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Producto</th>
-                                <th scope="col">Cantidad gastada</th>
-                                <th scope="col">Costo</th>
+                                <th scope="col">ID de producto</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Cantidad usada</th>
+                                <th scope="col">Gasto unitario</th>
+                                <th scope="col">Gasto total</th>
                             </tr>
-                            
                         </thead>
 
                         <!--Filas-->
                         <tbody>
-                            {% for p in producto %}
-                                {% for m in merma %}
-                                    {% if m.producto.id == p.id %}
-                                        <tr>
-                                            <td class="text-center" scope="row">{{ p.id }}</td>
-                                            <td class="text-center" scope="row">{{ p.nombre }}</td>
-                                            <td class="text-center" scope="row">{{ m.cant_usada }}</td>
-                                            <td class="text-center" scope="row">{{ p.valor }}</td>
-                                        </tr>
-                                    {% endif %}
-                                {% endfor %}
+                            {% for m in merma %}
+                                    <tr>
+                                        <td class="text-center" scope="row">{{ m.id }}</td>
+                                        <td class="text-center" scope="row">{{ m.nombre }}</td>
+                                        <td class="text-center" scope="row">{{ m.cant_usada }}</td>
+                                        <td class="text-center" scope="row">$ {{ m.gastosUnidad }}</td>
+                                        <td class="text-center" scope="row">$ {{ m.gastosTotal }}</td>
+                                    </tr>
                             {% endfor %}
                         </tbody>
                         
                         <tbody>
                             <tr class="table-info">
-                                <th class="text-center" scope="row" colspan="3">Total en productos</th>
-                                <td class="text-center" scope="row">$ {{ totalUsado }}</td>
+                                <th class="text-center" scope="row" colspan="4">Total en productos</th>
+                                <td class="text-center" scope="row">$ {{ totalPerdidas }}</td>
                             </tr>
                         </tbody>
                     </table>

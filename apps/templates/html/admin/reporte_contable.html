@@ -165,29 +165,27 @@
                                 <th scope="col">ID de producto</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Cantidad usada</th>
-                                <th scope="col">Gastos</th>
-                            
+                                <th scope="col">Gasto unitario</th>
+                                <th scope="col">Gasto total</th>
+                            </tr>
                         </thead>
 
                         <!--Filas-->
                         <tbody>
-                            {% for p in producto %}
-                                {% for m in merma %}
-                                    {% if m.producto.id == p.id %}
-                                        <tr>
-                                            <td class="text-center" scope="row">{{ p.id }}</td>
-                                            <td class="text-center" scope="row">{{ p.nombre }}</td>
-                                            <td class="text-center" scope="row">{{ m.cant_usada }}</td>
-                                            <td class="text-center" scope="row">{{ p.valor }}</td>
-                                        </tr>
-                                    {% endif %}
-                                {% endfor %}
+                            {% for m in merma %}
+                                    <tr>
+                                        <td class="text-center" scope="row">{{ m.id }}</td>
+                                        <td class="text-center" scope="row">{{ m.nombre }}</td>
+                                        <td class="text-center" scope="row">{{ m.cant_usada }}</td>
+                                        <td class="text-center" scope="row">$ {{ m.gastosUnidad }}</td>
+                                        <td class="text-center" scope="row">$ {{ m.gastosTotal }}</td>
+                                    </tr>
                             {% endfor %}
                         </tbody>
 
                         <tbody>
                             <tr class="table-warning">
-                                <th class="text-center" scope="row" colspan="3">Total pérdidas</th>
+                                <th class="text-center" scope="row" colspan="4">Total pérdidas</th>
                                 <td class="text-center" scope="row">$ {{ totalPerdidas }}</td>
                             </tr>
                         </tbody>
@@ -217,12 +215,12 @@
                         <tbody>
                             <tr>
                                 <td class="text-center" scope="row">Ingresos en ventas</td>
-                                <td class="text-center" scope="row">{{ totalGanancias }}</td>
+                                <td class="text-center" scope="row">$ {{ totalGanancias }}</td>
                             </tr>
 
                             <tr>
                                 <td class="text-center" scope="row">Pérdida en productos</td>
-                                <td class="text-center" scope="row">{{ totalPerdidas }}</td>
+                                <td class="text-center" scope="row">$ {{ totalPerdidas }}</td>
                             </tr>
                         </tbody>
 

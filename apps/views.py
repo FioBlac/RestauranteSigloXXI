@@ -1,7 +1,9 @@
 import django
 from django import template
+from django.db.models.aggregates import Count
 from django.db.models.fields import NullBooleanField
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import translation
 
 from carts.models import CartProduct #from RestauranteSigloXXI.carts.models import CartProduct <-- es el original
 
@@ -10,7 +12,7 @@ from .models import AuthGroup, AuthUserGroups, Producto, Reserva, Mesa, AuthUser
 from products.models import Product, Ingredientes
 from orden.models import Orden, Merma
 #from .models import Pedido, Producto, Reserva, Mesa, Plato, AuthUser, Bodega
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 import base64
 from .forms import AgregarProductoForm, cambiarEstadoPedidoForm,fechaReporteForm, EliminarProductoForm, EliminarReservaForm, EliminarMesaForm, ReservaForm, DatosReservaForm, MesaForm, datosAgregarMesaForm, CustomUserCreationFrom, CustomUserCreationFrom2, EliminarUsuarioForm
 from django.contrib.auth import authenticate, login, logout
@@ -516,14 +518,16 @@ def menu_reportes(request):
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def reporte_contable(request):
-    merma = Merma.objects.all()
-    producto = Producto.objects.all()
+    id_productos_merma = Merma.objects.filter( fecha_merma = datetime.now()).values_list('producto', flat=True).distinct()
+    productos = Producto.objects.filter(id__in = id_productos_merma)
+
     totalGanancias = 0
     totalPerdidas = 0
     total = 0
     reporteHoy = datetime.now().strftime('%Y-%m-%d')
-    ordenSinFecha = Orden.objects.filter(status = 'Completado')
+    ordenSinFecha = Orden.objects.filter( status = 'Completado')
     
+    #RECOLECTAR LAS ORDENES HECHAS EN EL DIA
     orden = []
     for tg in ordenSinFecha:
         dia_reporte = tg.created_at.strftime('%Y-%m-%d')
@@ -538,24 +542,24 @@ def reporte_contable(request):
 
             totalGanancias = totalGanancias + tg.total
 
+
+    #RECOLECTAR LOS PRODUCTOS USADOS EN EL DIA
     mermaProduc = []
-    for tp in merma:
-        dia_reporte = tp.fecha_merma.strftime('%Y-%m-%d')
+    for producto in productos:
+        cantProducto = Merma.objects.filter(producto = producto, fecha_merma = datetime.now()).aggregate(Sum('cant_usada'))['cant_usada__sum']
+        totalProducto = cantProducto * producto.valor
 
-        if dia_reporte == reporteHoy:
-            data = {
-                'id': tp.producto.id,
-                'nombre': tp.producto.nombre,
-                'cant_usada': tp.cant_usada,
-                'gastos': tp.producto.valor
-            }
-            mermaProduc.append(data)
+        data = {
+            'id': producto.id,
+            'nombre': producto.nombre,
+            'cant_usada': cantProducto,
+            'gastosUnidad': producto.valor,
+            'gastosTotal': totalProducto
+        }
+        mermaProduc.append(data)
 
-            #SACAR ID DEL PRODUCTO JUNTO A SU VALOR
-            valorProducto = producto.get( id = tp.producto.id ).valor
-
-            #CALCULAR VALOR DE LAS PERDIDAS
-            totalPerdidas = totalPerdidas + (valorProducto * tp.cant_usada)
+        #CALCULAR VALOR DE LAS PERDIDAS
+        totalPerdidas = totalPerdidas + totalProducto
 
     total = totalGanancias - totalPerdidas
     
@@ -563,42 +567,36 @@ def reporte_contable(request):
                                                                 'totalGanancias':totalGanancias, 
                                                                 'totalPerdidas':totalPerdidas,
                                                                 'total':total,
-                                                                'merma':merma, 
-                                                                'producto':producto, 
-                                                                'mermaProduc':mermaProduc})
+                                                                'merma':mermaProduc})
 
 
 @login_required(login_url = 'loginAsociado')
 @admin_view
 def reporte_stock(request):
-    merma = Merma.objects.all()
-    producto = Producto.objects.all()
-    totalUsado = 0
-    reporteHoy = datetime.now().strftime('%Y-%m-%d')
+    id_productos_merma = Merma.objects.filter( fecha_merma = datetime.now()).values_list('producto', flat=True).distinct()
+    productos = Producto.objects.filter(id__in = id_productos_merma)
+
+    totalPerdidas = 0
 
     mermaProduc = []
-    for tp in merma:
-        dia_reporte = tp.fecha_merma.strftime('%Y-%m-%d')
+    for producto in productos:
+        cantProducto = Merma.objects.filter(producto = producto, fecha_merma = datetime.now()).aggregate(Sum('cant_usada'))['cant_usada__sum']
+        totalProducto = cantProducto * producto.valor
 
-        if dia_reporte == reporteHoy:
-            data = {
-                'id': tp.producto.id,
-                'nombre': tp.producto.nombre,
-                'cant_usada': tp.cant_usada,
-                'gastos': tp.producto.valor
-            }
-            mermaProduc.append(data)
+        data = {
+            'id': producto.id,
+            'nombre': producto.nombre,
+            'cant_usada': cantProducto,
+            'gastosUnidad': producto.valor,
+            'gastosTotal': totalProducto
+        }
+        mermaProduc.append(data)
 
-            #SACAR ID DEL PRODUCTO JUNTO A SU VALOR
-            valorProducto = producto.get( id = tp.producto.id ).valor
+        #CALCULAR VALOR DE LAS PERDIDAS
+        totalPerdidas = totalPerdidas + totalProducto
 
-            #CALCULAR VALOR DE LAS PERDIDAS
-            totalUsado = totalUsado + (valorProducto * tp.cant_usada)
-
-    return render(request, 'html/admin/reporte_stock.html',{'merma':merma, 
-                                                            'producto':producto, 
-                                                            'totalUsado':totalUsado,
-                                                            'mermaProduc':mermaProduc})
+    return render(request, 'html/admin/reporte_stock.html',{'totalPerdidas':totalPerdidas,
+                                                            'merma':mermaProduc})
 
 
 #HTML BODEGA
