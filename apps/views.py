@@ -1048,6 +1048,27 @@ def pagar(request):
 
 def codigoqr(request):
     return render (request, 'html/general/codigoqr.html')
+
+
+def lista_compras(request):
+    orden = Orden.objects.all()
+    data = {
+        'orden':orden
+    }
+    return render(request, 'html/Cajero/pedidos_cajero.html', data)
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Formularios
 #Formulario de Hacer Reserva
 #def crearReserva(request):
