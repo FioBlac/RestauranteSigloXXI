@@ -1,5 +1,5 @@
 from django.contrib import  messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from carts.funciones import funcionCarrito, deleteCart
 from .models import Orden
 from .utils import funcionOrden, deleteOrden, funcionRestarIngredientes
@@ -10,6 +10,7 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query import EmptyQuerySet
 from django.contrib.auth.models import User
+from .forms import OrdenForm
 
 # Create your views here.
 
@@ -119,5 +120,38 @@ def completado(request):
 
     messages.success(request,'Compra realizada ')
     return redirect('index_productos')
+
+def listar_orden(request):
+    orden = Orden.objects.all()
+
+    data ={
+        'orden' : orden
+    }
+
+
+    return render(request,'orden/listar_orden.html',data)
+
+
+
+
+def modificar_orden(request,id):
+
+    orden= get_object_or_404(Orden, id=id)
+
+    data={
+
+        'form': OrdenForm(instance=orden)
+    }
+    if request.method == 'POST':
+        formulario = OrdenForm(data=request.POST, instance=orden,files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect(to="confirmacion")
+        data["form"] = formulario
+   
+    
+    return render(request,'orden/editar_orden.html',data)
+
+
 
 

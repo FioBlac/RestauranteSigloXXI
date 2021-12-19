@@ -1,0 +1,58 @@
+{%extends "base.html"%}
+{%block content%}
+{% load crispy_forms_tags%}
+
+<section class="container mb-4">
+    <h2>Listado de Ordenes</h2>
+
+    <div class="w-100">
+        <div class="table-responsive">
+
+                
+                <table class="table table-hover align-middle text-center">
+                    <!-- Nombre de Columna-->
+                    
+                    <thead>
+                        <tr>
+                            
+                            <th scope="col"> Cliente</th>
+                            <th scope="col">Fecha creacion</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Editar</th>
+
+                        </tr>
+                        
+                    </thead>
+
+                    <!--Filas-->
+                    <tbody>
+                       
+                                {% for p in orden %}
+                                   
+                                        <tr>
+                                            <td class="text-center" scope="row">{{ p.user }}</td>                                           
+                                            <td class="text-center" scope="row">{{ p.created_at }}</td>
+                                            <td class="text-center" scope="row">{{ p.total }}</td>
+                                            <td>
+                                                <a class="btn btn-warning d-grid gap-2" href="{% url 'modificar_orden' p.id %}">Editar</a>
+                                            </td>
+                                            
+                                        </tr>
+                                   
+                                {% endfor %}
+                          
+                    </tbody>
+                </table>
+            
+
+        </div>
+    </div>
+
+
+</section>
+
+
+
+
+
+{%endblock%}

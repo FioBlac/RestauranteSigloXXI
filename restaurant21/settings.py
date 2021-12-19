@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -90,7 +92,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': '127.0.0.1:1521/orcl',
-        'USER': 'rest21',
+        'USER': 'DML',
         'PASSWORD': 'oracle',
         'TEST': {
             'USER': 'default_test',

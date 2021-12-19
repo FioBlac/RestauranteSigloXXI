@@ -30,12 +30,13 @@
 </div>
 </div>
 
-<div class="alert alert-primary" role="alert">
-    Detalle de su orden 
-    <a href="{%url 'orden'%} " class="alert-link">Mi orden</a>
-</div>
 
-<div class="mt-1">
+
+<div class="container mb-4">
+    <div class="alert alert-primary" role="alert">
+        Detalle de su orden 
+        <a href="{%url 'orden'%} " class="alert-link">Mi orden</a>
+    </div>
     <div class="card">
         <div class="card-body">
             {%for product in cart.products.all%}
@@ -44,8 +45,8 @@
         </div>
     </div>
 </div>
-
-<div class="col">
+<div class="container mb-4">
+<div class="col-8">
     {%url 'completado' as next_url %}
     {%include 'orden/snippets/detalles.html' with next_url=next_url%}
 
@@ -56,12 +57,37 @@
                         <a class="btn btn-danger d-grid gap-2 " href="{%url 'cancelar'%}">
                             Eliminar orden</a>
                     </div>
+                   
             </div>
         </div>
     </div>
-</div>
+
+    <div class="">
+        <div class=''>
+            <div class="card card border-warning mb-3" style="width: 18rem;">
+                
+                <div class="card body">
+                    <a class="btn  btn-primary d-grid gap-2 " href="{%url 'listar_orden'%}">
+                        Asignar Cliente</a>
+                </div>  
+                   
+            </div>
+        </div>
+    </div>
+    
+    
+
+
+
+
+   
 </div>
 
+
 </div>
+
+
+
+
 
 {%endblock%}
