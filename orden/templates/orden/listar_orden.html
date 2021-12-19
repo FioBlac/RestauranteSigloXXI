@@ -1,5 +1,6 @@
-{% load static %}
 {%extends "base.html"%}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -134,7 +135,9 @@
                                                 <td class="text-center" scope="row">{{ p.user }}</td>                                           
                                                 <td class="text-center" scope="row">{{ p.created_at }}</td>
                                                 <td class="text-center" scope="row">{{ p.total }}</td>
-                                                
+                                                <td>
+                                                    <a class="btn btn-warning d-grid gap-2" href="{% url 'modificar_orden' p.id %}">Editar</a>
+                                                </td>
                                                 
                                             </tr>
                                        
