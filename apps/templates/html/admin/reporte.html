@@ -235,17 +235,31 @@
 
                     <!--Filas-->
                     <tbody>
-                        <tr>
-                            <td class="text-center" scope="row">
-                                $ {{ ganancias }}
-                            </td>
-                            <td>
-                                $ {{ totalGastos }}
-                            </td>
-                            <td>
-                                $ {{ resultadoTotal }}
-                            </td>
-                        </tr>
+                        {% if resultadoTotal <= 0 %}
+                            <tr class="table-danger">
+                                <td class="text-center" scope="row">
+                                    $ {{ ganancias }}
+                                </td>
+                                <td>
+                                    $ {{ totalGastos }}
+                                </td>
+                                <td>
+                                    $ {{ resultadoTotal }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr class="table-success">
+                                <td class="text-center" scope="row">
+                                    $ {{ ganancias }}
+                                </td>
+                                <td>
+                                    $ {{ totalGastos }}
+                                </td>
+                                <td>
+                                    $ {{ resultadoTotal }}
+                                </td>
+                            </tr>
+                        {% endif %}
                     </tbody>
                 </table>
             </div>
