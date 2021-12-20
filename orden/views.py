@@ -29,6 +29,8 @@ class OrdenViews(LoginRequiredMixin, ListView):
 @login_required(login_url='login')
 def orden (request):
     storage = messages.get_messages(request)
+    grupo = AuthGroup.objects.get(name='Garzon')
+    grupos= AuthUserGroups.objects.filter(group__id=grupo.id)
     for _ in storage:
         # This is important
         # Without this loop _loaded_messages is empty
@@ -56,6 +58,7 @@ def orden (request):
     return render(request,'orden/orden.html',{
     'cart': cart,
     'orden':orden,
+    'grupos' : grupos,
     'breadcrumb': breadcrumb()
     })
 
