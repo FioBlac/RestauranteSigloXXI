@@ -12,6 +12,7 @@ from django.db.models.query import EmptyQuerySet
 from django.contrib.auth.models import User
 from .forms import OrdenForm
 from apps.models import Reserva
+from apps.models import AuthGroup , AuthUserGroups
 
 # Create your views here.
 
@@ -56,6 +57,8 @@ def orden (request):
 @login_required(login_url='login')
 def confirmacion(request):
     storage = messages.get_messages(request)
+    grupo = AuthGroup.objects.get(name='Garzon')
+    grupos= AuthUserGroups.objects.filter(group__id=grupo.id)
     for _ in storage:
         # This is important
         # Without this loop _loaded_messages is empty
@@ -65,7 +68,7 @@ def confirmacion(request):
         del storage._loaded_messages[0]
 
     cart=funcionCarrito(request)
-    orden=funcionOrden(cart, request, None)
+    orden=funcionOrden(cart, request)
 
     #Aquí se registra los ingredientes utilizados en el pedido
     funcionRestarIngredientes(cart)
@@ -75,9 +78,10 @@ def confirmacion(request):
     return render(request,'orden/confirmacion.html',{
         'cart':cart,
         'orden':orden,
+        'grupos' : grupos,
         'breadcrumb':  breadcrumb(confirmation=True),
     })
-
+	
 @login_required(login_url='login')   
 def cancelar_orden(request):
     storage = messages.get_messages(request)
