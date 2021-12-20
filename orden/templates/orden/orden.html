@@ -26,4 +26,21 @@
     {% include 'orden/snippets/detalles.html' with next_url=next_url %}
 </div>
 
+{% for g in grupos %}
+    {% if g.user.id == request.user.id %}
+        <div class="">
+            <div class=''>
+                <div class="card card border-warning mb-3" style="width: 18rem;">
+                    
+                    <div class="card body">
+                        <a class="btn  btn-primary d-grid gap-2 " href="{%url 'confirmacion'%}">
+                            Avanzar</a>
+                    </div>  
+                    
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+
 {%endblock%}
