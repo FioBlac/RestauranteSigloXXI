@@ -1,3 +1,5 @@
+Cobro_Cliente_Manual.html
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
@@ -53,7 +55,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link " href="{% url 'pedidos_cajero' %}">Ver pedidos</a>
+                        <a class="nav-link " href="">Ver pedidos</a>
                     </li>
 
                     <li class="nav-item">
@@ -91,32 +93,40 @@
     <h4 style="text-align: left;margin: 30px;">Calculo de Cuentas</h4>
     <section style=" padding-top: 30px; padding-bottom:30px; margin: 5px;">
         <div class="container">     
+            {% block content %}
             <table class="table table-hover align-middle text-center">
                 <!-- Nombre de Columna-->
                 <thead>
                     <tr>
                         <th scope="col">Id_pedido</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Precio</th>
-                        <th scope="col">Ingresar pago</th>
+                        <th scope="col">Usuario</th>
+                        <th scope="col">Plato</th>
+                        <th scope="col">total</th>
+                        <th scope="col">Dinero pagado</th>
+                        <th scope="col">Vuelto</th>
+                        <th scope="col">Procesar pago</th>
                     </tr>
                     
                 </thead>
 
                 <!--Filas-->
                 <tbody>
+                    {% for Lp in Listados %}
                     <tr>
-                        <td class="text-center" scope="row"></td>
-                        <td class="text-center" scope="row"></td>
-                        <td class="text-center" scope="row"></td>
-                        <td class="text-center" scope="row"></td>
+                        <td class="text-center" scope="row">{{ Lp.ordenID }}</td>
+                        <td class="text-center" scope="row">{{ Lp.user }}</td>
+                        <td class="text-center" scope="row">{{ Lp.title }}</td>
+                        <td class="text-center" scope="row">{{ Lp.total }}</td>
+                        <td class="text-center" scope="row">Dinero pagado</td>
+                        <td class="text-center" scope="row">Vuelto</td>
                         <td class="text-center" scope="row">
                             <a class="btn btn-primary" role="button"> pago </a>
                         </td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
+            {% endblock %}
         </div>
     </section>
 
