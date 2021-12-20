@@ -843,8 +843,6 @@ def retiro_platos(request):
     products = Product.objects.all().order_by('tiempo')
     orden = Orden.objects.all().order_by('id')
     cart = CartProduct.objects.all().order_by('created_at')
-    mesas = Mesa.objects.all()
-    reservas = Reserva.objects.all()
     print("no entró")
 
     if request.method == 'POST':
@@ -868,11 +866,7 @@ def retiro_platos(request):
                 modificar_ped.status = 'Por Entregar'
                 modificar_ped.save()
 
-    return render (request, 'html/garzon/retiro_platos.html', {'orden':orden , 
-    'products':products, 
-    'cart':cart,
-    'mesas':mesas,
-    'reservas':reservas } )
+    return render (request, 'html/garzon/retiro_platos.html', {'orden':orden , 'products':products, 'cart':cart } )
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])
@@ -967,23 +961,27 @@ def index_cajero(request):
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cajero'])
-def cajero_cuenta_clientes(request):
-    return render (request, 'html/Cajero/cajero_cuenta_clientes.html')
-
-@login_required(login_url = 'loginAsociado')
-@usuarioPermitido(allowed_roles = ['Cajero'])
 def Cobro_Cliente_Manual(request):
     return render (request, 'html/Cajero/Cobro_Cliente_Manual.html')
-
+    
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cajero'])
-def pedidos_cajero(request):
-    return render (request, 'html/cajero/pedidos_cajero.html')
+def Listarpedidosrealizados(request):
+    listapedido = Orden.objects.all()
+    listapedido = Product.objects.all()
+    Listado = {'Listados':listapedido}
+    return render (request, 'apps/templates/Cajero/Cobro_Cliente_Manual.html',Listado)
+
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cajero'])
 def ver_pedidos_historicos(request):
     return render (request, 'html/cajero/ver_pedidos_historicos.html')
+
+@login_required(login_url = 'loginAsociado')
+@usuarioPermitido(allowed_roles = ['Cajero'])
+def pedidos_cajero(request):
+    return render (request, 'html/cajero/pedidos_cajero.html')
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cajero'])
