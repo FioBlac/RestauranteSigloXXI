@@ -39,9 +39,14 @@ def orden (request):
 
     reserva_id =request.session.get('reserva_id')
     if reserva_id != None:
-        reserva = Reserva.objects.get(id_reserva = reserva_id)
-        cart = funcionCarrito(request)
-        orden = funcionOrden(cart, request, reserva)
+        if reserva_id == 'Seleccione su Reserva':
+            reserva = None
+            cart = funcionCarrito(request)
+            orden = funcionOrden(cart, request, reserva)
+        else:
+            reserva = Reserva.objects.get(id_reserva = reserva_id)
+            cart = funcionCarrito(request)
+            orden = funcionOrden(cart, request, reserva)
     else:
         cart = funcionCarrito(request)
         orden = funcionOrden(cart, request, None)

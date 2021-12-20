@@ -33,6 +33,7 @@ def cart(request):
 
         if reservaForm.is_valid():
             fechaReserva = reservaForm.cleaned_data['fechaReserva']
+            print(fechaReserva)
             request.session['reserva_id'] = fechaReserva
             return redirect('orden')
             
