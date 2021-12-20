@@ -4,15 +4,15 @@ from products.models import Ingredientes
 from .models import Orden, Merma
 from django.urls import  reverse
 
-def funcionOrden(cart, request):
+def funcionOrden(cart, request, reserva):
     orden = Orden.objects.filter(cart=cart).first()
 
     if orden is None and request.user.is_authenticated:
-        orden = Orden.objects.create(cart=cart, user=request.user)
+        orden = Orden.objects.create(cart=cart, user=request.user, id_reserva = reserva)
+        request.session['reserva_id'] = None
 
     if orden:
         request.session['orden_id'] = orden.id
-
     return orden
 
 #Esta funcion la hizo el Jose

@@ -11,6 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query import EmptyQuerySet
 from django.contrib.auth.models import User
 from .forms import OrdenForm
+from apps.models import Reserva
 
 # Create your views here.
 
@@ -35,8 +36,14 @@ def orden (request):
     for _ in list(storage._loaded_messages):
         del storage._loaded_messages[0]
 
-    cart = funcionCarrito(request)
-    orden = funcionOrden(cart, request)
+    reserva_id =request.session.get('reserva_id')
+    if reserva_id != None:
+        reserva = Reserva.objects.get(id_reserva = reserva_id)
+        cart = funcionCarrito(request)
+        orden = funcionOrden(cart, request, reserva)
+    else:
+        cart = funcionCarrito(request)
+        orden = funcionOrden(cart, request, None)
     
 
 
@@ -58,7 +65,7 @@ def confirmacion(request):
         del storage._loaded_messages[0]
 
     cart=funcionCarrito(request)
-    orden=funcionOrden(cart, request)
+    orden=funcionOrden(cart, request, None)
 
     #Aquí se registra los ingredientes utilizados en el pedido
     funcionRestarIngredientes(cart)
@@ -83,7 +90,7 @@ def cancelar_orden(request):
         del storage._loaded_messages[0]
         
     cart=funcionCarrito(request)
-    orden=funcionOrden(cart,request)
+    orden=funcionOrden(cart,request,None)
 
 
     if request.user.id != orden.user_id:
@@ -108,7 +115,7 @@ def completado(request):
         del storage._loaded_messages[0]
         
     cart=funcionCarrito(request)
-    orden = funcionOrden(cart, request)
+    orden = funcionOrden(cart, request, None)
 
     if request.user.id != orden.user_id:
         return redirect('index_productos')

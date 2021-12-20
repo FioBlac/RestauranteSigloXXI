@@ -67,6 +67,8 @@ class crearPlato(forms.Form):
 class cambiarEstadoPedidoForm(forms.Form):
     cambiarEstado = forms.CharField()
 
+class asignarReservaCarritoForm(forms.Form):
+    fechaReserva = forms.CharField()
 
 
 class CustomUserCreationFrom(forms.ModelForm):

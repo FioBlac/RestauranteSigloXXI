@@ -42,22 +42,38 @@
         </table>
     </div>
 
+        
+   
+
     <div class="col">
-        <div class="card">
-            <div class="card-body">
-                <div>
-                    Subtotal: ({{cart.products.count}}): <span class="text-dander">{{cart.subtotal | precio_tag}}</span>
-                </div>
-
-                <div class="mt-2 ">
-                    <a href="{% url 'orden'%}" class="btn btn-warning">Realizar pedido</a>
-                </div>
-
-                <div class="mt-2">
-                    <a href="{%url 'index_productos'%}" class=" btn btn-primary">Seguir comprando</a>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="col-lg-6 col-md-6 col-sm-12 my-3">
+                <select class="form-select" name="fechaReserva" aria-label="Default select example">
+                    <option selected>Seleccione su Reserva</option>
+                    {% for r in reservasHoy %}
+                    <option value="{{ r.id_reserva }}">{{ r.fecha_reserva }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+    
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        Subtotal: ({{cart.products.count}}): <span class="text-dander">{{cart.subtotal | precio_tag}}</span>
+                    </div>
+    
+                    <div class="mt-2 ">
+                        <button type="submit" class="btn btn-warning">Realizar pedido</button>
+                    </div>
+    
+                    <div class="mt-2">
+                        <a href="{%url 'index_productos'%}" class=" btn btn-primary">Seguir comprando</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
+     
     </div>
 
 {%else%}
