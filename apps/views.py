@@ -274,7 +274,7 @@ def admin_reportes(request):
                 fechaMerma = m.fecha_merma.strftime('%Y-%m')
 
                 if fechaMerma == mesReporte:
-                    totalGastos = totalGastos +(m.cant_usada * Producto.objects.get(id = m.id_producto).precio)
+                    totalGastos = totalGastos +(m.cant_usada * Producto.objects.get(id = m.producto.id).valor)
 
             #Sacar Total
             resultadoTotal = ganancias - totalGastos
