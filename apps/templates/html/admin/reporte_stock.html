@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">  
     
     <!-- Titulo de la pestaña-->
-    <title>Gestion de usuarios</title>
+    <title>Reporte contable</title>
 </head>
 <body>
     <header class="container-fluid bg-primary 
@@ -140,6 +140,18 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <section class="container">
+        <div class="row w-75 mx-auto justify-content-center">
+            <div class="text-center col-lg pt-3 ">
+                <a class="btn  btn-outline-primary btn-lg w-50" type="button" value="Generar informe de compras realizadas" onclick="Listado()">
+                    <i class="bi bi-file-earmark-pdf"></i>
+
+                    Exportar a PDF
+                </a>
+            </div>
+        </div>
 
         <div class="row w-75 mx-auto justify-content-center pb-5">
             <div class="text-center col-lg pt-3 ">
@@ -151,5 +163,11 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <script>
+        function Listado(){
+            window.print();
+        }
+    </script>
 </body>
 </html>
