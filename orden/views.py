@@ -73,7 +73,7 @@ def confirmacion(request):
         del storage._loaded_messages[0]
 
     cart=funcionCarrito(request)
-    orden=funcionOrden(cart, request)
+    orden=funcionOrden(cart, request, None)
 
     #Aquí se registra los ingredientes utilizados en el pedido
     funcionRestarIngredientes(cart)
