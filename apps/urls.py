@@ -3,7 +3,7 @@ from django import urls
 from django.urls import path
 #from .views import home, login
 from . import views
-from apps.views import ListaComprasRealizadas, lista_compras,Listarpedidosrealizados
+from apps.views import lista_compras
 
 urlpatterns =[
     #HTML GENERAL
@@ -65,7 +65,6 @@ urlpatterns =[
     #HTML CAJERO
     path('Cobro_Cliente_Manual', views.Cobro_Cliente_Manual, name='Cobro_Cliente_Manual'),
     path('index_cajero', views.index_cajero, name='index_cajero'),
-    path('lista_pedidos',Listarpedidosrealizados, name='lista_pedidos'),
     #path('pedidos_cajero', views.pedidos_cajero, name='pedidos_cajero'),
     path('ver_pedidos_historicos',views.ver_pedidos_historicos, name='ver_pedidos_historicos'),
     path('lista_compras',lista_compras, name= 'lista_compras'),

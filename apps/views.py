@@ -968,16 +968,9 @@ def index_cajero(request):
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cajero'])
 def Cobro_Cliente_Manual(request):
-    return render (request, 'html/Cajero/Cobro_Cliente_Manual.html')
-    
-@login_required(login_url = 'loginAsociado')
-@usuarioPermitido(allowed_roles = ['Cajero'])
-def Listarpedidosrealizados(request):
     listapedido = Orden.objects.all()
-    listapedido = Product.objects.all()
-    Listado = {'Listados':listapedido}
-    return render (request, 'apps/templates/Cajero/Cobro_Cliente_Manual.html',Listado)
-
+    return render (request, 'html/Cajero/Cobro_Cliente_Manual.html', {'listapedido':listapedido})
+    
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cajero'])
