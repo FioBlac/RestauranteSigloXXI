@@ -23,7 +23,7 @@ class Orden(models.Model):
     created_at =models.DateTimeField(auto_now_add=True)
     id_cart = models.ForeignKey(Cart, models.DO_NOTHING, db_column='id_cart_p', blank=True, null=True, related_name = '+')
     id_products = models.ForeignKey(Product, models.DO_NOTHING, db_column='id_products_p', blank=True, null=True, related_name = '+')
-    id_reserva = models.ForeignKey(Reserva, models.DO_NOTHING, db_column='id_reserva_p', blank=True, null=True, related_name = '+')
+    id_reserva = models.ForeignKey(Reserva, on_delete=models.CASCADE, db_column='id_reserva_p', blank=True, null=True, related_name = '+')
 
     def __str__(self):
         return self.ordenID
