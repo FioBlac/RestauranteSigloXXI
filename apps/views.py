@@ -843,6 +843,8 @@ def retiro_platos(request):
     products = Product.objects.all().order_by('tiempo')
     orden = Orden.objects.all().order_by('id')
     cart = CartProduct.objects.all().order_by('created_at')
+    mesas = Mesa.objects.all()
+    reservas = Reserva.objects.all()
     print("no entró")
 
     if request.method == 'POST':
@@ -866,7 +868,11 @@ def retiro_platos(request):
                 modificar_ped.status = 'Por Entregar'
                 modificar_ped.save()
 
-    return render (request, 'html/garzon/retiro_platos.html', {'orden':orden , 'products':products, 'cart':cart } )
+    return render (request, 'html/garzon/retiro_platos.html', {'orden':orden , 
+    'products':products, 
+    'cart':cart,
+    'reservas':reservas,
+    'mesas':mesas } )
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Garzon'])
