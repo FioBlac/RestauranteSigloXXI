@@ -131,15 +131,15 @@
             
             <span class="input-group-text"> Agregar consumo total $</span>
             <input type="number" name="b" id="b"  class="form-control" aria-label="Amount (to the nearest dollar)">
-            
-            <span style="text-align: center;" class="input-group-text">
-                <h5 style="text-align: center;">
-                    ¡Recuerde que si el resultado sale negativo 
-                    es porque el cliente no pago lo suficiente 
-                    para alcanzar el valor total! 
-                </h5>
-            </span>
         </div>
+
+        <span style="text-align: center;" class="input-group-text">
+            <h5 style="text-align: center;">
+                ¡Recuerde que si el resultado sale negativo 
+                es porque el cliente no pago lo suficiente 
+                para alcanzar el valor total! 
+            </h5>
+        </span>
         <tr>
             <td>
                 <a  class="btn btn-primary" type="button" value="calcular" onclick="Calculo()">Calcular</a>
@@ -148,10 +148,8 @@
     </div>
 
     <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary" type="button">Procesar pago</button>
+        <a class="btn btn-primary" type="button" href="{% url 'ver_pedidos_historicos' %}"> historial de pagos en caja</a>
     </div>
-
-
 
     <div style="margin: 30px;"></div>
 
