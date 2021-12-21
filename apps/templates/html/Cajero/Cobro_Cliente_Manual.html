@@ -99,7 +99,7 @@
                         <th scope="col">Id pedido</th>
                         <th scope="col">Usuario</th>
                         <th scope="col">total</th>
-                        <th scope="col">Procesar pago</th>
+                        <th scope="col">Estado</th>
                     </tr>
                     
                 </thead>
@@ -110,9 +110,7 @@
                         <td class="text-center" scope="row">{{ lp.id }}</td>
                         <td class="text-center" scope="row">{{ lp.user.username }}</td>
                         <td class="text-center" scope="row">{{ lp.total }}</td>
-                        <td class="text-center" scope="row">
-                            <a class="btn btn-primary" role="button"> pago </a>
-                        </td>
+                        <td class="text-center" scope="row">{{ lp.status }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -120,6 +118,40 @@
             {% endblock %}
         </div>
     </section>
+
+
+    <h2 style="text-align: center;">Calculo manual</h2>
+    
+    <div style="margin: 30px;"></div>
+    
+    <div class="row g-3 align-items-center"></div>
+        <div class="input-group mb-3">
+            <span class="input-group-text"> Agregar pago del cliente $</span>
+            <input type="number" name="a" id="a"  class="form-control" aria-label="Amount (to the nearest dollar)" >  
+            
+            <span class="input-group-text"> Agregar consumo total $</span>
+            <input type="number" name="b" id="b"  class="form-control" aria-label="Amount (to the nearest dollar)">
+            
+            <span style="text-align: center;" class="input-group-text">
+                <h5 style="text-align: center;">
+                    ¡Recuerde que si el resultado sale negativo 
+                    es porque el cliente no pago lo suficiente 
+                    para alcanzar el valor total! 
+                </h5>
+            </span>
+        </div>
+        <tr>
+            <td>
+                <a  class="btn btn-primary" type="button" value="calcular" onclick="Calculo()">Calcular</a>
+            </td>
+        </tr>
+    </div>
+
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-primary" type="button">Procesar pago</button>
+    </div>
+
+
 
     <div style="margin: 30px;"></div>
 
@@ -215,8 +247,13 @@
             </a>
         </div>
     </footer>
-
-
-
+    <script>
+        function Calculo(){
+            var num1 = parseInt(document.getElementById('a').value);
+            var num2 = parseInt(document.getElementById('b').value);
+            var resta = num1 - num2;
+            alert('el vuelto es de: '+resta);
+        }
+    </script>
 </body>
 </html>
