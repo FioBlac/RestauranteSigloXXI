@@ -1,3 +1,4 @@
+from typing import OrderedDict
 import django
 from django import template
 from django.db.models.aggregates import Count
@@ -975,7 +976,8 @@ def Cobro_Cliente_Manual(request):
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cajero'])
 def ver_pedidos_historicos(request):
-    return render (request, 'html/cajero/ver_pedidos_historicos.html')
+    listacompra = Orden.objects.all()
+    return render (request, 'html/cajero/ver_pedidos_historicos.html',{'listacompra':listacompra})
 
 @login_required(login_url = 'loginAsociado')
 @usuarioPermitido(allowed_roles = ['Cajero'])
