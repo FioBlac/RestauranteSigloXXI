@@ -113,6 +113,7 @@
                                 <th scope="col">Nombre del cajero</th>
                                 <th scope="col">Total de la cuenta</th>
                                 <th scope="col">Pago del cliente</th>
+                                <th scope="col">vuelto del cliente</th>
                             </tr>
                         </thead>
                         <!--Filas-->
@@ -122,8 +123,9 @@
                                 <td class="text-center" scope="row">{{lp.id}}</td>
                                 <td class="text-center" scope="row">{{lp.user.username}}</td>
                                 <td class="text-center" scope="row">{{user.username}}</td>
-                                <td class="text-center" scope="row"></td>
-                                <td class="text-center" scope="row"></td>
+                                <td class="text-center" scope="row">$25.000</td>
+                                <td class="text-center" scope="row">$30.000</td>
+                                <td class="text-center" scope="row">$5.000</td>
                             </tr>
                             {% endfor %}        
                         </tbody>
@@ -156,11 +158,6 @@
     <script>
         function Listado1(){
             window.print();
-        }
-    </script>
-    <script>
-        function obtenerdatos(){
-
         }
     </script>
 
